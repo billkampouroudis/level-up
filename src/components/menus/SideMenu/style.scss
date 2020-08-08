@@ -1,0 +1,88 @@
+@import '../../../assets/styles/variables';
+
+.sidenav {
+  height: 100%;
+  width: $sideMenuDefaultWidth;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.2s;
+  padding-top: 22px;
+
+  &.open {
+    width: $sideMenuOpenWidth;
+
+    ul {
+      text-align: left;
+      white-space: nowrap;
+
+      li {
+        h4 {
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  @media screen and (max-width: $sm) {
+    width: 0;
+  }
+
+  svg {
+    width: 32px;
+    height: 32px;
+    color: #fff;
+  }
+
+  .logo {
+    width: 56px;
+    height: 56px;
+    color: #fff;
+  }
+
+  .control {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 40%;
+
+    :hover {
+      cursor: pointer;
+    }
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+    position: absolute;
+    bottom: 0;
+    left: 24px;
+
+    li {
+      margin-bottom: 16px;
+
+      h4 {
+        display: none;
+        margin-left: 16px;
+        color: #fff;
+      }
+
+      :hover {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+main {
+  margin-left: $sideMenuDefaultWidth;
+  transition: 0.2s;
+
+  @media screen and (max-width: $sm) {
+    margin-left: 0;
+  }
+}

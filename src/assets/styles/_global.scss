@@ -1,0 +1,99 @@
+//
+// General
+//
+.cursor-pointer:hover {
+  cursor: pointer;
+}
+
+//
+// Sections
+//
+
+section {
+  margin-bottom: 100px;
+}
+
+//
+// links
+//
+
+a {
+  color: $primary;
+  &:hover {
+    text-decoration: underline;
+    color: $primaryDark;
+  }
+}
+
+//
+// Buttons
+//
+
+.btn {
+  border-radius: 100px;
+  padding: 12px 32px;
+  min-width: 180px;
+
+  svg {
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &.btn-sm {
+    padding: 8px 24px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &.btn-lg {
+    padding: 14px 34px;
+  }
+
+  &.btn-xl {
+    padding: 16px 40px;
+    font-size: 1.25rem;
+    line-height: 1.5;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  &.btn-secondary {
+    background-color: #fff;
+    border: 2px solid $primary;
+    color: $primary;
+
+    &:active:focus {
+      background-color: $primary;
+      box-shadow: none;
+      border: 2px solid rgba(255, 255, 255, 0);
+    }
+  }
+}
+
+//
+// Navbar
+//
+
+nav {
+  min-height: $navbarHeight !important;
+}
+
+//
+// Forms
+//
+
+form {
+  .form-control {
+    padding: 24px 24px;
+    border-radius: 100px;
+    border: 0px;
+    background: $background-dark;
+  }
+}

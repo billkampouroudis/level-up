@@ -1,0 +1,8 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu');
+
+@import 'variables'; // Must be before bootstrap import in order to override default variables.
+@import '~bootstrap/scss/bootstrap';
+
+// Global custom styles
+@import '_global';
+@import '_typography';

@@ -1,0 +1,98 @@
+// NOTE For declaring custom variables, please use Camel Case, to avoid confilcts with Bootstrap which declares variables using dashes.
+// eg. Use `myCustomColor` instead of `my-custom-color`
+
+/* ------------------------------------------------------ */
+/*            BOOTSTRAP VARIABLES OVERRIDES               */
+/* ------------------------------------------------------ */
+
+//
+// Color system
+//
+$primary: #5015cf;
+$primaryLight: #6f68d6;
+$primaryDark: #200063;
+$primaryDarker: #150041;
+$background: #fff;
+$background-dark: #eeebf3;
+
+$light-grey: #a9a9a9;
+$grey: #383838;
+$dark-grey: #17191d;
+$success: #27ae60;
+$warning: #f2c94c;
+$danger: #eb5757;
+$info: #56ccf2;
+
+$theme-colors: (
+  'primary-light': $primaryLight,
+  'primary-dark': $primaryDark,
+  'primary-darker': $primaryDarker,
+  'background': $background,
+  'background-dark': $background-dark
+);
+
+//
+// Fonts
+//
+$font-family-sans-serif: 'Ubuntu', sans-serif;
+$font-size-base: 1rem;
+$fwLight: 300;
+$fwNormal: 400;
+$fwSemiBold: 600;
+$fwBold: 700;
+$fwExtraBold: 800;
+
+//
+// Headings
+//
+$h1-font-size: 50px;
+$h1-tablet-font-size: 33px;
+$h1-mobile-font-size: 30px;
+$h2-font-size: 32px;
+$h2-mobile-font-size: 26px;
+$h3-font-size: 24px;
+$h4-font-size: 18px;
+$h5-font-size: 16px;
+$h6-font-size: 12px;
+
+//
+// Buttons
+//
+$btn-padding-x: 2rem;
+$btn-padding-x-sm: 2rem;
+$btn-padding-x-lg: 2rem;
+
+//
+// Containers
+//
+$sm: 540px;
+$md: 720px;
+$lg: 960px;
+$xl: 1200px;
+
+$container-max-widths: (
+  sm: $sm,
+  md: $md,
+  lg: $lg,
+  xl: $xl
+) !default;
+
+/* ------------------------------------------------------ */
+/*                    CUSTOM VARIABLES                    */
+/* ------------------------------------------------------ */
+
+//
+// Menus
+//
+$navbarHeight: 90px;
+$sideMenuDefaultWidth: 80px;
+$sideMenuOpenWidth: 300px;
+
+//
+// Spacing
+//
+$spacingXs: 30px;
+$spacingSm: 40px;
+$spacingMd: 60px;
+$spacingLg: 100px;
+$spacingXl: 165px;
