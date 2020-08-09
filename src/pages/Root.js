@@ -13,6 +13,7 @@ import MyCartPage from './MyCartPage';
 import MyLevelPage from './MyLevelPage';
 import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
+import MyAccountPage from './MyAccountPage';
 
 const Root = () => {
   return (
@@ -52,6 +53,11 @@ const Root = () => {
         <PrivateRoute
           path={Urls.MY_LEVEL}
           component={MyLevelPage}
+          layout={MainLayout}
+        />
+        <PrivateRoute
+          path={Urls.MY_ACCOUNT}
+          component={MyAccountPage}
           layout={MainLayout}
         />
 

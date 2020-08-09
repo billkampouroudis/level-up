@@ -1,11 +1,51 @@
 @import '../../../assets/styles/variables';
 
 .mobile-menu {
+  position: fixed;
   height: calc(100vh - #{$navbarHeight});
-  width: 100vw;
-  background: $background-dark !important;
+  width: 100%;
+  background: $background !important;
   opacity: 90%;
-  backdrop-filter: blur(2px);
-  position: absolute;
+  backdrop-filter: blur(5px);
   transition: 0.2s;
+  overflow-y: auto;
+  z-index: $navZIndex;
+
+  @media screen and (min-width: $md) {
+    display: none;
+  }
+
+  .nav-link {
+    padding: 0;
+    margin-bottom: 24px;
+  }
+
+  ul {
+    list-style-type: none;
+    text-align: left;
+    white-space: nowrap;
+    padding-left: 0;
+
+    li {
+      margin-bottom: 16px;
+      a {
+        display: block;
+      }
+
+      h4 {
+        display: inline-block;
+        margin-bottom: 0;
+        margin-left: 16px;
+      }
+
+      :hover {
+        cursor: pointer;
+      }
+
+      svg {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
 }

@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Urls from '../../../pages/router/Urls';
-
 import './style.scss';
-
 import { Container } from 'react-bootstrap';
 import {
-  FaceWink32,
   ChevronRight32,
   ChevronLeft32,
   ShoppingCart32,
   Favorite32,
   RecentlyViewed32,
   Unlocked32,
-  User32
+  User32,
+  Logout32
 } from '@carbon/icons-react';
+
+// Components
+import UserMenu from '../../misc/UserMenuLinks';
+
+// Images
+import logo from '../../../assets/images/logo.svg';
 
 const SideMenu = (props) => {
   const [sideNavState, setSideNavState] = useState(1); // 0:hidden, 1:default, 2:open
-  const [pathName, setPathName] = useState(null);
   let location = useLocation();
 
   const open = () => {
@@ -83,40 +86,11 @@ const SideMenu = (props) => {
     <aside className="sidenav bg-primary-dark">
       <figure className="w-100 text-center">
         <Link to={Urls.HOME}>
-          <FaceWink32 className="logo" />
+          <img src={logo} alt="Logo" className="logo" />
         </Link>
       </figure>
       {showSideNavControl()}
-      <ul>
-        <li>
-          <Link to={Urls.MY_CART}>
-            <ShoppingCart32 />
-            <h4>Καλάθι</h4>
-          </Link>
-        </li>
-        <li>
-          <Link to={Urls.FAVORITES}>
-            <Favorite32 />
-            <h4>Αγαπημένα πρϊόντα</h4>
-          </Link>
-        </li>
-        <li>
-          <Link to={Urls.MY_ORDERS}>
-            <RecentlyViewed32 />
-            <h4>Παραγγελίες</h4>
-          </Link>
-        </li>
-        <li>
-          <Link to={Urls.MY_LEVEL}>
-            <Unlocked32 />
-            <h4>Level</h4>
-          </Link>
-        </li>
-        <li>
-          <User32 />
-          <h4>Λογαριασμός</h4>
-        </li>
-      </ul>
+      <UserMenu />
     </aside>
   );
 };

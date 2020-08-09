@@ -1,16 +1,29 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Urls from '../../../pages/router/Urls';
 
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import './style.scss';
 
-// import { Menu32 } from '@carbon/icons-react';
+//Components
+import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
+import UserMenuLinks from '../../misc/UserMenuLinks';
 
 const CustomNav = () => (
-  <Navbar bg="light" expand="lg" className="mobile-menu">
-    Mobile
-  </Navbar>
+  <section className="mobile-menu pt-4">
+    <Container>
+      <nav>
+        <ul className="mb-5">
+          <li>
+            <h2>Κατηγορίες</h2>
+            <CategoriesMenuLinks />
+          </li>
+        </ul>
+        <UserMenuLinks />
+      </nav>
+    </Container>
+  </section>
 );
 
 export default CustomNav;

@@ -1,6 +1,16 @@
 //
 // General
 //
+
+html {
+  overflow: hidden;
+}
+
+main {
+  height: calc(100vh - #{$navbarHeight});
+  overflow-y: auto;
+}
+
 .cursor-pointer:hover {
   cursor: pointer;
 }

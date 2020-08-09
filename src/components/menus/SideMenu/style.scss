@@ -4,7 +4,7 @@
   height: 100%;
   width: $sideMenuDefaultWidth;
   position: fixed;
-  z-index: 1;
+  z-index: $sideNavZIndex;
   top: 0;
   left: 0;
   background-color: #111;
@@ -18,10 +18,15 @@
     ul {
       text-align: left;
       white-space: nowrap;
+      width: 100%;
 
       li {
         h4 {
           display: inline-block;
+        }
+
+        a {
+          display: block;
         }
       }
     }

@@ -17,10 +17,6 @@ main {
     margin-left: $sideMenuDefaultWidth;
   }
 
-  h4 {
-    margin: 0;
-  }
-
   .mobile-control {
     display: none;
 
@@ -35,7 +31,9 @@ main {
   }
 
   .nav-link {
-    padding-left: 0;
+    padding-left: 0 !important;
+    margin: 0 16px 0 0;
+    color: $grey !important;
     &.inactive-link {
       opacity: 0.6;
     }
