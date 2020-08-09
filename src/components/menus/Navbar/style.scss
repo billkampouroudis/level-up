@@ -1,0 +1,69 @@
+@import '../../../assets/styles/variables';
+
+main {
+  margin-top: $navbarHeight;
+}
+
+.main-nav {
+  height: $navbarHeight;
+  z-index: $navZIndex;
+  margin-left: 0;
+  transition: 0.2s;
+  box-shadow: 0px 20px 40px -30px rgba(0, 0, 0, 0.2);
+
+  background-color: #fff;
+
+  @media screen and (min-width: $md) {
+    margin-left: $sideMenuDefaultWidth;
+  }
+
+  h4 {
+    margin: 0;
+  }
+
+  .mobile-control {
+    display: none;
+
+    @media screen and (max-width: $md) {
+      display: inline-block;
+      position: absolute;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      cursor: pointer;
+    }
+  }
+
+  .nav-link {
+    padding-left: 0;
+    &.inactive-link {
+      opacity: 0.6;
+    }
+  }
+
+  .main-nav-links {
+    @media screen and (max-width: $md) {
+      display: none;
+    }
+  }
+
+  .logo {
+    @media screen and (min-width: $md) {
+      display: none;
+    }
+  }
+}
+
+.navbar-open {
+  position: fixed;
+  top: $navbarHeight;
+  min-height: 120px;
+  width: calc(100vw - #{$sideMenuDefaultWidth});
+  margin-left: $sideMenuDefaultWidth;
+  padding: 0;
+  background-color: $background;
+  z-index: $navZIndex;
+  // opacity: 90%;
+  // backdrop-filter: blur(2px);
+  box-shadow: 0px 20px 40px -30px rgba(0, 0, 0, 0.2);
+}

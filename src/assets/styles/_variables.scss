@@ -28,7 +28,10 @@ $theme-colors: (
   'primary-dark': $primaryDark,
   'primary-darker': $primaryDarker,
   'background': $background,
-  'background-dark': $background-dark
+  'background-dark': $background-dark,
+  'light-grey': $light-grey,
+  'grey': $grey,
+  'dark-grey': $dark-grey
 );
 
 //
@@ -46,8 +49,8 @@ $fwExtraBold: 800;
 // Headings
 //
 $h1-font-size: 50px;
-$h1-tablet-font-size: 33px;
-$h1-mobile-font-size: 30px;
+$h1-tablet-font-size: 35px;
+$h1-mobile-font-size: 33px;
 $h2-font-size: 32px;
 $h2-mobile-font-size: 26px;
 $h3-font-size: 24px;
@@ -87,6 +90,12 @@ $container-max-widths: (
 $navbarHeight: 90px;
 $sideMenuDefaultWidth: 80px;
 $sideMenuOpenWidth: 300px;
+
+//
+// Z-Indexes
+//
+
+$navZIndex: 1000;
 
 //
 // Spacing

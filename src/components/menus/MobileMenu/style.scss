@@ -1,0 +1,11 @@
+@import '../../../assets/styles/variables';
+
+.mobile-menu {
+  height: calc(100vh - #{$navbarHeight});
+  width: 100vw;
+  background: $background-dark !important;
+  opacity: 90%;
+  backdrop-filter: blur(2px);
+  position: absolute;
+  transition: 0.2s;
+}

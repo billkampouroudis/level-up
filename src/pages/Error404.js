@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Error404 = () => {
   return (
-    <div className="App">
+    <div className="container pt-6">
       <header className="App-header">
         <h1>404</h1>
       </header>

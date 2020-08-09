@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import Urls from '../../../pages/router/Urls';
 
 import './style.scss';
 
@@ -16,6 +18,8 @@ import {
 
 const SideMenu = (props) => {
   const [sideNavState, setSideNavState] = useState(1); // 0:hidden, 1:default, 2:open
+  const [pathName, setPathName] = useState(null);
+  let location = useLocation();
 
   const open = () => {
     setSideNavState(2);
@@ -46,7 +50,13 @@ const SideMenu = (props) => {
     const main = document.getElementsByTagName('main')[0];
     main.classList.remove('side-menu-open');
 
-    main.removeChild(document.getElementById('hide-content-background'));
+    const hideContentBackground = document.getElementById(
+      'hide-content-background'
+    );
+
+    if (hideContentBackground) {
+      main.removeChild(hideContentBackground);
+    }
   };
 
   const showSideNavControl = () => {
@@ -65,28 +75,42 @@ const SideMenu = (props) => {
     }
   };
 
+  useEffect(() => {
+    close();
+  }, [location]);
+
   return (
     <aside className="sidenav bg-primary-dark">
       <figure className="w-100 text-center">
-        <FaceWink32 className="logo" />
+        <Link to={Urls.HOME}>
+          <FaceWink32 className="logo" />
+        </Link>
       </figure>
       {showSideNavControl()}
       <ul>
         <li>
-          <ShoppingCart32 />
-          <h4>Καλάθι</h4>
+          <Link to={Urls.MY_CART}>
+            <ShoppingCart32 />
+            <h4>Καλάθι</h4>
+          </Link>
         </li>
         <li>
-          <Favorite32 />
-          <h4>Αγαπημένα πρϊόντα</h4>
+          <Link to={Urls.FAVORITES}>
+            <Favorite32 />
+            <h4>Αγαπημένα πρϊόντα</h4>
+          </Link>
         </li>
         <li>
-          <RecentlyViewed32 />
-          <h4>Παραγγελίες</h4>
+          <Link to={Urls.MY_ORDERS}>
+            <RecentlyViewed32 />
+            <h4>Παραγγελίες</h4>
+          </Link>
         </li>
         <li>
-          <Unlocked32 />
-          <h4>Level</h4>
+          <Link to={Urls.MY_LEVEL}>
+            <Unlocked32 />
+            <h4>Level</h4>
+          </Link>
         </li>
         <li>
           <User32 />

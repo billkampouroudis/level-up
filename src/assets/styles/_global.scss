@@ -5,12 +5,35 @@
   cursor: pointer;
 }
 
+.pt-6 {
+  padding-top: 64px;
+}
+
+.logo {
+  width: 56px !important;
+  height: 56px !important;
+  color: #fff;
+}
+
+main {
+  z-index: 1;
+}
+
 //
 // Sections
 //
 
 section {
   margin-bottom: 100px;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  @include media-breakpoint-up(sm) {
+    padding-left: 0;
+    padding-right: 0;
+  }
 }
 
 //

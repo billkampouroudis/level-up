@@ -10,7 +10,7 @@
   background-color: #111;
   overflow-x: hidden;
   transition: 0.2s;
-  padding-top: 22px;
+  padding-top: 20px;
 
   &.open {
     width: $sideMenuOpenWidth;
@@ -27,19 +27,13 @@
     }
   }
 
-  @media screen and (max-width: $sm) {
+  @media screen and (max-width: $md) {
     width: 0;
   }
 
   svg {
     width: 32px;
     height: 32px;
-    color: #fff;
-  }
-
-  .logo {
-    width: 56px;
-    height: 56px;
     color: #fff;
   }
 
@@ -79,10 +73,15 @@
 }
 
 main {
-  margin-left: $sideMenuDefaultWidth;
+  margin-left: 0;
   transition: 0.2s;
 
-  @media screen and (max-width: $sm) {
-    margin-left: 0;
+  @media screen and (min-width: $md) {
+    margin-left: $sideMenuDefaultWidth;
+  }
+
+  padding-left: 16px;
+  @media screen and (max-width: $md) {
+    padding-left: 0;
   }
 }

@@ -7,8 +7,8 @@ import { Link } from 'react-router-dom';
 
 const HomePage = () => {
   return (
-    <div className="App">
-      <header className="App-header">
+    <div className="container pt-6" style={{ height: '150vh' }}>
+      <header>
         <h1>Home</h1>
       </header>
     </div>

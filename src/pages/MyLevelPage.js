@@ -9,7 +9,7 @@ const ProductsPage = () => {
   return (
     <div className="container pt-6">
       <header className="App-header">
-        <h1>Products</h1>
+        <h1>My Level</h1>
       </header>
     </div>
   );
