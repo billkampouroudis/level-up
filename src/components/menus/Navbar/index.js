@@ -1,14 +1,15 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import Urls from '../../../pages/router/Urls';
-
 import { Container, Navbar, Nav, Row, Col } from 'react-bootstrap';
+import Urls from '../../../pages/router/Urls';
 import './style.scss';
+import { Menu32 } from '@carbon/icons-react';
 
-import { Menu32, FaceWink32 } from '@carbon/icons-react';
-
+// Components
 import MobileMenu from '../MobileMenu';
+
+// Images
+import logo from '../assets/images/logo.svg';
 
 const CustomNav = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -18,21 +19,21 @@ const CustomNav = () => {
     return (
       <Row>
         <Col>
-          <ul clasName="d-inline-block">
+          <ul className="d-inline-block">
             <li>Μπλούζες</li>
             <li>Πουκάμισα</li>
             <li>Παντελόνια</li>
           </ul>
         </Col>
         <Col>
-          <ul clasName="d-inline-block">
+          <ul className="d-inline-block">
             <li>Φορέματα</li>
             <li>Μπουφάν</li>
             <li>Ζακέτες</li>
           </ul>
         </Col>
         <Col>
-          <ul clasName="d-inline-block">
+          <ul className="d-inline-block">
             <li>Φούστες</li>
             <li>Παπούτσια</li>
             <li>Εσώρουχα</li>
@@ -56,6 +57,8 @@ const CustomNav = () => {
         return categoriesConent();
       case 'brands':
         return brandsContent();
+      default:
+        return <span>No menu found</span>;
     }
   };
 
@@ -67,7 +70,7 @@ const CustomNav = () => {
 
     setSelectedMenuItem(selectedItem);
 
-    const main = document
+    document
       .getElementsByTagName('main')[0]
       .addEventListener('click', closeMenu);
   };
@@ -84,7 +87,7 @@ const CustomNav = () => {
       <Navbar className="main-nav fixed-top">
         <Container>
           <Link to={Urls.HOME}>
-            <FaceWink32 className="logo" />
+            <img src={logo} alt="Logo" className="logo" />
           </Link>
           <Menu32
             className="mobile-control"

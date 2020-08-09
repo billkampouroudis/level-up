@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
 
 import Navbar from '../../menus/Navbar';
 import SideMenu from '../../menus/SideMenu';
