@@ -28,23 +28,31 @@
 
     li {
       margin-bottom: 16px;
+
       a {
         display: block;
+        color: $grey !important;
+
+        &:hover {
+          text-decoration: underline;
+          color: $primary !important;
+        }
       }
 
       h4 {
         display: inline-block;
         margin-bottom: 0;
-        margin-left: 16px;
+        margin-left: 0;
       }
 
-      :hover {
+      &:hover {
         cursor: pointer;
       }
 
       svg {
         width: 24px;
         height: 24px;
+        margin-right: 8px;
       }
     }
   }

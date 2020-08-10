@@ -31,7 +31,7 @@ const Root = () => {
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.PRODUCTS}
+          path={`${Urls.PRODUCTS}:category`}
           component={ProductsPage}
           layout={MainLayout}
         />

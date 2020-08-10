@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import Urls from '../../../pages/router/Urls';
 import './style.scss';
@@ -15,6 +15,8 @@ import logo from '../../../assets/images/logo.svg';
 const CustomNav = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [selectedMenuItem, setSelectedMenuItem] = useState(null);
+
+  let location = useLocation();
 
   const showMenuContent = () => {
     switch (selectedMenuItem) {
@@ -41,11 +43,21 @@ const CustomNav = () => {
   };
 
   const closeMenu = () => {
+    //  Close desktop menu
     setSelectedMenuItem(null);
-
     const main = document.getElementsByTagName('main')[0];
     main.removeEventListener('click', closeMenu);
+
+    //  Close mobile menu
+    if (mobileOpen) {
+      setMobileOpen(false);
+    }
   };
+
+  useEffect(() => {
+    closeMenu();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location]);
 
   return (
     <>
@@ -85,10 +97,12 @@ const CustomNav = () => {
         </Container>
       </Navbar>
 
+      {/* Desktop Menu Content*/}
       <div className={`navbar-open ${selectedMenuItem ? 'd-block' : 'd-none'}`}>
         <Container>{showMenuContent()}</Container>
       </div>
 
+      {/* Mobile Menu Content*/}
       {mobileOpen ? <MobileMenu /> : null}
     </>
   );

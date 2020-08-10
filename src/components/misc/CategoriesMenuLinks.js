@@ -8,23 +8,41 @@ const CategoriesMenuLinks = () => {
     <Row>
       <Col>
         <ul className="d-inline-block">
-          <li>Μπλούζες</li>
-          <li>Πουκάμισα</li>
-          <li>Παντελόνια</li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}tops`}>Μπλούζες</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}shirts`}>Πουκάμισα</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}trousers`}>Παντελόνια</Link>
+          </li>
         </ul>
       </Col>
       <Col>
         <ul className="d-inline-block">
-          <li>Φορέματα</li>
-          <li>Μπουφάν</li>
-          <li>Ζακέτες</li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}dresses`}>Φορέματα</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}jackets`}>Μπουφάν</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}cardigans`}>Ζακέτες</Link>
+          </li>
         </ul>
       </Col>
       <Col>
         <ul className="d-inline-block">
-          <li>Φούστες</li>
-          <li>Παπούτσια</li>
-          <li>Εσώρουχα</li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}skirts`}>Φούστες</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}shoes`}>Παπούτσια</Link>
+          </li>
+          <li>
+            <Link to={`${Urls.PRODUCTS}underwares`}>Εσώρουχα</Link>
+          </li>
         </ul>
       </Col>
     </Row>

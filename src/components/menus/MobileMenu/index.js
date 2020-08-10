@@ -10,20 +10,23 @@ import './style.scss';
 import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
 import UserMenuLinks from '../../misc/UserMenuLinks';
 
-const CustomNav = () => (
-  <section className="mobile-menu pt-4">
-    <Container>
-      <nav>
-        <ul className="mb-5">
-          <li>
+const CustomNav = () => {
+  return (
+    <section className="mobile-menu pt-4">
+      <Container>
+        <nav>
+          <section className="mb-4">
             <h2>Κατηγορίες</h2>
             <CategoriesMenuLinks />
-          </li>
-        </ul>
-        <UserMenuLinks />
-      </nav>
-    </Container>
-  </section>
-);
+          </section>
+          <section>
+            <h2>Μενού</h2>
+            <UserMenuLinks />
+          </section>
+        </nav>
+      </Container>
+    </section>
+  );
+};
 
 export default CustomNav;

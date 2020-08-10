@@ -15,38 +15,50 @@ const UserMenuLinks = () => {
   return (
     <ul>
       <li>
-        <Link to={Urls.MY_CART}>
-          <ShoppingCart32 />
-          <h4>Καλάθι</h4>
-        </Link>
+        <h4>
+          <Link to={Urls.MY_CART}>
+            <ShoppingCart32 />
+            <span>Καλάθι</span>
+          </Link>
+        </h4>
       </li>
       <li>
-        <Link to={Urls.FAVORITES}>
-          <Favorite32 />
-          <h4>Αγαπημένα πρϊόντα</h4>
-        </Link>
+        <h4>
+          <Link to={Urls.FAVORITES}>
+            <Favorite32 />
+            <span>Αγαπημένα πρϊόντα</span>
+          </Link>
+        </h4>
       </li>
       <li>
-        <Link to={Urls.MY_ORDERS}>
-          <RecentlyViewed32 />
-          <h4>Παραγγελίες</h4>
-        </Link>
+        <h4>
+          <Link to={Urls.MY_ORDERS}>
+            <RecentlyViewed32 />
+            <span>Παραγγελίες</span>
+          </Link>
+        </h4>
       </li>
       <li>
-        <Link to={Urls.MY_LEVEL}>
-          <Unlocked32 />
-          <h4>Level</h4>
-        </Link>
+        <h4>
+          <Link to={Urls.MY_LEVEL}>
+            <Unlocked32 />
+            <span>Level</span>
+          </Link>
+        </h4>
       </li>
       <li>
-        <Link to={Urls.MY_ACCOUNT}>
-          <User32 />
-          <h4>Λογαριασμός</h4>
-        </Link>
+        <h4>
+          <Link to={Urls.MY_ACCOUNT}>
+            <User32 />
+            <span>Λογαριασμός</span>
+          </Link>
+        </h4>
       </li>
       <li>
-        <Logout32 />
-        <h4>Αποσύνδεση</h4>
+        <h4>
+          <Logout32 />
+          <span>Αποσύνδεση</span>
+        </h4>
       </li>
     </ul>
   );
