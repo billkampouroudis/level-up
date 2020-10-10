@@ -43,7 +43,8 @@ Counter.propTypes = {
   increaseCounter: PropTypes.func,
   decreaseCounter: PropTypes.func,
   fetchProducts: PropTypes.func,
-  products: PropTypes.object
+  products: PropTypes.object,
+  count: PropTypes.number
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);
