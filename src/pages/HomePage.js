@@ -1,13 +1,9 @@
 import React from 'react';
-import logo from '../assets/images/logo.svg';
-
-import { Button } from 'react-bootstrap';
-import Urls from './router/Urls';
-import { Link } from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 
 const HomePage = () => {
   return (
-    <div className="container pt-6">
+    <Container className="pt-6">
       <header>
         <h1>Home</h1>
 
@@ -187,7 +183,7 @@ const HomePage = () => {
           erat volutpat, quis porta lorem viverra.
         </p>
       </header>
-    </div>
+    </Container>
   );
 };
 

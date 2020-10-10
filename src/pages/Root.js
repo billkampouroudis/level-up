@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
+import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import Urls from './router/Urls';
 

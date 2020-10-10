@@ -2,16 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Urls from '../../../pages/router/Urls';
 import './style.scss';
-import { Container } from 'react-bootstrap';
 import {
   ChevronRight32,
-  ChevronLeft32,
-  ShoppingCart32,
-  Favorite32,
-  RecentlyViewed32,
-  Unlocked32,
-  User32,
-  Logout32
+  ChevronLeft32
 } from '@carbon/icons-react';
 
 // Components

@@ -61,7 +61,7 @@ const CustomNav = () => {
 
   return (
     <>
-      <Navbar className="main-nav fixed-top">
+      <Navbar className="main-nav fixed-top d-flex d-md-none">
         <Container>
           <Link to={Urls.HOME}>
             <img src={logo} alt="Logo" className="logo" />

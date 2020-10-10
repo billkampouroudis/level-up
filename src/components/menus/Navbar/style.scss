@@ -2,6 +2,10 @@
 
 main {
   margin-top: $navbarHeight;
+
+  @media screen and (min-width: $md) {
+    margin-top: 0;
+  }
 }
 
 .main-nav {
