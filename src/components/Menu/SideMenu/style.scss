@@ -95,8 +95,6 @@ main {
   @media screen and (min-width: $md) {
     margin-left: $sideMenuDefaultWidth;
   }
-
-  padding-left: 16px;
   @media screen and (max-width: $md) {
     padding-left: 0;
   }

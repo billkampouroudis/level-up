@@ -1,19 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Navbar from '../../menus/Navbar';
-import SideMenu from '../../menus/SideMenu';
+import Navbar from '../../Menu/Navbar';
+import SideMenu from '../../Menu/SideMenu';
 
 const MainLayout = (props) => {
-  const {children} = props;
+  const { children } = props;
 
   return (
     <>
       <Navbar />
       <SideMenu />
-      <main>
-        <div>{children}</div>
-      </main>
+      <main>{children}</main>
     </>
   );
 };

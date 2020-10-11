@@ -37,15 +37,6 @@ section {
   margin-bottom: 100px;
 }
 
-.container {
-  padding-left: 15px;
-  padding-right: 15px;
-  @include media-breakpoint-up(sm) {
-    padding-left: 0;
-    padding-right: 0;
-  }
-}
-
 //
 // links
 //
@@ -116,6 +107,14 @@ a {
 
 nav {
   min-height: $navbarHeight !important;
+}
+
+.pt-navbar {
+  padding-top: $spacingSm;
+
+  @include media-breakpoint-up(md) {
+    padding-top: 0;
+  }
 }
 
 //
