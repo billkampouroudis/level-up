@@ -15,9 +15,9 @@ $primaryDarker: #150041;
 $background: #fff;
 $background-dark: #eeebf3;
 
-$light-grey: #a9a9a9;
+$grey-light: #a9a9a9;
 $grey: #383838;
-$dark-grey: #17191d;
+$grey-dark: #17191d;
 $success: #27ae60;
 $warning: #f2c94c;
 $danger: #eb5757;
@@ -29,9 +29,9 @@ $theme-colors: (
   'primary-darker': $primaryDarker,
   'background': $background,
   'background-dark': $background-dark,
-  'light-grey': $light-grey,
+  'grey-light': $grey-light,
   'grey': $grey,
-  'dark-grey': $dark-grey
+  'grey-dark': $grey-dark
 );
 
 //
@@ -39,6 +39,9 @@ $theme-colors: (
 //
 $font-family-sans-serif: 'Ubuntu', sans-serif;
 $font-size-base: 1rem;
+$font-size-small: 0.875rem;
+$font-size-large: 1.125rem;
+$font-size-xlarge: 1.3rem;
 $fwLight: 300;
 $fwNormal: 400;
 $fwSemiBold: 600;
@@ -48,8 +51,8 @@ $fwExtraBold: 800;
 //
 // Headings
 //
-$h1-font-size: 50px;
-$h1-tablet-font-size: 35px;
+$h1-font-size: 90px;
+$h1-tablet-font-size: 60px;
 $h1-mobile-font-size: 33px;
 $h2-font-size: 32px;
 $h2-mobile-font-size: 26px;
@@ -106,3 +109,19 @@ $spacingSm: 42px;
 $spacingMd: 64px;
 $spacingLg: 100px;
 $spacingXl: 165px;
+
+:export {
+  color_primary: $primary;
+  color_primaryLight: $primaryLight;
+  color_primaryDark: $primaryDark;
+  color_primaryDarker: $primaryDarker;
+  color_background: $background;
+  color_backgroundDark: $background-dark;
+  color_greyLight: $grey-light;
+  color_grey: $grey;
+  color_greyDark: $grey-dark;
+  color_success: $success;
+  color_warning: $warning;
+  color_danger: $danger;
+  color_info: $info;
+}

@@ -1,45 +1,59 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
-import Counter from '../components/Counter';
+// import Counter from '../components/Counter';
+
+// Components
+import Products from '../components/Products';
+import Header from '../components/Header';
+
+// Images
+import HeroImage1 from '../assets/images/Hero-Image.jpg';
+import HeroImage2 from '../assets/images/Hero-Image-2.jpg';
+import HeroImage3 from '../assets/images/Hero-Image-3.jpg';
+import HeroImage4 from '../assets/images/Hero-Image-4.jpg';
 
 const HomePage = () => {
+  const [heroImage, setHeroImage] = useState(HeroImage1);
+
+  useEffect(() => {
+    setTimeout(() => {
+      switch (heroImage) {
+        case HeroImage1:
+          setHeroImage(HeroImage2);
+          break;
+        case HeroImage2:
+          setHeroImage(HeroImage3);
+          break;
+        case HeroImage3:
+          setHeroImage(HeroImage4);
+          break;
+        default:
+          setHeroImage(HeroImage1);
+      }
+    }, 6000);
+  }, [heroImage]);
   return (
     <>
-      <Container fluid className="bg-primary mb-5">
-        <Row>
-          <Col>
-            <header>
-              <h1 className="text-white">Home</h1>
-            </header>
-          </Col>
-        </Row>
-      </Container>
-      <Container>
-        <Row>
-          <Col>
-            <Counter />
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-              ullamcorper suscipit tellus, quis convallis sapien. Ut sit amet
-              odio ex. Ut tellus augue, blandit sed erat ac, dictum hendrerit
-              enim. Proin quis lacinia nisi. Vestibulum eu tristique metus. Sed
-              ut dui non purus sollicitudin venenatis vitae nec leo. Ut gravida,
-              nunc nec accumsan blandit, odio lorem placerat purus, in viverra
-              odio lectus sit amet justo. Praesent commodo eu nibh convallis
-              placerat. Integer fermentum semper blandit. Mauris cursus nunc
-              sem. Pellentesque in congue metus, quis maximus libero. Donec sed
-              quam massa. Nulla egestas diam eget eros placerat, quis mattis ex
-              fermentum. Vestibulum placerat eros id sapien hendrerit, blandit
-              faucibus quam luctus. Etiam in ante ipsum. Proin ac dolor sit amet
-              magna congue mollis laoreet eu ipsum. In hac habitasse platea
-              dictumst. Quisque ullamcorper elit at congue fringilla. Nullam
-              luctus venenatis nisi, condimentum lacinia nunc tristique vel.
-              Suspendisse egestas in massa eget iaculis. Cras et arcu sem.
-              Mauris id tempus augue.
-            </p>
-          </Col>
-        </Row>
-      </Container>
+      <Header backgroundImage={heroImage}>
+        <Container>
+          <Row>
+            <Col>
+              <header>
+                <h1 className="text-white">
+                  Ανεβάστε <span className="text-bold">level</span> στις αγορές
+                  σας!
+                </h1>
+                <br />
+                <p className="text-white text-xl">
+                  Ξεκλειδώστε νέες προσφορές με κάθε νέο level που κατακτάτε.
+                </p>
+              </header>
+            </Col>
+          </Row>
+        </Container>
+      </Header>
+
+      <Products />
     </>
   );
 };

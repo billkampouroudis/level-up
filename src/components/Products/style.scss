@@ -1,0 +1,46 @@
+@import '../../assets/styles/variables';
+
+.product-card {
+  .image {
+    height: 300px;
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      overflow: hidden;
+    }
+  }
+
+  .content {
+    padding: 8px;
+
+    .name {
+      height: 60px;
+      overflow: hidden;
+      color: $grey;
+    }
+    .rating,
+    .price {
+      display: flex;
+      align-items: center;
+
+      span {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .rating {
+      color: $grey-light;
+
+      svg {
+        color: $primary;
+      }
+    }
+
+    .seller a {
+      color: $grey-light !important;
+      text-decoration: underline;
+    }
+  }
+}

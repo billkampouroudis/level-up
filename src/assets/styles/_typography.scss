@@ -6,8 +6,17 @@ html {
 .h1,
 h1 {
   font-size: $h1-mobile-font-size;
-  font-weight: bold;
+  font-weight: 500;
   margin-bottom: 24px;
+
+  @include media-breakpoint-up(md) {
+    font-size: $h1-tablet-font-size;
+  }
+
+  @include media-breakpoint-up(xl) {
+    font-size: $h1-font-size;
+    margin-bottom: 40px;
+  }
 }
 
 .h2,
@@ -15,6 +24,11 @@ h2 {
   font-size: $h2-mobile-font-size;
   font-weight: 500;
   margin-bottom: 16px;
+
+  @include media-breakpoint-up(xl) {
+    font-size: $h2-font-size;
+    margin-bottom: 40px;
+  }
 }
 
 .h3,
@@ -44,17 +58,30 @@ p {
   margin-bottom: 8px;
 }
 
-@include media-breakpoint-up(md) {
-  .h1,
-  h1 {
-    font-size: $h1-tablet-font-size;
+.text-semi-bold {
+  font-weight: 500;
+}
+
+.text-bold {
+  font-weight: 800;
+}
+
+.text-sm {
+  font-size: $font-size-small;
+}
+
+.text-lg {
+  font-size: $font-size-base;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-large;
   }
 }
 
-@include media-breakpoint-up(xl) {
-  .h1,
-  h1 {
-    font-size: $h1-font-size;
-    margin-bottom: 40px;
+.text-xl {
+  font-size: $font-size-large;
+
+  @include media-breakpoint-up(md) {
+    font-size: $font-size-xlarge;
   }
 }

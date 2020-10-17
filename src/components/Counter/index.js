@@ -8,10 +8,6 @@ import {
 import { fetchProducts } from '../../redux/Products/products.actions';
 
 function Counter(props) {
-  useEffect(() => {
-    console.log(props.products.loading);
-  }, [props.products.loading]);
-
   return (
     <div>
       <div>Count: {props.count}</div>

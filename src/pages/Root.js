@@ -14,6 +14,7 @@ import MyLevelPage from './MyLevelPage';
 import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
+import SellersPage from './SellersPage';
 
 const Root = () => {
   return (
@@ -31,7 +32,7 @@ const Root = () => {
           layout={MainLayout}
         />
         <PrivateRoute
-          path={`${Urls.PRODUCTS}:category`}
+          path={Urls.PRODUCTS + ':id?'}
           component={ProductsPage}
           layout={MainLayout}
         />
@@ -58,6 +59,11 @@ const Root = () => {
         <PrivateRoute
           path={Urls.MY_ACCOUNT}
           component={MyAccountPage}
+          layout={MainLayout}
+        />
+        <PrivateRoute
+          path={Urls.SELLERS + ':id?'}
+          component={SellersPage}
           layout={MainLayout}
         />
 

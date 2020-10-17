@@ -9,6 +9,7 @@ html {
 main {
   height: calc(100vh - #{$navbarHeight});
   overflow-y: auto;
+  z-index: 1;
 }
 
 .cursor-pointer:hover {
@@ -23,10 +24,6 @@ main {
   width: 56px !important;
   height: 56px !important;
   color: #fff;
-}
-
-main {
-  z-index: 1;
 }
 
 //

@@ -4,7 +4,9 @@ import {
   FETCH_PRODUCTS_ERROR
 } from './products.types';
 
-import makeRequest, { requestMethods } from '../../api';
+import { getProducts, getProduct } from '../../api/products';
+
+import makeRequest, { requestMethods } from '../../api/request';
 
 export const fetchProductsRequest = () => {
   return {
@@ -26,16 +28,14 @@ export const fetchProductsError = (error) => {
   };
 };
 
-export function fetchProducts(url) {
+export function fetchProducts() {
   return (dispatch) => {
     dispatch(fetchProductsRequest());
 
-    makeRequest({ method: requestMethods.GET, url })
-      .then((response) => {
-        dispatch(fetchProductsSuccess(response.data));
+    getProducts()
+      .then((res) => {
+        dispatch(fetchProductsSuccess(res.data));
       })
-      .catch((error) => {
-        dispatch(fetchProductsError(error.message));
-      });
+      .catch((err) => dispatch(fetchProductsError(err.message)));
   };
 }
