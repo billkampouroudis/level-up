@@ -3,12 +3,12 @@
 //
 
 html {
-  overflow: hidden;
+  // overflow: hidden;
 }
 
 main {
   // height: calc(100vh - #{$navbarHeight});
-  overflow-y: auto;
+  // overflow-y: auto;
   z-index: 1;
 }
 
@@ -142,4 +142,10 @@ form {
   h1 {
     margin-bottom: 16px;
   }
+}
+
+// Product
+.product-image {
+  width: 100%;
+  object-fit: cover;
 }

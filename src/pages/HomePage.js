@@ -33,10 +33,14 @@ const HomePage = () => {
         }
       }, 6000);
     };
+
+    changeHeroImage();
+
     return () => {
       clearTimeout(changeHeroImage);
     };
   }, [heroImage]);
+
   return (
     <>
       <Header backgroundImage={heroImage} height="820px">

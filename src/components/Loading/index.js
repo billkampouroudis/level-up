@@ -6,7 +6,7 @@ import './style.scss';
 const CustomNav = (props) => {
   const { loading, fullHeight } = props;
 
-  return (
+  return loading ? (
     <div
       className={`sweet-loading text-center d-flex align-items-center ${
         fullHeight && loading ? 'full-height' : ''
@@ -19,7 +19,7 @@ const CustomNav = (props) => {
         css="margin: 0 auto;"
       />
     </div>
-  );
+  ) : null;
 };
 
 export default CustomNav;
