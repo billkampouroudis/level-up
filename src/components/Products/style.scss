@@ -31,9 +31,7 @@
     }
 
     .rating {
-      color: $grey-light;
-
-      svg {
+      .MuiRating-root {
         color: $primary;
       }
     }

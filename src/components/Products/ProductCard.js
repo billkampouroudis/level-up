@@ -1,8 +1,16 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../pages/router/Urls';
-import { StarFilled16, StarHalf16, Locked24 } from '@carbon/icons-react';
+import {
+  Star16,
+  StarFilled16,
+  StarHalf16,
+  Locked24
+} from '@carbon/icons-react';
+import Rating from '@material-ui/lab/Rating';
 
 import './style.scss';
 
@@ -11,8 +19,9 @@ const ProductCard = (props) => {
 
   const renderStars = () => {
     let stars = [];
+    let i = 0;
 
-    for (let i = 0; i < Math.floor(product.stars); i++) {
+    while (i < Math.floor(product.stars)) {
       stars.push(<StarFilled16 key={i} />);
     }
 
@@ -33,7 +42,7 @@ const ProductCard = (props) => {
 
       <div className="content">
         <div className="rating mb-1">
-          {renderStars()}
+          <Rating name="pristine" readOnly value={product.stars} />
           <span className="pl-1 text-sm">(23)</span>
         </div>
         <Link to={urls.PRODUCTS + product.id}>
