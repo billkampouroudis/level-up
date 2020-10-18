@@ -16,34 +16,30 @@ const HomePage = () => {
   const [heroImage, setHeroImage] = useState(HeroImage1);
 
   useEffect(() => {
-    const changeHeroImage = () => {
-      setTimeout(() => {
-        switch (heroImage) {
-          case HeroImage1:
-            setHeroImage(HeroImage2);
-            break;
-          case HeroImage2:
-            setHeroImage(HeroImage3);
-            break;
-          case HeroImage3:
-            setHeroImage(HeroImage4);
-            break;
-          default:
-            setHeroImage(HeroImage1);
-        }
-      }, 6000);
-    };
-
-    changeHeroImage();
+    const changeHeroImage = setTimeout(() => {
+      switch (heroImage) {
+        case HeroImage1:
+          setHeroImage(HeroImage2);
+          break;
+        case HeroImage2:
+          setHeroImage(HeroImage3);
+          break;
+        case HeroImage3:
+          setHeroImage(HeroImage4);
+          break;
+        default:
+          setHeroImage(HeroImage1);
+      }
+    }, 6000);
 
     return () => {
-      clearTimeout(changeHeroImage());
+      clearTimeout(changeHeroImage);
     };
   }, [heroImage]);
 
   return (
     <>
-      <Header backgroundImage={heroImage} height="820px">
+      <Header backgroundImage={heroImage} home>
         <Container fluid className="home-hero">
           <Container>
             <Row>

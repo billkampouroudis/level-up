@@ -4,24 +4,27 @@ import { Container } from 'react-bootstrap';
 import './style.scss';
 
 const Header = (props) => {
+  const { children, backgroundImage, home } = props;
+
   const style = {
-    backgroundImage: `url(${props.backgroundImage})`,
-    height: props.height
+    backgroundImage: `url(${backgroundImage})`
   };
 
   return (
     <Container
       fluid
-      className="header mb-5 d-flex align-items-center"
+      className={`header mb-5 d-flex align-items-center ${home ? 'home' : ''}`}
       style={style}
     >
-      {props.children}
+      {children}
     </Container>
   );
 };
 
 Header.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
+  backgroundImage: PropTypes.string,
+  home: PropTypes.bool
 };
 
 export default Header;

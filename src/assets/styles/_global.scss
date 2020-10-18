@@ -161,13 +161,18 @@ form {
         red($background-dark),
         green($background-dark),
         blue($background-dark),
-        0.3
+        0.2
       );
     }
   }
 
   .selected.item {
-    background: $background-dark;
+    background: rgba(
+      red($background-dark),
+      green($background-dark),
+      blue($background-dark),
+      0.6
+    );
   }
 
   &.upward.active {
@@ -184,12 +189,6 @@ form {
   border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
 }
 
-// .ui.upward.selection.active.dropdown {
-//   border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
-//   border-radius: 0 0 10px 10px !important;
-//   background: red;
-// }
-
 //
 // Home Header
 //
@@ -197,8 +196,9 @@ form {
   background-color: rgba(red($primary), green($primary), blue($primary), 0.9);
   padding: 24px 0;
   position: absolute;
-  bottom: 0;
-  left: 0;
+  bottom: 15px;
+  left: 15px;
+  width: calc(100% - 30px);
 
   h1 {
     margin-bottom: 16px;

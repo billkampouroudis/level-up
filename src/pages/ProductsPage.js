@@ -75,10 +75,10 @@ const ProductsPage = (props) => {
             <Col xl={1} className="bg-primary">
               {product.id}
             </Col>
-            <Col xl={5}>
+            <Col xl={6}>
               <img src={product.image} className="product-image" />
             </Col>
-            <Col xl={6}>
+            <Col xl={5}>
               <Row>
                 <Col>
                   <Link to={urls.SELLERS + product.seller.id}>
@@ -87,12 +87,14 @@ const ProductsPage = (props) => {
                 </Col>
               </Row>
               <Row>
-                <Col>{product.name}</Col>
+                <Col>
+                  <h1 className="h2 mb-4">{product.name}</h1>
+                </Col>
               </Row>
               <Row>
                 <Col>
                   <label className="text-bold mb-1">Μέγεθος</label>
-                  <Select placeholder="Επιλέξτε μέγεθος" options={sizes()} />
+                  <Select placeholder="Επέλεξε μέγεθος" options={sizes()} />
                 </Col>
               </Row>
             </Col>

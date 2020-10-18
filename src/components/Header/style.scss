@@ -2,7 +2,7 @@
 
 .header {
   position: relative;
-  min-height: 400px;
+  min-height: 500px;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -10,4 +10,16 @@
 
   -webkit-transition: background-image 0.2s ease-in-out;
   transition: background-image 0.2s ease-in-out;
+
+  &.home {
+    height: 400px;
+
+    @media screen and (min-width: $md) {
+      height: 600px;
+    }
+
+    @media screen and (min-width: $xl) {
+      height: 820px;
+    }
+  }
 }
