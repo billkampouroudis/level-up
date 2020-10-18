@@ -37,7 +37,7 @@ const HomePage = () => {
     changeHeroImage();
 
     return () => {
-      clearTimeout(changeHeroImage);
+      clearTimeout(changeHeroImage());
     };
   }, [heroImage]);
 
