@@ -10,7 +10,7 @@ import MobileMenu from '../MobileMenu';
 import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
 
 // Images
-import logo from '../../../assets/images/logo.svg';
+import logo from '../../../assets/images/Logo-Small.svg';
 
 const CustomNav = () => {
   const [mobileOpen, setMobileOpen] = useState(false);

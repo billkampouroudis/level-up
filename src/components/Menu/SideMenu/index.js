@@ -2,16 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import Urls from '../../../pages/router/Urls';
 import './style.scss';
-import {
-  ChevronRight32,
-  ChevronLeft32
-} from '@carbon/icons-react';
+import { ChevronRight32, ChevronLeft32 } from '@carbon/icons-react';
 
 // Components
 import UserMenu from '../../misc/UserMenuLinks';
 
 // Images
-import logo from '../../../assets/images/logo.svg';
+import logoWhite from '../../../assets/images/Logo-Small-White.svg';
+import logoLargeWhite from '../../../assets/images/Logo-Large-White.svg';
 
 const SideMenu = (props) => {
   const [sideNavState, setSideNavState] = useState(1); // 0:hidden, 1:default, 2:open
@@ -79,7 +77,11 @@ const SideMenu = (props) => {
     <aside className="sidenav bg-primary-dark">
       <figure className="w-100 text-center">
         <Link to={Urls.HOME}>
-          <img src={logo} alt="Logo" className="logo" />
+          {sideNavState === 2 ? (
+            <img src={logoLargeWhite} alt="Logo" className="logo-full" />
+          ) : (
+            <img src={logoWhite} alt="Logo" className="logo" />
+          )}
         </Link>
       </figure>
       {showSideNavControl()}
