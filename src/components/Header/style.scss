@@ -1,6 +1,7 @@
 @import '../../assets/styles/variables';
 
 .header {
+  position: relative;
   min-height: 400px;
   background-repeat: no-repeat;
   background-position: center;
@@ -9,16 +10,4 @@
 
   -webkit-transition: background-image 0.2s ease-in-out;
   transition: background-image 0.2s ease-in-out;
-
-  h1,
-  p {
-    // background-color: $primary;
-    background-color: rgba(red($primary), green($primary), blue($primary), 0.9);
-    display: inline-block;
-    padding: 16px 32px;
-  }
-
-  h1 {
-    margin-bottom: 8px;
-  }
 }

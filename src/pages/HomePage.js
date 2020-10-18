@@ -34,22 +34,23 @@ const HomePage = () => {
   }, [heroImage]);
   return (
     <>
-      <Header backgroundImage={heroImage}>
-        <Container>
-          <Row>
-            <Col>
-              <header>
-                <h1 className="text-white">
-                  Ανεβάστε <span className="text-bold">level</span> στις αγορές
-                  σας!
-                </h1>
-                <br />
-                <p className="text-white text-xl">
-                  Ξεκλειδώστε νέες προσφορές με κάθε νέο level που κατακτάτε.
-                </p>
-              </header>
-            </Col>
-          </Row>
+      <Header backgroundImage={heroImage} height="820px">
+        <Container fluid className="home-hero">
+          <Container>
+            <Row>
+              <Col>
+                <header>
+                  <h1 className="text-white">
+                    Ανέβασε <span className="text-bold">level</span> στις αγορές
+                    σου!
+                  </h1>
+                  <p className="text-white text-xl">
+                    Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
+                  </p>
+                </header>
+              </Col>
+            </Row>
+          </Container>
         </Container>
       </Header>
 

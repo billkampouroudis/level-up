@@ -6,7 +6,7 @@ html {
 .h1,
 h1 {
   font-size: $h1-mobile-font-size;
-  font-weight: 500;
+  font-weight: 300;
   margin-bottom: 24px;
 
   @include media-breakpoint-up(md) {

@@ -7,7 +7,7 @@ html {
 }
 
 main {
-  height: calc(100vh - #{$navbarHeight});
+  // height: calc(100vh - #{$navbarHeight});
   overflow-y: auto;
   z-index: 1;
 }
@@ -124,5 +124,20 @@ form {
     border-radius: 100px;
     border: 0px;
     background: $background-dark;
+  }
+}
+
+//
+// Home Header
+//
+.home-hero {
+  background-color: rgba(red($primary), green($primary), blue($primary), 0.9);
+  padding: 24px 0;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  h1 {
+    margin-bottom: 16px;
   }
 }

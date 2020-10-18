@@ -6,7 +6,7 @@ import './style.scss';
 const Header = (props) => {
   const style = {
     backgroundImage: `url(${props.backgroundImage})`,
-    height: '850px'
+    height: props.height
   };
 
   return (
