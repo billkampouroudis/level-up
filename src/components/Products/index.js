@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -11,7 +11,6 @@ import Loading from '../Loading';
 
 // Redux Actions
 import { fetchProducts } from '../../redux/Products/products.actions';
-import { useEffect } from 'react';
 
 const Products = (props) => {
   const { fetchProducts, products } = props;
@@ -32,8 +31,10 @@ const Products = (props) => {
 
   return (
     <Container>
+      {!products.list.length && products.loading && (
+        <Loading loading={products.loading} />
+      )}
       <Row>{renderProducts()}</Row>
-      <Loading loading={products.loading} />
     </Container>
   );
 };
@@ -46,8 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () =>
-      dispatch(fetchProducts('https://fakestoreapi.com/products'))
+    fetchProducts: () => dispatch(fetchProducts())
   };
 };
 

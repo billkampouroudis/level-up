@@ -1,5 +1,17 @@
 @import '../../assets/styles/variables';
 
-// .sweet-loading div {
-//   color: $primary !important;
-// }
+.sweet-loading {
+  height: 200px;
+  &.full-height {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    z-index: 1100;
+
+    -webkit-transition: background-color 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out;
+  }
+}

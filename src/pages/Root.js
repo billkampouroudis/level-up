@@ -67,6 +67,11 @@ const Root = () => {
           layout={MainLayout}
         />
 
+        <PrivateRoute
+          path={Urls.NOT_FOUND}
+          component={Error404}
+          layout={MainLayout}
+        />
         <PrivateRoute path="*" component={Error404} layout={MainLayout} />
       </Switch>
     </Router>

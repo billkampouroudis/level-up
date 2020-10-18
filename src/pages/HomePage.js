@@ -16,21 +16,26 @@ const HomePage = () => {
   const [heroImage, setHeroImage] = useState(HeroImage1);
 
   useEffect(() => {
-    setTimeout(() => {
-      switch (heroImage) {
-        case HeroImage1:
-          setHeroImage(HeroImage2);
-          break;
-        case HeroImage2:
-          setHeroImage(HeroImage3);
-          break;
-        case HeroImage3:
-          setHeroImage(HeroImage4);
-          break;
-        default:
-          setHeroImage(HeroImage1);
-      }
-    }, 6000);
+    const changeHeroImage = () => {
+      setTimeout(() => {
+        switch (heroImage) {
+          case HeroImage1:
+            setHeroImage(HeroImage2);
+            break;
+          case HeroImage2:
+            setHeroImage(HeroImage3);
+            break;
+          case HeroImage3:
+            setHeroImage(HeroImage4);
+            break;
+          default:
+            setHeroImage(HeroImage1);
+        }
+      }, 6000);
+    };
+    return () => {
+      clearTimeout(changeHeroImage);
+    };
   }, [heroImage]);
   return (
     <>

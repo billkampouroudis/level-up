@@ -30,8 +30,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     increaseCounter: () => dispatch(increaseCounter()),
     decreaseCounter: () => dispatch(decreaseCounter()),
-    fetchProducts: (url) =>
-      dispatch(fetchProducts('https://fakestoreapi.com/products'))
+    fetchProducts: (url) => dispatch(fetchProducts())
   };
 };
 

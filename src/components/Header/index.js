@@ -12,7 +12,7 @@ const Header = (props) => {
   return (
     <Container
       fluid
-      className="header bg-primary mb-5 d-flex align-items-center"
+      className="header mb-5 d-flex align-items-center"
       style={style}
     >
       {props.children}

@@ -28,14 +28,16 @@ export const fetchProductsError = (error) => {
   };
 };
 
-export function fetchProducts() {
+export function fetchProducts(id) {
   return (dispatch) => {
     dispatch(fetchProductsRequest());
 
-    getProducts()
+    getProducts(id)
       .then((res) => {
         dispatch(fetchProductsSuccess(res.data));
       })
-      .catch((err) => dispatch(fetchProductsError(err.message)));
+      .catch((err) => {
+        dispatch(fetchProductsError(err.message));
+      });
   };
 }
