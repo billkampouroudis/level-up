@@ -2,9 +2,9 @@
 // General
 //
 
-html {
-  // overflow: hidden;
-}
+// html {
+//   overflow: hidden;
+// }
 
 main {
   // height: calc(100vh - #{$navbarHeight});
@@ -31,7 +31,6 @@ main {
 //
 // Sections
 //
-
 section {
   margin-bottom: 100px;
 }
@@ -39,7 +38,6 @@ section {
 //
 // links
 //
-
 a {
   color: $primary;
   &:hover {
@@ -51,7 +49,6 @@ a {
 //
 // Buttons
 //
-
 .btn {
   border-radius: 100px;
   padding: 12px 32px;
@@ -103,7 +100,6 @@ a {
 //
 // Navbar
 //
-
 nav {
   min-height: $navbarHeight !important;
 }
@@ -117,9 +113,8 @@ nav {
 }
 
 //
-// Forms
+// Forms / Inputs
 //
-
 form {
   .form-control {
     padding: 24px 24px;
@@ -128,6 +123,72 @@ form {
     background: $background-dark;
   }
 }
+
+//
+// Select
+//
+.ui.selection.dropdown {
+  width: 100%;
+  border-radius: 10px;
+  padding: 16px 24px;
+  background-color: $background-dark;
+  border: 2px solid $background-dark;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+  }
+
+  .dropdown.icon {
+    padding: 16px 24px;
+  }
+
+  .menu {
+    // top: 101% !important;
+    // padding: 16px 24px;
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+    border-top-width: 0 !important;
+    width: -webkit-fill-available;
+    margin-left: -2px;
+    margin-right: -2px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .item {
+    &:hover {
+      background: rgba(
+        red($background-dark),
+        green($background-dark),
+        blue($background-dark),
+        0.3
+      );
+    }
+  }
+
+  .selected.item {
+    background: $background-dark;
+  }
+
+  &.upward.active {
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+    border-radius: 0 0 10px 10px !important;
+
+    .menu {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+}
+
+.ui.selection.active.dropdown {
+  border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+}
+
+// .ui.upward.selection.active.dropdown {
+//   border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+//   border-radius: 0 0 10px 10px !important;
+//   background: red;
+// }
 
 //
 // Home Header
@@ -148,4 +209,12 @@ form {
 .product-image {
   width: 100%;
   object-fit: cover;
+}
+
+// Ratings
+.rating {
+  .ui.rating .active.icon {
+    color: $primary !important;
+    border: none;
+  }
 }

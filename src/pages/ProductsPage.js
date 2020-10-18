@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/Urls';
+import { Select } from 'semantic-ui-react';
+import styles from '../assets/styles/_variables.scss';
 
 // Components
 import Header from '../components/Header';
@@ -22,6 +24,28 @@ const ProductsPage = (props) => {
   const [product, setProduct] = useState(null);
 
   const history = useHistory();
+
+  const mapSizes = {
+    XXS: 'XX-Small',
+    XS: 'X-Small',
+    S: 'Small',
+    M: 'Medium',
+    L: 'Large',
+    XL: 'X-Large',
+    XXL: 'XX-Large',
+    XXXL: 'XXX-Large',
+    XXXXL: 'XXXX-Large'
+  };
+
+  const sizes = () => {
+    if (product.sizes) {
+      return product.sizes.map((size) => {
+        return { key: size, value: size, text: mapSizes[size] || size };
+      });
+    }
+
+    return [];
+  };
 
   useEffect(() => {
     if (products.list.length) {
@@ -66,7 +90,10 @@ const ProductsPage = (props) => {
                 <Col>{product.name}</Col>
               </Row>
               <Row>
-                <Col>{product.name}</Col>
+                <Col>
+                  <label className="text-bold mb-1">Μέγεθος</label>
+                  <Select placeholder="Επιλέξτε μέγεθος" options={sizes()} />
+                </Col>
               </Row>
             </Col>
           </Row>

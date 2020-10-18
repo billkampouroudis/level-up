@@ -16,6 +16,7 @@ const products = [
     originalPrice: 409.9,
     reducedPrice: 350.0,
     discountLevel: 12,
+    sizes: ['Small', 'Medium', 'Large', 'X-Large'],
     seller: {
       id: 1,
       name: 'Caliroots',
@@ -38,6 +39,7 @@ const products = [
     originalPrice: 69.9,
     reducedPrice: 60.0,
     discountLevel: 2,
+    sizes: ['38', '39', '40', '41', '42'],
     seller: {
       id: 2,
       name: 'Caliroots',

@@ -10,7 +10,7 @@ import {
   StarHalf16,
   Locked24
 } from '@carbon/icons-react';
-import Rating from '@material-ui/lab/Rating';
+import { Rating } from 'semantic-ui-react';
 
 import './style.scss';
 
@@ -42,7 +42,7 @@ const ProductCard = (props) => {
 
       <div className="content">
         <div className="rating mb-1">
-          <Rating name="pristine" readOnly value={product.stars} />
+          <Rating defaultRating={product.stars} maxRating={5} disabled />
           <span className="pl-1 text-sm">(23)</span>
         </div>
         <Link to={urls.PRODUCTS + product.id}>
@@ -50,8 +50,8 @@ const ProductCard = (props) => {
             <p className="text-lg">{product.name}</p>
           </div>
         </Link>
-        <div className="price text-semi-bold mb-1">
-          <span className="mr-2">{product.originalPrice}€</span>
+        <div className="price  mb-1">
+          <span className="mr-2 text-semi-bold">{product.originalPrice}€</span>
           <span>
             <Locked24 />
             {product.reducedPrice}€
