@@ -1,7 +1,7 @@
 import React from 'react';
-import {Container} from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
-const ProductsPage = () => {
+const MyAccountPage = () => {
   return (
     <Container className="pt-6">
       <header className="App-header">
@@ -11,4 +11,4 @@ const ProductsPage = () => {
   );
 };
 
-export default ProductsPage;
+export default MyAccountPage;

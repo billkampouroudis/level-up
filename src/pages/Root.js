@@ -7,7 +7,7 @@ import MainLayout from '../components/Layout/MainLayout';
 
 import HomePage from './HomePage';
 import LoginRegisterPage from './LoginRegisterPage';
-import ProductsPage from './ProductsPage';
+import ProductPage from './ProductPage';
 import Error404 from './Error404';
 import MyCartPage from './MyCartPage';
 import MyLevelPage from './MyLevelPage';
@@ -33,7 +33,7 @@ const Root = () => {
         />
         <PrivateRoute
           path={Urls.PRODUCTS + ':id?'}
-          component={ProductsPage}
+          component={ProductPage}
           layout={MainLayout}
         />
         <PrivateRoute

@@ -17,7 +17,7 @@ import TesImage from '../assets/images/product1.jpg';
 // Redux Actions
 import { fetchProducts } from '../redux/Products/products.actions';
 
-const ProductsPage = (props) => {
+const ProductPage = (props) => {
   const { match, products, fetchProducts } = props;
   const productId = parseInt(match.params.id);
 
@@ -117,7 +117,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-ProductsPage.propTypes = {
+ProductPage.propTypes = {
   match: PropTypes.object
 };
-export default connect(mapStateToProps, mapDispatchToProps)(ProductsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);
