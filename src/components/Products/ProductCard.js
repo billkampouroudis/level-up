@@ -12,8 +12,6 @@ import {
 } from '@carbon/icons-react';
 import { Rating } from 'semantic-ui-react';
 
-import './style.scss';
-
 const ProductCard = (props) => {
   const { product } = props;
 

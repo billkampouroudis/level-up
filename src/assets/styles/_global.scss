@@ -12,6 +12,11 @@ main {
   z-index: 1;
 }
 
+::selection {
+  background: $primaryLight;
+  color: #fff;
+}
+
 .cursor-pointer:hover {
   cursor: pointer;
 }
@@ -49,7 +54,7 @@ a {
 //
 // Buttons
 //
-.btn {
+button {
   border-radius: 100px;
   padding: 12px 32px;
   min-width: 180px;
@@ -60,7 +65,45 @@ a {
     height: 24px;
   }
 
-  &.btn-sm {
+  &:focus {
+    outline: none;
+  }
+
+  &.primary {
+    background-color: $primary;
+    color: #fff;
+    border: 2px solid $primary;
+
+    &:hover {
+      background-color: darken($primary, 5%);
+    }
+
+    &:focus,
+    &:active {
+      background-color: darken($primary, 10%);
+      border: 2px solid $primaryLight;
+    }
+  }
+
+  &.secondary {
+    background-color: #fff;
+    border: 2px solid $primary;
+    color: $primary;
+
+    &:hover {
+      background-color: $primary;
+      color: #fff;
+    }
+
+    &:focus,
+    &:active {
+      background-color: darken($primary, 10%);
+      border: 2px solid $primaryLight;
+      color: #fff;
+    }
+  }
+
+  &.sm {
     padding: 8px 24px;
 
     svg {
@@ -69,11 +112,11 @@ a {
     }
   }
 
-  &.btn-lg {
+  &.lg {
     padding: 14px 34px;
   }
 
-  &.btn-xl {
+  &.xl {
     padding: 16px 40px;
     font-size: 1.25rem;
     line-height: 1.5;
@@ -81,18 +124,6 @@ a {
     svg {
       width: 28px;
       height: 28px;
-    }
-  }
-
-  &.btn-secondary {
-    background-color: #fff;
-    border: 2px solid $primary;
-    color: $primary;
-
-    &:active:focus {
-      background-color: $primary;
-      box-shadow: none;
-      border: 2px solid rgba(255, 255, 255, 0);
     }
   }
 }
@@ -124,29 +155,44 @@ form {
   }
 }
 
-//
-// Select
-//
+.ui.input input,
 .ui.selection.dropdown {
-  width: 100%;
+  width: 100% !important;
   border-radius: 10px;
   padding: 16px 24px;
-  background-color: $background-dark;
+  background-color: $background-dark !important;
   border: 2px solid $background-dark;
+  margin-bottom: $spacingXs;
 
   &:focus,
   &:active,
   &:hover {
     border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
   }
+}
 
+// Input
+.ui.input {
+  width: 100%;
+
+  &.icon {
+    i.icon {
+      top: 0;
+      right: 16px;
+      height: 24px;
+      width: 24px;
+      transform: translateY(65%);
+    }
+  }
+}
+
+// Select
+.ui.selection.dropdown {
   .dropdown.icon {
     padding: 16px 24px;
   }
 
   .menu {
-    // top: 101% !important;
-    // padding: 16px 24px;
     border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
     border-top-width: 0 !important;
     width: -webkit-fill-available;

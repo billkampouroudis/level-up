@@ -1,7 +1,6 @@
 import React from 'react';
 import HashLoader from 'react-spinners/HashLoader';
 import SCSS from '../../assets/styles/_variables.scss';
-import './style.scss';
 
 const CustomNav = (props) => {
   const { loading, fullHeight } = props;

@@ -8,3 +8,13 @@
 // Global custom styles
 @import '_global';
 @import '_typography';
+
+// Components styling
+@import '../../components/misc/Counter/style.scss';
+@import '../../components/Header/style.scss';
+@import '../../components/Loading/style.scss';
+@import '../../components/Menu/MobileMenu/style.scss';
+@import '../../components/Menu/Navbar/style.scss';
+@import '../../components/Menu/SideMenu/style.scss';
+@import '../../components/Products/style.scss';
+@import '../../components/Ui/style.scss';

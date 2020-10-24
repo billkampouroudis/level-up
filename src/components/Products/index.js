@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import './style.scss';
-
 // Component
 import ProductCard from './ProductCard';
 import Loading from '../Loading';

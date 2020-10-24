@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
-import './style.scss';
 
 const Header = (props) => {
   const { children, backgroundImage, home } = props;

@@ -1,5 +1,3 @@
-@import '../../assets/styles/variables';
-
 .product-card {
   .image {
     height: 300px;
@@ -34,5 +32,22 @@
       color: $grey-light !important;
       text-decoration: underline;
     }
+  }
+}
+
+.product-options {
+  .original-price,
+  .discount-price {
+    @extend .text-xl, .text-bold;
+  }
+
+  .original-price {
+    &.delete {
+      text-decoration: line-through;
+    }
+  }
+
+  .discount-price {
+    color: $primary;
   }
 }

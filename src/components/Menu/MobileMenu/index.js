@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { Container } from 'react-bootstrap';
-import './style.scss';
 
 //Components
 // import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
