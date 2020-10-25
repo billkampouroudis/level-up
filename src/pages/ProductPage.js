@@ -27,14 +27,6 @@ const ProductPage = (props) => {
     } else {
       fetchProducts(productId);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
-    if (products.list.length) {
-      setProduct(products.list.find((product) => product.id === productId));
-      console.log(products.list.find((product) => product.id === productId));
-    }
 
     if (products.error) {
       history.push(urls.NOT_FOUND);
@@ -48,15 +40,15 @@ const ProductPage = (props) => {
       {product && !products.loading && (
         <Container className="pt-6">
           <Row>
-            <Col xl={7}>
+            <Col md={6} xl={7}>
               <img
                 src={product.image}
                 className="product-image"
                 alt={product.name}
               />
             </Col>
-            <Col xl={5}>
-              <ProductOptions product={product} />
+            <Col md={6} xl={5}>
+              <ProductOptions productId={productId} />
             </Col>
           </Row>
         </Container>

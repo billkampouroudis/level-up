@@ -17,6 +17,7 @@ const products = [
     reducedPrice: 350.0,
     discountLevel: 12,
     sizes: ['Small', 'Medium', 'Large', 'X-Large'],
+    isFavorite: true,
     seller: {
       id: 1,
       name: 'Caliroots',
@@ -40,6 +41,7 @@ const products = [
     reducedPrice: 60.0,
     discountLevel: 2,
     sizes: ['38', '39', '40', '41', '42'],
+    isFavorite: false,
     seller: {
       id: 2,
       name: 'Caliroots',
@@ -49,30 +51,54 @@ const products = [
   }
 ];
 
-export const getProducts = (id) => {
-  // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
-  //   .then((response) => {
-  //     console.log(response.data)
-  //   })
-  //   .catch((error) => {
-  //     console.log(error.message);
-  //   });
+const productsApi = {
+  getProducts: (id) => {
+    // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
 
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (id) {
-        const product = products.filter((product) => product.id === id);
-        if (product.length) {
-          resolve({
-            data: products.filter((product) => product.id === id)
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        if (id) {
+          const product = products.filter((product) => product.id === id);
+          if (product.length) {
+            resolve({
+              data: products.filter((product) => product.id === id)
+            });
+          }
+          reject({
+            message: 'Not found'
           });
+        } else {
+          resolve({ data: products });
         }
-        reject({
-          message: 'Not found'
+      }, 500);
+    });
+  },
+
+  addToFavorites: (id) => {
+    // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
+    //   .then((response) => {
+    //     console.log(response.data)
+    //   })
+    //   .catch((error) => {
+    //     console.log(error.message);
+    //   });
+
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        const product = products.find((product) => product.id === id);
+        product.isFavorite = !product.isFavorite;
+        resolve({
+          data: product
         });
-      } else {
-        resolve({ data: products });
-      }
-    }, 1000);
-  });
+      }, 500);
+    });
+  }
 };
+
+export default productsApi;

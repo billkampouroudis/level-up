@@ -1,0 +1,18 @@
+.ui.message {
+  position: fixed;
+  top: 90px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 30px);
+
+  .header {
+    min-height: fit-content;
+  }
+
+  @include media-breakpoint-up(md) {
+    top: 0;
+    left: 50%;
+    transform: translateX(calc(-50% + #{$sideMenuDefaultWidth}));
+    width: fit-content;
+  }
+}

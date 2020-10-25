@@ -1,0 +1,76 @@
+//
+// Buttons
+//
+button.custom {
+  border-radius: 100px;
+  padding: 12px 32px;
+  min-width: 180px;
+
+  svg {
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.primary {
+    background-color: $primary;
+    color: #fff;
+    border: 2px solid $primary;
+
+    &:hover {
+      background-color: darken($primary, 5%);
+    }
+
+    &:focus,
+    &:active {
+      background-color: darken($primary, 10%);
+      border: 2px solid $primaryLight;
+    }
+  }
+
+  &.secondary {
+    background-color: #fff;
+    border: 2px solid $primary;
+    color: $primary;
+
+    &:hover {
+      background-color: $primary;
+      color: #fff;
+    }
+
+    &:focus,
+    &:active {
+      background-color: darken($primary, 10%);
+      border: 2px solid $primaryLight;
+      color: #fff;
+    }
+  }
+
+  &.sm {
+    padding: 8px 24px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &.lg {
+    padding: 14px 34px;
+  }
+
+  &.xl {
+    padding: 16px 40px;
+    font-size: 1.25rem;
+    line-height: 1.5;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
