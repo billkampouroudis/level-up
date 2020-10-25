@@ -1,34 +1,12 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../pages/router/Urls';
-import {
-  Star16,
-  StarFilled16,
-  StarHalf16,
-  Locked24
-} from '@carbon/icons-react';
+import { Locked24 } from '@carbon/icons-react';
 import { Rating } from 'semantic-ui-react';
 
 const ProductCard = (props) => {
   const { product } = props;
-
-  const renderStars = () => {
-    let stars = [];
-    let i = 0;
-
-    while (i < Math.floor(product.stars)) {
-      stars.push(<StarFilled16 key={i} />);
-    }
-
-    if (product.stars % 1 !== 0) {
-      stars.push(<StarHalf16 key={stars.length} />);
-    }
-
-    return stars;
-  };
 
   return (
     <div className="product-card">

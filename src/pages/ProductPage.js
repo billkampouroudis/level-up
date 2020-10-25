@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -9,8 +9,6 @@ import urls from './router/Urls';
 // Components
 import Loading from '../components/Loading';
 import ProductOptions from '../components/Products/ProductOptions';
-
-import { Select } from 'semantic-ui-react';
 
 // Redux Actions
 import { fetchProducts } from '../redux/Products/products.actions';
@@ -29,6 +27,7 @@ const ProductPage = (props) => {
     } else {
       fetchProducts(productId);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -40,6 +39,7 @@ const ProductPage = (props) => {
     if (products.error) {
       history.push(urls.NOT_FOUND);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products.loading]);
 
   return (
@@ -49,7 +49,11 @@ const ProductPage = (props) => {
         <Container className="pt-6">
           <Row>
             <Col xl={7}>
-              <img src={product.image} className="product-image" />
+              <img
+                src={product.image}
+                className="product-image"
+                alt={product.name}
+              />
             </Col>
             <Col xl={5}>
               <ProductOptions product={product} />

@@ -1,4 +1,4 @@
-import makeRequest, { requestMethods } from './request';
+// import makeRequest, { requestMethods } from './request';
 
 // Images
 import Product1 from '../assets/images/product1.jpg';

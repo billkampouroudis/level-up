@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { Link, useHistory } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from '../../pages/router/Urls';
@@ -8,8 +7,6 @@ import { Select } from 'semantic-ui-react';
 import { Locked32 } from '@carbon/icons-react';
 
 // Component
-import ProductCard from './ProductCard';
-import Loading from '../Loading';
 import Counter from '../misc/Counter';
 import Button from '../Ui/Button';
 

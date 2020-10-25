@@ -4,9 +4,7 @@ import {
   FETCH_PRODUCTS_ERROR
 } from './products.types';
 
-import { getProducts, getProduct } from '../../api/products';
-
-import makeRequest, { requestMethods } from '../../api/request';
+import { getProducts } from '../../api/products';
 
 export const fetchProductsRequest = () => {
   return {
