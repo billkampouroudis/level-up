@@ -37,7 +37,18 @@ main {
 // Sections
 //
 section {
-  margin-bottom: 100px;
+  padding-top: $sectionMobile;
+  padding-bottom: $sectionMobile;
+
+  @include media-breakpoint-up(md) {
+    padding-top: $sectionTablet;
+    padding-bottom: $sectionTablet;
+  }
+
+  @include media-breakpoint-up(xl) {
+    padding-top: $sectionDesktop;
+    padding-bottom: $sectionDesktop;
+  }
 }
 
 //
@@ -181,9 +192,7 @@ form {
 }
 
 // Ratings
-.rating {
-  .ui.rating .active.icon {
-    color: $primary !important;
-    border: none;
-  }
+.ui.rating .active.icon {
+  color: $primary !important;
+  border: none;
 }

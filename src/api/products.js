@@ -22,7 +22,11 @@ const products = [
       id: 1,
       name: 'Caliroots',
       link:
-        'https://caliroots.com/wacko-maria-x-carhartt-og-active-jacket-i028198-0d9-02/p/139954'
+        'https://caliroots.com/wacko-maria-x-carhartt-og-active-jacket-i028198-0d9-02/p/139954',
+      stars: 3,
+      address: 'Διεύθυνση, Πόλη, Χώρα',
+      phone: '25510 33464',
+      totalOrders: 125
     }
   },
   {
@@ -46,13 +50,17 @@ const products = [
       id: 2,
       name: 'Caliroots',
       link:
-        'https://caliroots.com/wacko-maria-x-carhartt-og-active-jacket-i028198-0d9-02/p/139954'
+        'https://caliroots.com/wacko-maria-x-carhartt-og-active-jacket-i028198-0d9-02/p/139954',
+      stars: 4,
+      address: 'Διεύθυνση, Πόλη, Χώρα',
+      phone: '25510 54555',
+      totalOrders: 125
     }
   }
 ];
 
 const productsApi = {
-  getProducts: (id) => {
+  getProducts: (id, options) => {
     // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
     //   .then((response) => {
     //     console.log(response.data)
@@ -67,7 +75,7 @@ const productsApi = {
           const product = products.filter((product) => product.id === id);
           if (product.length) {
             resolve({
-              data: products.filter((product) => product.id === id)
+              data: product
             });
           }
           reject({

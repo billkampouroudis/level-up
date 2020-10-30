@@ -16,7 +16,7 @@ import ErrorAlert from '../Alerts/ErrorAlert';
 import { addToFavorites } from '../../redux/Products/products.actions';
 
 const ProductOptions = (props) => {
-  const { productId, products, addToFavorites } = props;
+  const { productId, addToFavorites } = props;
 
   const [isFavorite, setIsFavorite] = useState(false);
   const [product, setProduct] = useState(null);
@@ -51,8 +51,10 @@ const ProductOptions = (props) => {
   };
 
   useEffect(() => {
-    setProduct(products.list.find((product) => product.id === productId));
-  }, [products]);
+    setProduct(
+      props.productsReducer.data.find((product) => product.id === productId)
+    );
+  }, [props.productsReducer]);
 
   useEffect(() => {
     if (product) {
@@ -113,7 +115,9 @@ const ProductOptions = (props) => {
           </Row>
           <Row className="d-flex align-items-center">
             <Col>
-              <Button text="Add to cart" className="custom primary mr-3" />
+              <Button className="custom primary mr-3">
+                Προσθήκη στο καλάθι
+              </Button>
 
               {isFavorite ? (
                 <FavoriteFilled32
@@ -129,7 +133,9 @@ const ProductOptions = (props) => {
             </Col>
           </Row>
         </Container>
-        {products.error && <ErrorAlert message={products.error} />}
+        {props.productsReducer.isFetchingProductsError && (
+          <ErrorAlert message={props.productsReducer.isFetchingProductsError} />
+        )}
       </>
     )
   );
@@ -137,7 +143,7 @@ const ProductOptions = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+    productsReducer: state.productsReducer
   };
 };
 

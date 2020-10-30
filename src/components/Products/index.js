@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
@@ -12,15 +12,31 @@ import ErrorAlert from '../Alerts/ErrorAlert';
 import { fetchProducts } from '../../redux/Products/products.actions';
 
 const Products = (props) => {
-  const { fetchProducts, products } = props;
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchProducts();
-  }, [fetchProducts]);
+    if (props.data) {
+      setProducts(props.data);
+    } else {
+      props.fetchProducts();
+    }
+
+    if (props.loading !== 'undefined') {
+      setLoading(props.loading);
+    }
+  }, [props.loading, props.data]);
+
+  useEffect(() => {
+    if (!props.data) {
+      setProducts(props.productsReducer.data);
+      setLoading(props.productsReducer.isFetchingProducts);
+    }
+  }, [props.productsReducer]);
 
   const renderProducts = () => {
-    if (products.list.length) {
-      return props.products.list.map((product) => (
+    if (products.length) {
+      return products.map((product) => (
         <Col xs={12} sm={6} md={4} lg={3} key={product.id}>
           <ProductCard product={product} />
         </Col>
@@ -31,20 +47,22 @@ const Products = (props) => {
   return (
     <>
       <Container>
-        {products.list.length <= 1 && products.loading ? (
-          <Loading loading={products.loading} />
+        {products && products.length <= 1 && loading ? (
+          <Loading loading={true} />
         ) : (
           <Row>{renderProducts()}</Row>
         )}
       </Container>
-      {products.error && <ErrorAlert message={products.error} />}
+      {/* {props.productsReducer.isFetchingProductsError && (
+        <ErrorAlert message={props.productsReducer.isFetchingProductsError} />
+      )} */}
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    products: state.products
+    productsReducer: state.productsReducer
   };
 };
 
@@ -55,7 +73,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 Products.propTypes = {
-  products: PropTypes.object,
-  fetchProducts: PropTypes.func
+  productsReducer: PropTypes.object,
+  fetchProducts: PropTypes.func,
+  data: PropTypes.array,
+  loading: PropTypes.bool
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Products);

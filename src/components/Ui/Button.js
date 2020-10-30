@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Products = (props) => {
-  const { text, className, onClick } = props;
+  const { children, className, onClick } = props;
 
   return (
     <button className={className || ''} onClick={onClick}>
-      {text}
+      {children}
     </button>
   );
 };
 
 Products.propTypes = {
-  text: PropTypes.string,
+  children: PropTypes.node.isRequired,
   className: PropTypes.string,
   onClick: PropTypes.func
 };
