@@ -3,19 +3,19 @@ import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 
 const Header = (props) => {
-  const { children, backgroundImage, home } = props;
-
   const style = {
-    backgroundImage: `url(${backgroundImage})`
+    backgroundImage: `url(${props.backgroundImage})`
   };
 
   return (
     <Container
       fluid
-      className={`header mb-5 d-flex align-items-center ${home ? 'home' : ''}`}
+      className={`header mb-5 d-flex align-items-center ${
+        props.home ? 'home' : ''
+      } ${props.seller ? 'seller' : ''}`}
       style={style}
     >
-      {children}
+      {props.children}
     </Container>
   );
 };
@@ -23,7 +23,8 @@ const Header = (props) => {
 Header.propTypes = {
   children: PropTypes.node.isRequired,
   backgroundImage: PropTypes.string,
-  home: PropTypes.bool
+  home: PropTypes.bool,
+  seller: PropTypes.bool
 };
 
 export default Header;

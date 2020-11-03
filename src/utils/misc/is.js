@@ -17,6 +17,9 @@ const is = {
   },
   notEmptyObject: (item) => {
     return item && item.constructor === Object && Object.keys(item).length > 0;
+  },
+  emptyObject: (item) => {
+    return !is.notEmptyObject(item);
   }
 };
 

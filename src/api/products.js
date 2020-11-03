@@ -34,11 +34,34 @@ const products = [
     image: Product2,
     name: 'Vans Era',
     description: `Color: Port Royale
-      VN0A4BV45U7
-      Material
-      Upper: Textile
-      Lining & Insole: Textile
-      Outsole: Other material`,
+    VN0A4BV45U7
+    Material
+    Upper: Textile
+    Lining & Insole: Textile
+    Outsole: Other material`,
+    stars: 4.5,
+    ratings: 8,
+    originalPrice: 69.9,
+    reducedPrice: 60.0,
+    discountLevel: 2,
+    sizes: ['38', '39', '40', '41', '42'],
+    isFavorite: false,
+    seller: {
+      id: 1,
+      name: 'Caliroots',
+      stars: 3
+    }
+  },
+  {
+    id: 3,
+    image: Product2,
+    name: 'Vans Era',
+    description: `Color: Port Royale
+    VN0A4BV45U7
+    Material
+    Upper: Textile
+    Lining & Insole: Textile
+    Outsole: Other material`,
     stars: 4.5,
     ratings: 8,
     originalPrice: 69.9,
@@ -48,13 +71,8 @@ const products = [
     isFavorite: false,
     seller: {
       id: 2,
-      name: 'Caliroots',
-      link:
-        'https://caliroots.com/wacko-maria-x-carhartt-og-active-jacket-i028198-0d9-02/p/139954',
-      stars: 4,
-      address: 'Διεύθυνση, Πόλη, Χώρα',
-      phone: '25510 54555',
-      totalOrders: 125
+      name: 'Test',
+      stars: 3
     }
   }
 ];
@@ -84,7 +102,7 @@ const productsApi = {
         } else {
           resolve({ data: products });
         }
-      }, 500);
+      }, 200);
     });
   },
 
@@ -104,7 +122,7 @@ const productsApi = {
         resolve({
           data: product
         });
-      }, 500);
+      }, 200);
     });
   }
 };

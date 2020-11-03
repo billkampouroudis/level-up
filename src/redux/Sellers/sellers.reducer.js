@@ -1,34 +1,34 @@
 import {
-  FETCH_SELLER_PRODUCTS_REQUEST,
-  FETCH_SELLER_PRODUCTS_SUCCESS,
-  FETCH_SELLER_PRODUCTS_ERROR
+  FETCH_SELLERS_REQUEST,
+  FETCH_SELLERS_SUCCESS,
+  FETCH_SELLERS_ERROR
 } from './sellers.types';
 
 const INITIAL_STATE = {
   data: [],
-  isFetchingSellerProducts: false,
-  isFetchingSellerProductsError: null
+  isFetchingSellers: false,
+  isFetchingSellersError: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     // Fetch products
-    case FETCH_SELLER_PRODUCTS_REQUEST:
+    case FETCH_SELLERS_REQUEST:
       return {
         ...state,
-        isFetchingSellerProducts: true
+        isFetchingSellers: true
       };
-    case FETCH_SELLER_PRODUCTS_SUCCESS:
+    case FETCH_SELLERS_SUCCESS:
       return {
         ...state,
-        isFetchingSellerProducts: false,
+        isFetchingSellers: false,
         data: action.response
       };
-    case FETCH_SELLER_PRODUCTS_ERROR:
+    case FETCH_SELLERS_ERROR:
       return {
         ...state,
-        isFetchingSellerProducts: false,
-        isFetchingSellerProductsError: action.error
+        isFetchingSellers: false,
+        isFetchingSellersError: action.error
       };
     default:
       return state;

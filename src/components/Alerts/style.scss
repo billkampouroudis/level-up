@@ -10,9 +10,10 @@
   }
 
   @include media-breakpoint-up(md) {
-    top: 0;
+    top: 16px;
     left: 50%;
     transform: translateX(calc(-50% + #{$sideMenuDefaultWidth}));
     width: fit-content;
+    min-width: 200px;
   }
 }

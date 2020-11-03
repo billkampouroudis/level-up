@@ -19,7 +19,7 @@ const ProductCard = (props) => {
       <div className="content">
         <div className="rating mb-1">
           <Rating defaultRating={product.stars} maxRating={5} disabled />
-          <span className="pl-1 text-sm">(23)</span>
+          <span className="pl-1 text-sm">({product.ratings})</span>
         </div>
         <Link to={urls.PRODUCTS + product.id}>
           <div className="name">

@@ -23,7 +23,7 @@ const SideMenu = (props) => {
 
     const child = document.createElement('div');
     child.setAttribute('id', 'hide-content-background');
-    child.style.position = 'absolute';
+    child.style.position = 'fixed';
     child.style.left = '0';
     child.style.top = '0';
     child.style.width = '100%';

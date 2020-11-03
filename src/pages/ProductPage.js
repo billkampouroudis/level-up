@@ -18,63 +18,67 @@ import Products from '../components/Products';
 
 // Redux Actions
 import { fetchProducts } from '../redux/Products/products.actions';
-import { fetchSellerProducts } from '../redux/Sellers/sellers.actions';
+import { fetchSellers } from '../redux/Sellers/sellers.actions';
 
 const ProductPage = (props) => {
-  const { match, fetchProducts } = props;
-  const productId = parseInt(match.params.id);
-
+  const [productId, setProductId] = useState(parseInt(props.match.params.id));
   const [product, setProduct] = useState({});
 
   const history = useHistory();
 
   useEffect(() => {
-    if (props.productsReducer.isFetchingProductsError) {
+    if (!props.match.params.id) {
       history.push(urls.NOT_FOUND);
     }
 
-    if (props.productsReducer.data.length) {
-      setProduct(
-        props.productsReducer.data.find((product) => product.id === productId)
-      );
-    } else {
-      fetchProducts(productId);
-    }
+    window.scrollTo(0, 0);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    props.fetchProducts(parseInt(props.match.params.id));
+  }, [props.match.params.id]);
 
   useEffect(() => {
-    setProduct(
-      props.productsReducer.data.find((product) => product.id === productId)
+    const productFromStore = props.productsReducer.data.find(
+      (product) => product.id === parseInt(props.match.params.id)
     );
+
+    setProductId(parseInt(props.match.params.id));
+
+    if (productFromStore) {
+      setProduct(productFromStore);
+      props.fetchSellers(productFromStore.seller.id);
+    }
   }, [props.productsReducer.data]);
 
   useEffect(() => {
     if (is.notEmptyObject(product)) {
-      props.fetchSellerProducts(product.seller.id);
+      props.fetchSellers(product.seller.id);
     }
   }, [product]);
 
   return (
     <>
-      <Loading loading={props.productsReducer.loading} fullHeight />
-      {product && !props.productsReducer.isFetchingProductsError && (
+      {props.productsReducer.isFetchingSellers && (
+        <Loading loading={props.productsReducer.loading} fullHeight />
+      )}
+      {is.notEmptyObject(product) && (
         <>
-          <Container className="pt-6">
-            <Row>
-              <Col md={6} xl={7}>
-                <img
-                  src={product.image}
-                  className="product-image"
-                  alt={product.name}
-                />
-              </Col>
-              <Col md={6} xl={5}>
-                <ProductOptions productId={productId} />
-              </Col>
-            </Row>
-          </Container>
+          <section>
+            <Container>
+              <Row>
+                <Col md={6} xl={7}>
+                  <img
+                    src={product.image}
+                    className="product-image"
+                    alt={product.name}
+                  />
+                </Col>
+                <Col md={6} xl={5}>
+                  <ProductOptions productId={productId} />
+                </Col>
+              </Row>
+            </Container>
+          </section>
+
           <section className="bg-background-dark mb-0">
             <Container>
               <Row>
@@ -82,11 +86,16 @@ const ProductPage = (props) => {
                   <h3>{get.safe(() => product.seller.name)}</h3>
                   <div className="mb-1">
                     {get.safe(() => product.seller.stars) ? (
-                      <Rating
-                        defaultRating={product.seller.stars}
-                        maxRating={5}
-                        disabled
-                      />
+                      <>
+                        <Rating
+                          defaultRating={product.seller.stars}
+                          maxRating={5}
+                          disabled
+                        />
+                        <span className="pl-1 text-sm">
+                          ({product.ratings})
+                        </span>
+                      </>
                     ) : null}
                   </div>
                   <div className="mb-3">
@@ -110,23 +119,29 @@ const ProductPage = (props) => {
               </Row>
             </Container>
           </section>
+          {get.safe(() => props.sellersReducer.data[0].products.length, 0) >
+            1 && (
+            <section className="bg-background-dark pt-0">
+              <Container>
+                <Row>
+                  <Col>
+                    <h3 className="mb-3">Περισσότερα προϊόντα στο κατάστημα</h3>
+
+                    <Products
+                      data={get.safe(
+                        () => props.sellersReducer.data[0].products,
+                        []
+                      )}
+                      loading={props.sellersReducer.isFetchingSellers}
+                      exclude={[product.id]}
+                    />
+                  </Col>
+                </Row>
+              </Container>
+            </section>
+          )}
         </>
       )}
-
-      <section className="bg-background-dark">
-        <Container>
-          <Row>
-            <Col>
-              <h3 className="mb-3">Περισσότερα προϊόντα στο κατάστημα</h3>
-
-              <Products
-                data={get.safe(() => props.sellersReducer.data[0].products, [])}
-                loading={props.sellersReducer.isFetchingSellerProducts}
-              />
-            </Col>
-          </Row>
-        </Container>
-      </section>
     </>
   );
 };
@@ -141,7 +156,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchProducts: (id) => dispatch(fetchProducts(id)),
-    fetchSellerProducts: (id) => dispatch(fetchSellerProducts(id))
+    fetchSellers: (id) => dispatch(fetchSellers(id))
   };
 };
 

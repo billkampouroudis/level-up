@@ -1,4 +1,7 @@
 import {
+  FETCH_SELLERS_REQUEST,
+  FETCH_SELLERS_SUCCESS,
+  FETCH_SELLERS_ERROR,
   FETCH_SELLER_PRODUCTS_REQUEST,
   FETCH_SELLER_PRODUCTS_SUCCESS,
   FETCH_SELLER_PRODUCTS_ERROR
@@ -6,37 +9,38 @@ import {
 
 import sellerApi from '../../api/sellers';
 
-// Fetch Seller Products
-export const fetchSellerProductsRequest = () => {
+// Fetch Seller
+export const fetchSellersRequest = () => {
   return {
-    type: FETCH_SELLER_PRODUCTS_REQUEST
+    type: FETCH_SELLERS_REQUEST
   };
 };
 
-export const fetchSellerProductsSuccess = (response) => {
+export const fetchSellersSuccess = (response) => {
   return {
-    type: FETCH_SELLER_PRODUCTS_SUCCESS,
+    type: FETCH_SELLERS_SUCCESS,
     response
   };
 };
 
-export const fetchSellerProductsError = (error) => {
+export const fetchSellersError = (error) => {
   return {
-    type: FETCH_SELLER_PRODUCTS_ERROR,
+    type: FETCH_SELLERS_ERROR,
     error
   };
 };
 
-export function fetchSellerProducts(id) {
+/*** Thunks ***/
+export function fetchSellers(id) {
   return (dispatch) => {
-    dispatch(fetchSellerProductsRequest());
+    dispatch(fetchSellersRequest());
     sellerApi
-      .getSellerProducts(id)
+      .getSellers(id)
       .then((res) => {
-        dispatch(fetchSellerProductsSuccess(res.data));
+        dispatch(fetchSellersSuccess(res.data));
       })
       .catch((err) => {
-        dispatch(fetchSellerProductsError(err.message));
+        dispatch(fetchSellersError(err.message));
       });
   };
 }

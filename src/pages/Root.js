@@ -14,7 +14,7 @@ import MyLevelPage from './MyLevelPage';
 import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
-import SellersPage from './SellersPage';
+import SellerPage from './SellerPage';
 
 const Root = () => {
   return (
@@ -63,7 +63,7 @@ const Root = () => {
         />
         <PrivateRoute
           path={Urls.SELLERS + ':id?'}
-          component={SellersPage}
+          component={SellerPage}
           layout={MainLayout}
         />
 

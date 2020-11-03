@@ -17,7 +17,14 @@ const Products = (props) => {
 
   useEffect(() => {
     if (props.data) {
-      setProducts(props.data);
+      if (props.exclude) {
+        // exclude the given ids from the displayed products
+        setProducts(
+          props.data.filter((item) => !props.exclude.includes(item.id))
+        );
+      } else {
+        setProducts(props.data);
+      }
     } else {
       props.fetchProducts();
     }
@@ -46,16 +53,9 @@ const Products = (props) => {
 
   return (
     <>
-      <Container>
-        {products && products.length <= 1 && loading ? (
-          <Loading loading={true} />
-        ) : (
-          <Row>{renderProducts()}</Row>
-        )}
+      <Container className="p-0">
+        {loading ? <Loading loading={true} /> : <Row>{renderProducts()}</Row>}
       </Container>
-      {/* {props.productsReducer.isFetchingProductsError && (
-        <ErrorAlert message={props.productsReducer.isFetchingProductsError} />
-      )} */}
     </>
   );
 };
@@ -76,6 +76,7 @@ Products.propTypes = {
   productsReducer: PropTypes.object,
   fetchProducts: PropTypes.func,
   data: PropTypes.array,
-  loading: PropTypes.bool
+  loading: PropTypes.bool,
+  exclude: PropTypes.array
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Products);
