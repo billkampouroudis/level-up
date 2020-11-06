@@ -34,9 +34,6 @@ module.exports = {
         ignore: ['i18n'],
         customValidators: []
       }
-    ],
-
-    'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'ignore'
+    ]
   }
 };

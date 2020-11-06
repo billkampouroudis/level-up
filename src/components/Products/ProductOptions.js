@@ -4,22 +4,29 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from '../../pages/router/Urls';
-import { Select } from 'semantic-ui-react';
 import { Locked32, Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
+import { validateOne } from '../../utils/validation/index';
 
 // Component
 import Counter from '../misc/Counter';
 import Button from '../Ui/Button';
 import ErrorAlert from '../Alerts/ErrorAlert';
+import CustomSelect from '../Inputs/CustomSelect';
 
 // Redux Actions
 import { addToFavorites } from '../../redux/Products/products.actions';
 
 const ProductOptions = (props) => {
-  const { productId, addToFavorites } = props;
-
   const [isFavorite, setIsFavorite] = useState(false);
   const [product, setProduct] = useState(null);
+  const [sizeSelect, setSizeSelect] = useState({
+    value: null,
+    label: 'Μέγεθος',
+    rules: {
+      notEmpty: true
+    },
+    errorMessage: ''
+  });
 
   const user = null;
 
@@ -47,14 +54,25 @@ const ProductOptions = (props) => {
 
   const handleFavorites = () => {
     setIsFavorite(!isFavorite);
-    addToFavorites(product.id);
+    props.addToFavorites(product.id);
+  };
+
+  const addToCart = () => {
+    const validatedSizeSelect = validateOne(sizeSelect);
+
+    if (validatedSizeSelect.errorMessage) {
+      setSizeSelect(validatedSizeSelect);
+      return;
+    }
+
+    alert('success');
   };
 
   useEffect(() => {
     setProduct(
-      props.productsReducer.data.find((product) => product.id === productId)
+      props.productsReducer.data.find((product) => product.id === props.productId)
     );
-  }, [props.productsReducer]);
+  }, [props.productId, props.productsReducer]);
 
   useEffect(() => {
     if (product) {
@@ -78,13 +96,20 @@ const ProductOptions = (props) => {
               <h1 className="h2 mb-4">{product.name}</h1>
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
-              <label className="text-bold mb-1">Μέγεθος</label>
-              <Select placeholder="Επέλεξε μέγεθος" options={sizes()} />
+              <label className="text-bold mb-1">{sizeSelect.label}</label>
+              <CustomSelect
+                placeholder="Επέλεξε μέγεθος"
+                options={sizes()}
+                errorMessage={sizeSelect.errorMessage}
+                onChange={(e, value) => {
+                  setSizeSelect(validateOne({ ...sizeSelect, value }))
+                }}
+              />
             </Col>
           </Row>
-          <Row>
+          <Row className="mb-3">
             <Col>
               <label className="text-bold mb-1">Ποσότητα</label>
               <Counter />
@@ -115,7 +140,7 @@ const ProductOptions = (props) => {
           </Row>
           <Row className="d-flex align-items-center">
             <Col>
-              <Button className="custom primary mr-3">
+              <Button className="custom primary mr-3" onClick={addToCart}>
                 Προσθήκη στο καλάθι
               </Button>
 
@@ -154,7 +179,9 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 ProductOptions.propTypes = {
-  productId: PropTypes.number.isRequired
+  productId: PropTypes.number.isRequired,
+  productsReducer: PropTypes.object,
+  addToFavorites: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductOptions);

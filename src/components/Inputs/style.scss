@@ -1,0 +1,90 @@
+//
+// General
+//
+.ui.input input,
+.ui.selection.dropdown {
+  width: 100% !important;
+  border-radius: 10px;
+  padding: 16px 24px;
+  background-color: $background-dark !important;
+  border: 2px solid $background-dark;
+
+  &:focus,
+  &:active,
+  &:hover {
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+  }
+}
+
+//
+// Input
+//
+.ui.input {
+  width: 100%;
+
+  &.icon {
+    i.icon {
+      top: 0;
+      right: 16px;
+      height: 24px;
+      width: 24px;
+      transform: translateY(65%);
+    }
+  }
+}
+
+//
+// Select
+//
+.ui.selection.dropdown {
+  .dropdown.icon {
+    padding: 16px 24px;
+  }
+
+  .menu {
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+    border-top-width: 0 !important;
+    width: -webkit-fill-available;
+    margin-left: -2px;
+    margin-right: -2px;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .item {
+    &:hover {
+      background: rgba(
+        red($background-dark),
+        green($background-dark),
+        blue($background-dark),
+        0.2
+      );
+    }
+  }
+
+  .selected.item {
+    background: rgba(
+      red($background-dark),
+      green($background-dark),
+      blue($background-dark),
+      0.6
+    );
+  }
+
+  &.upward.active {
+    border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+    border-radius: 0 0 10px 10px !important;
+
+    .menu {
+      border-radius: 10px 10px 0 0;
+    }
+  }
+}
+
+.ui.selection.active.dropdown {
+  border: 2px solid rgba(red($primary), green($primary), blue($primary), 0.5) !important;
+}
+
+.error-message {
+  color: $danger;
+  transform: translateY(-16px);
+}

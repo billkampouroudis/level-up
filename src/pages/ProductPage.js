@@ -20,128 +20,130 @@ import Products from '../components/Products';
 import { fetchProducts } from '../redux/Products/products.actions';
 import { fetchSellers } from '../redux/Sellers/sellers.actions';
 
+// Hooks
+import useDidMountEffect from '../utils/hooks/useDidMountEffect';
+
 const ProductPage = (props) => {
-  const [productId, setProductId] = useState(parseInt(props.match.params.id));
+  const [productId, setProductId] = useState(null);
   const [product, setProduct] = useState({});
 
   const history = useHistory();
 
   useEffect(() => {
-    if (!props.match.params.id) {
+    if(props.match.params.id){
+      const productIdFromParams = parseInt(props.match.params.id);
+      setProductId(productIdFromParams);
+      window.scrollTo(0, 0);
+      props.fetchProducts(parseInt(props.match.params.id));
+    } else{
       history.push(urls.NOT_FOUND);
     }
-
-    window.scrollTo(0, 0);
-
-    props.fetchProducts(parseInt(props.match.params.id));
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
-  useEffect(() => {
-    const productFromStore = props.productsReducer.data.find(
-      (product) => product.id === parseInt(props.match.params.id)
-    );
+  useDidMountEffect(()=>{
+    if(!props.productsReducer.isFetchingProducts){
+      const productFromStore = props.productsReducer.data.find(
+        (product) => product.id === productId
+      );
 
-    setProductId(parseInt(props.match.params.id));
+      if(!productFromStore){
+        history.push(urls.NOT_FOUND);
+        return;
+      }
 
-    if (productFromStore) {
       setProduct(productFromStore);
       props.fetchSellers(productFromStore.seller.id);
     }
-  }, [props.productsReducer.data]);
-
-  useEffect(() => {
-    if (is.notEmptyObject(product)) {
-      props.fetchSellers(product.seller.id);
-    }
-  }, [product]);
+  }, [props.productsReducer.isFetchingProducts])
 
   return (
     <>
-      {props.productsReducer.isFetchingSellers && (
+      {props.productsReducer.isFetchingSellers || is.emptyObject(product) || product.id !== productId ? (
         <Loading loading={props.productsReducer.loading} fullHeight />
-      )}
-      {is.notEmptyObject(product) && (
-        <>
-          <section>
-            <Container>
-              <Row>
-                <Col md={6} xl={7}>
-                  <img
-                    src={product.image}
-                    className="product-image"
-                    alt={product.name}
-                  />
-                </Col>
-                <Col md={6} xl={5}>
-                  <ProductOptions productId={productId} />
-                </Col>
-              </Row>
-            </Container>
-          </section>
-
-          <section className="bg-background-dark mb-0">
-            <Container>
-              <Row>
-                <Col md={4}>
-                  <h3>{get.safe(() => product.seller.name)}</h3>
-                  <div className="mb-1">
-                    {get.safe(() => product.seller.stars) ? (
-                      <>
-                        <Rating
-                          defaultRating={product.seller.stars}
-                          maxRating={5}
-                          disabled
-                        />
-                        <span className="pl-1 text-sm">
-                          ({product.ratings})
-                        </span>
-                      </>
-                    ) : null}
-                  </div>
-                  <div className="mb-3">
-                    {get.safe(() => product.seller.totalOrders)} Συνολικές
-                    παραγγελίες
-                  </div>
-                  <div>
-                    <Link
-                      to={urls.SELLERS + get.safe(() => product.seller.id, '')}
-                    >
-                      <Button className="custom secondary mr-3">
-                        Επίσκεψη καταστήματος
-                      </Button>
-                    </Link>
-                  </div>
-                </Col>
-                <Col>
-                  <h3>Πληροφορίες προϊόντος</h3>
-                  <p>{product.description}</p>
-                </Col>
-              </Row>
-            </Container>
-          </section>
-          {get.safe(() => props.sellersReducer.data[0].products.length, 0) >
-            1 && (
-            <section className="bg-background-dark pt-0">
+      ) :
+        is.notEmptyObject(product) && product.id === productId && (
+          <>
+            <section>
               <Container>
                 <Row>
-                  <Col>
-                    <h3 className="mb-3">Περισσότερα προϊόντα στο κατάστημα</h3>
-
-                    <Products
-                      data={get.safe(
-                        () => props.sellersReducer.data[0].products,
-                        []
-                      )}
-                      loading={props.sellersReducer.isFetchingSellers}
-                      exclude={[product.id]}
+                  <Col md={6} xl={7}>
+                    <img
+                      src={product.image}
+                      className="product-image"
+                      alt={product.name}
                     />
+                  </Col>
+                  <Col md={6} xl={5}>
+                    <ProductOptions productId={productId} />
                   </Col>
                 </Row>
               </Container>
             </section>
-          )}
-        </>
-      )}
+
+            <section className="bg-background-dark mb-0">
+              <Container>
+                <Row>
+                  <Col md={4}>
+                    <h3>{get.safe(() => product.seller.name)}</h3>
+                    <div className="mb-1">
+                      {get.safe(() => product.seller.stars) ? (
+                        <Rating>
+                          <Rating
+                            defaultRating={product.seller.stars}
+                            maxRating={5}
+                            disabled
+                          />
+                          <span className="pl-1 text-sm">
+                          ({product.ratings})
+                          </span>
+                        </Rating>
+                      ) : null}
+                    </div>
+                    <div className="mb-3">
+                      {get.safe(() => product.seller.totalOrders)} Συνολικές
+                    παραγγελίες
+                    </div>
+                    <div>
+                      <Link
+                        to={urls.SELLERS + get.safe(() => product.seller.id, '')}
+                      >
+                        <Button className="custom secondary mr-3">
+                        Επίσκεψη καταστήματος
+                        </Button>
+                      </Link>
+                    </div>
+                  </Col>
+                  <Col>
+                    <h3>Πληροφορίες προϊόντος</h3>
+                    <p>{product.description}</p>
+                  </Col>
+                </Row>
+              </Container>
+            </section>
+            {get.safe(() => props.sellersReducer.data[0].products.length, 0) >
+            1 && (
+              <section className="bg-background-dark pt-0">
+                <Container>
+                  <Row>
+                    <Col>
+                      <h3 className="mb-3">Περισσότερα προϊόντα στο κατάστημα</h3>
+
+                      <Products
+                        data={get.safe(
+                          () => props.sellersReducer.data[0].products,
+                          []
+                        )}
+                        loading={props.sellersReducer.isFetchingSellers}
+                        exclude={[product.id]}
+                      />
+                    </Col>
+                  </Row>
+                </Container>
+              </section>
+            )}
+          </>
+        )}
     </>
   );
 };
@@ -163,6 +165,8 @@ const mapDispatchToProps = (dispatch) => {
 ProductPage.propTypes = {
   match: PropTypes.object,
   productsReducer: PropTypes.object,
-  sellersReducer: PropTypes.object
+  sellersReducer: PropTypes.object,
+  fetchProducts: PropTypes.func,
+  fetchSellers: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

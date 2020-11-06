@@ -9,7 +9,7 @@ const is = {
       item === [] ||
       item === {} ||
       item === false ||
-      item === NaN
+      isNaN(item)
     );
   },
   truthy: (item) => {

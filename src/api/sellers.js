@@ -29,7 +29,7 @@ const sellers = [
         originalPrice: 409.9,
         reducedPrice: 350.0,
         discountLevel: 12,
-        sizes: ['Small', 'Medium', 'Large', 'X-Large'],
+        sizes: ['S', 'M', 'L', 'XL'],
         isFavorite: true,
         seller: {
           id: 1,

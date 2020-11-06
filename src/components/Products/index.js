@@ -6,7 +6,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 // Component
 import ProductCard from './ProductCard';
 import Loading from '../Loading';
-import ErrorAlert from '../Alerts/ErrorAlert';
 
 // Redux Actions
 import { fetchProducts } from '../../redux/Products/products.actions';
@@ -32,6 +31,7 @@ const Products = (props) => {
     if (props.loading !== 'undefined') {
       setLoading(props.loading);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.loading, props.data]);
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const Products = (props) => {
       setProducts(props.productsReducer.data);
       setLoading(props.productsReducer.isFetchingProducts);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.productsReducer]);
 
   const renderProducts = () => {
