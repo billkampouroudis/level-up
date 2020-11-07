@@ -70,7 +70,9 @@ const ProductOptions = (props) => {
 
   useEffect(() => {
     setProduct(
-      props.productsReducer.data.find((product) => product.id === props.productId)
+      props.productsReducer.data.find(
+        (product) => product.id === props.productId
+      )
     );
   }, [props.productId, props.productsReducer]);
 
@@ -104,7 +106,7 @@ const ProductOptions = (props) => {
                 options={sizes()}
                 errorMessage={sizeSelect.errorMessage}
                 onChange={(e, value) => {
-                  setSizeSelect(validateOne({ ...sizeSelect, value }))
+                  setSizeSelect(validateOne({ ...sizeSelect, value }));
                 }}
               />
             </Col>

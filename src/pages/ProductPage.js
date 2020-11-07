@@ -30,24 +30,24 @@ const ProductPage = (props) => {
   const history = useHistory();
 
   useEffect(() => {
-    if(props.match.params.id){
+    if (props.match.params.id) {
       const productIdFromParams = parseInt(props.match.params.id);
       setProductId(productIdFromParams);
       window.scrollTo(0, 0);
       props.fetchProducts(parseInt(props.match.params.id));
-    } else{
+    } else {
       history.push(urls.NOT_FOUND);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
-  useDidMountEffect(()=>{
-    if(!props.productsReducer.isFetchingProducts){
+  useDidMountEffect(() => {
+    if (!props.productsReducer.isFetchingProducts) {
       const productFromStore = props.productsReducer.data.find(
         (product) => product.id === productId
       );
 
-      if(!productFromStore){
+      if (!productFromStore) {
         history.push(urls.NOT_FOUND);
         return;
       }
@@ -55,16 +55,19 @@ const ProductPage = (props) => {
       setProduct(productFromStore);
       props.fetchSellers(productFromStore.seller.id);
     }
-  }, [props.productsReducer.isFetchingProducts])
+  }, [props.productsReducer.isFetchingProducts]);
 
   return (
     <>
-      {props.productsReducer.isFetchingSellers || is.emptyObject(product) || product.id !== productId ? (
+      {props.productsReducer.isFetchingSellers ||
+      is.emptyObject(product) ||
+      product.id !== productId ? (
         <Loading loading={props.productsReducer.loading} fullHeight />
-      ) :
-        is.notEmptyObject(product) && product.id === productId && (
+      ) : (
+        is.notEmptyObject(product) &&
+        product.id === productId && (
           <>
-            <section>
+            <section className="pb-0 pb-sm-auto">
               <Container>
                 <Row>
                   <Col md={6} xl={7}>
@@ -81,35 +84,37 @@ const ProductPage = (props) => {
               </Container>
             </section>
 
-            <section className="bg-background-dark mb-0">
+            <section className="mb-0">
               <Container>
                 <Row>
-                  <Col md={4}>
+                  <Col md={6} lg={4} className="mb-4">
                     <h3>{get.safe(() => product.seller.name)}</h3>
                     <div className="mb-1">
                       {get.safe(() => product.seller.stars) ? (
-                        <Rating>
+                        <>
                           <Rating
                             defaultRating={product.seller.stars}
                             maxRating={5}
                             disabled
                           />
                           <span className="pl-1 text-sm">
-                          ({product.ratings})
+                            {product.ratings}
                           </span>
-                        </Rating>
+                        </>
                       ) : null}
                     </div>
                     <div className="mb-3">
                       {get.safe(() => product.seller.totalOrders)} Συνολικές
-                    παραγγελίες
+                      παραγγελίες
                     </div>
                     <div>
                       <Link
-                        to={urls.SELLERS + get.safe(() => product.seller.id, '')}
+                        to={
+                          urls.SELLERS + get.safe(() => product.seller.id, '')
+                        }
                       >
                         <Button className="custom secondary mr-3">
-                        Επίσκεψη καταστήματος
+                          Επίσκεψη καταστήματος
                         </Button>
                       </Link>
                     </div>
@@ -121,29 +126,33 @@ const ProductPage = (props) => {
                 </Row>
               </Container>
             </section>
-            {get.safe(() => props.sellersReducer.data[0].products.length, 0) >
-            1 && (
-              <section className="bg-background-dark pt-0">
-                <Container>
-                  <Row>
-                    <Col>
-                      <h3 className="mb-3">Περισσότερα προϊόντα στο κατάστημα</h3>
+            {!props.sellersReducer.isFetchingSellers &&
+              get.safe(() => props.sellersReducer.data[0].products.length, 0) >
+                1 && (
+                <section className="bg-background-dark">
+                  <Container>
+                    <Row>
+                      <Col>
+                        <h3 className="mb-3">
+                          Περισσότερα προϊόντα στο κατάστημα
+                        </h3>
 
-                      <Products
-                        data={get.safe(
-                          () => props.sellersReducer.data[0].products,
-                          []
-                        )}
-                        loading={props.sellersReducer.isFetchingSellers}
-                        exclude={[product.id]}
-                      />
-                    </Col>
-                  </Row>
-                </Container>
-              </section>
-            )}
+                        <Products
+                          data={get.safe(
+                            () => props.sellersReducer.data[0].products,
+                            []
+                          )}
+                          loading={props.sellersReducer.isFetchingSellers}
+                          exclude={[product.id]}
+                        />
+                      </Col>
+                    </Row>
+                  </Container>
+                </section>
+              )}
           </>
-        )}
+        )
+      )}
     </>
   );
 };

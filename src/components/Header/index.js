@@ -10,9 +10,9 @@ const Header = (props) => {
   return (
     <Container
       fluid
-      className={`header mb-5 d-flex align-items-center ${
-        props.home ? 'home' : ''
-      } ${props.seller ? 'seller' : ''}`}
+      className={`header d-flex align-items-center ${
+        props.className ? props.className : ''
+      }`}
       style={style}
     >
       {props.children}
@@ -24,7 +24,8 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
   backgroundImage: PropTypes.string,
   home: PropTypes.bool,
-  seller: PropTypes.bool
+  seller: PropTypes.bool,
+  className: PropTypes.string
 };
 
 export default Header;

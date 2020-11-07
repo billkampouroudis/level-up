@@ -13,7 +13,7 @@ main {
 }
 
 ::selection {
-  background: $primaryLight;
+  background-color: $accent;
   color: #fff;
 }
 
@@ -55,10 +55,11 @@ section {
 // links
 //
 a {
-  color: $primary;
+  color: $accent;
   &:hover {
     text-decoration: underline;
-    color: $primaryDark;
+    // color: scale($accent, $lightness: -25%);
+    color: $accentDark;
   }
 }
 
@@ -89,23 +90,6 @@ form {
   }
 }
 
-
-//
-// Home Header
-//
-.home-hero {
-  background-color: rgba(red($primary), green($primary), blue($primary), 0.9);
-  padding: 24px 0;
-  position: absolute;
-  bottom: 15px;
-  left: 15px;
-  width: calc(100% - 30px);
-
-  h1 {
-    margin-bottom: 16px;
-  }
-}
-
 // Product
 .product-image {
   width: 100%;
@@ -114,6 +98,6 @@ form {
 
 // Ratings
 .ui.rating .active.icon {
-  color: $primary !important;
+  color: $accent !important;
   border: none;
 }

@@ -2,14 +2,15 @@ module.exports = {
   globals: {
     __PATH_PREFIX__: true
   },
-  extends: `react-app`,
+  extends: ['react-app', 'plugin:prettier/recommended'],
+  plugins: ['prettier'],
   rules: {
     // Possible Errors
     'no-console': 'off',
     'no-empty': ['error', { allowEmptyCatch: true }],
 
     // Stylistic Issues
-    indent: ['warn', 2, { SwitchCase: 1, ignoredNodes: ['TemplateLiteral'] }],
+    // indent: ['warn', 2],
     quotes: ['warn', 'single', { allowTemplateLiterals: true }],
     'brace-style': ['warn'],
     'no-multiple-empty-lines': ['warn', { max: 1 }],

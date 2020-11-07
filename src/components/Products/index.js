@@ -31,7 +31,7 @@ const Products = (props) => {
     if (props.loading !== 'undefined') {
       setLoading(props.loading);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.loading, props.data]);
 
   useEffect(() => {
@@ -39,13 +39,13 @@ const Products = (props) => {
       setProducts(props.productsReducer.data);
       setLoading(props.productsReducer.isFetchingProducts);
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.productsReducer]);
 
   const renderProducts = () => {
     if (products.length) {
       return products.map((product) => (
-        <Col xs={12} sm={6} md={4} lg={3} key={product.id}>
+        <Col xs={12} sm={6} md={4} lg={3} key={product.id} className="mb-3">
           <ProductCard product={product} />
         </Col>
       ));
@@ -54,7 +54,7 @@ const Products = (props) => {
 
   return (
     <>
-      <Container className="p-0">
+      <Container>
         {loading ? <Loading loading={true} /> : <Row>{renderProducts()}</Row>}
       </Container>
     </>

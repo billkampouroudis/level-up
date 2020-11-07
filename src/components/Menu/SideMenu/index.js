@@ -73,7 +73,7 @@ const SideMenu = (props) => {
   }, [location]);
 
   return (
-    <aside className="sidenav bg-primary-dark">
+    <aside className="sidenav">
       <figure className="w-100 text-center">
         <Link to={Urls.HOME}>
           {sideNavState === 2 ? (

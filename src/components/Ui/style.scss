@@ -17,35 +17,35 @@ button.custom {
   }
 
   &.primary {
-    background-color: $primary;
+    background-color: $accent;
     color: #fff;
-    border: 2px solid $primary;
+    border: 2px solid $accent;
 
     &:hover {
-      background-color: darken($primary, 5%);
+      background-color: $accentDark;
     }
 
     &:focus,
     &:active {
-      background-color: darken($primary, 10%);
-      border: 2px solid $primaryLight;
+      background-color: $accentDark;
+      border: 2px solid $accent;
     }
   }
 
   &.secondary {
     background-color: #fff;
-    border: 2px solid $primary;
+    border: 2px solid $accent;
     color: $primary;
 
     &:hover {
-      background-color: $primary;
+      background-color: $accentDark;
       color: #fff;
     }
 
     &:focus,
     &:active {
-      background-color: darken($primary, 10%);
-      border: 2px solid $primaryLight;
+      background-color: darken($accent, 10%);
+      border: 2px solid $accent;
       color: #fff;
     }
   }

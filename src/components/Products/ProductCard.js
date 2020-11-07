@@ -11,9 +11,9 @@ const ProductCard = (props) => {
   return (
     <div className="product-card">
       <Link to={urls.PRODUCTS + product.id}>
-        <div className="image">
+        <figure>
           <img src={product.image} alt="product1" />
-        </div>
+        </figure>
       </Link>
 
       <div className="content">

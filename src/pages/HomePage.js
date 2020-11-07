@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 // Components
 import Products from '../components/Products';
 import Header from '../components/Header';
+import Button from '../components/Ui/Button';
 
 // Images
 import HeroImage1 from '../assets/images/Hero-Image.jpg';
@@ -39,27 +40,30 @@ const HomePage = () => {
 
   return (
     <>
-      <Header backgroundImage={heroImage} home>
-        <Container fluid className="home-hero">
+      <Header backgroundImage={heroImage} className="home">
+        <div className="content">
           <Container>
             <Row>
               <Col>
                 <header>
-                  <h1 className="text-white">
+                  <h1>
                     Ανέβασε <span className="text-bold">level</span> στις αγορές
                     σου!
                   </h1>
-                  <p className="text-white text-xl">
+                  <p className="text-xl mb-4">
                     Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
                   </p>
+                  <Button className="custom primary">Μάθετε περισσότερα</Button>
                 </header>
               </Col>
             </Row>
           </Container>
-        </Container>
+        </div>
       </Header>
 
-      <Products />
+      <section>
+        <Products />
+      </section>
     </>
   );
 };

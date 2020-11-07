@@ -34,7 +34,7 @@ PrivateRoute.propTypes = {
   component: PropTypes.oneOfType([PropTypes.object, PropTypes.func]),
   location: PropTypes.object,
   layout: PropTypes.func.isRequired,
-  // isAuthenticated: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
   pageKey: PropTypes.string
 };
 

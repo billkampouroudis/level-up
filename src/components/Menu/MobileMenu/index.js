@@ -15,9 +15,11 @@ const CustomNav = () => {
             <h2>Κατηγορίες</h2>
             <CategoriesMenuLinks />
           </section> */}
-          <section>
-            <h2>Μενού</h2>
-            <UserMenuLinks />
+          <section className="text-center">
+            <div className="d-inline-block">
+              <h2 className="text-left">Μενού</h2>
+              <UserMenuLinks />
+            </div>
           </section>
         </nav>
       </Container>
