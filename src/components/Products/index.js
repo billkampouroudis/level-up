@@ -8,7 +8,7 @@ import ProductCard from './ProductCard';
 import Loading from '../Loading';
 
 // Redux Actions
-import { fetchProducts } from '../../redux/Products/products.actions';
+import { listProducts } from '../../redux/Products/products.actions';
 
 const Products = (props) => {
   const [products, setProducts] = useState([]);
@@ -25,7 +25,8 @@ const Products = (props) => {
         setProducts(props.data);
       }
     } else {
-      props.fetchProducts();
+      console.log(props.listProducts());
+      // props.listProducts();
     }
 
     if (props.loading !== 'undefined') {
@@ -37,7 +38,7 @@ const Products = (props) => {
   useEffect(() => {
     if (!props.data) {
       setProducts(props.productsReducer.data);
-      setLoading(props.productsReducer.isFetchingProducts);
+      setLoading(props.productsReducer.isListingProducts);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.productsReducer]);
@@ -69,13 +70,13 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: () => dispatch(fetchProducts())
+    listProducts: () => dispatch(listProducts.call())
   };
 };
 
 Products.propTypes = {
   productsReducer: PropTypes.object,
-  fetchProducts: PropTypes.func,
+  listProducts: PropTypes.func,
   data: PropTypes.array,
   loading: PropTypes.bool,
   exclude: PropTypes.array

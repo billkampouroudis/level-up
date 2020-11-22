@@ -17,7 +17,7 @@ import Button from '../components/Ui/Button';
 import Products from '../components/Products';
 
 // Redux Actions
-import { fetchProducts } from '../redux/Products/products.actions';
+import { getProduct, listProducts } from '../redux/Products/products.actions';
 import { fetchSellers } from '../redux/Sellers/sellers.actions';
 
 // Hooks
@@ -34,7 +34,7 @@ const ProductPage = (props) => {
       const productIdFromParams = parseInt(props.match.params.id);
       setProductId(productIdFromParams);
       window.scrollTo(0, 0);
-      props.fetchProducts(parseInt(props.match.params.id));
+      props.getProduct(parseInt(props.match.params.id));
     } else {
       history.push(urls.NOT_FOUND);
     }
@@ -42,7 +42,7 @@ const ProductPage = (props) => {
   }, [props.match.params.id]);
 
   useDidMountEffect(() => {
-    if (!props.productsReducer.isFetchingProducts) {
+    if (!props.productsReducer.isListingProducts) {
       const productFromStore = props.productsReducer.data.find(
         (product) => product.id === productId
       );
@@ -55,7 +55,7 @@ const ProductPage = (props) => {
       setProduct(productFromStore);
       props.fetchSellers(productFromStore.seller.id);
     }
-  }, [props.productsReducer.isFetchingProducts]);
+  }, [props.productsReducer.isListingProducts]);
 
   return (
     <>
@@ -166,7 +166,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchProducts: (id) => dispatch(fetchProducts(id)),
+    getProduct: (id) => dispatch(getProduct.call(id)),
+    listProducts: (id) => dispatch(listProducts.call()),
     fetchSellers: (id) => dispatch(fetchSellers(id))
   };
 };
@@ -175,7 +176,7 @@ ProductPage.propTypes = {
   match: PropTypes.object,
   productsReducer: PropTypes.object,
   sellersReducer: PropTypes.object,
-  fetchProducts: PropTypes.func,
+  listProducts: PropTypes.func,
   fetchSellers: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

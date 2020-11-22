@@ -1,8 +1,10 @@
-// import makeRequest, { requestMethods } from './request';
+import makeRequest, { requestMethods } from './request';
 
 // Images
 import Product1 from '../assets/images/product1.jpg';
 import Product2 from '../assets/images/product2.jpg';
+
+const apiUrl = process.env.REACT_APP_API_BASE_URL;
 
 const products = [
   {
@@ -78,43 +80,35 @@ const products = [
 ];
 
 const productsApi = {
-  getProducts: (id, options) => {
-    // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
-    //   .then((response) => {
-    //     console.log(response.data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
+  getProduct: async ({ id, options }) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.GET,
+        url: `${apiUrl}/products/${id}`,
+        options
+      });
 
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        if (id) {
-          const product = products.filter((product) => product.id === id);
-          if (product.length) {
-            resolve({
-              data: product
-            });
-          }
-          reject({
-            message: 'Not found'
-          });
-        } else {
-          resolve({ data: products });
-        }
-      }, 200);
-    });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   },
 
-  addToFavorites: (id) => {
-    // makeRequest({ method: requestMethods.GET, 'https://fakestoreapi.com/products' })
-    //   .then((response) => {
-    //     console.log(response.data)
-    //   })
-    //   .catch((error) => {
-    //     console.log(error.message);
-    //   });
+  listProducts: async (options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.GET,
+        url: `${apiUrl}/products`,
+        options
+      });
 
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
+  addToFavorites: ({ id, options }) => {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         const product = products.find((product) => product.id === id);

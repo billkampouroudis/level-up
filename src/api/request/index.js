@@ -14,27 +14,28 @@ const defaultConfig = {
   }
 };
 
-const defaultParams = {
+const defaultOptions = {
   withAuth: false
 };
 
 /**
  * Creates a request to the api using the given params
  * @param {string} method
+ * @param {string} url
+ * @param {object} data
+ * @param {object} options
  */
 const makeRequest = async ({
   method = requestMethods.GET,
   url,
   data,
-  params = defaultParams
+  options = defaultOptions
 }) => {
-  if (params) {
-    if (params.withAuth) {
-      defaultConfig.header = {
-        ...defaultConfig.headers,
-        Authorization: 'JWT fefege...'
-      };
-    }
+  if (options.withAuth) {
+    defaultConfig.header = {
+      ...defaultConfig.headers,
+      Authorization: 'JWT fefege...'
+    };
   }
 
   try {
