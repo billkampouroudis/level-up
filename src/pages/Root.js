@@ -14,7 +14,7 @@ import MyLevelPage from './MyLevelPage';
 import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
-import SellerPage from './SellerPage';
+import StorePage from './StorePage';
 
 const Root = () => {
   return (
@@ -32,7 +32,7 @@ const Root = () => {
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.PRODUCTS + ':id?'}
+          path={`${Urls.PRODUCTS}/:id?`}
           component={ProductPage}
           layout={MainLayout}
         />
@@ -62,8 +62,8 @@ const Root = () => {
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.SELLERS + ':id?'}
-          component={SellerPage}
+          path={`${Urls.STORES}/:id?`}
+          component={StorePage}
           layout={MainLayout}
         />
 

@@ -15,11 +15,19 @@ const is = {
   truthy: (item) => {
     return !is.falsy(item);
   },
-  notEmptyObject: (item) => {
-    return item && item.constructor === Object && Object.keys(item).length > 0;
-  },
   emptyObject: (item) => {
-    return !is.notEmptyObject(item);
+    return !(
+      item &&
+      item.constructor === Object &&
+      Object.keys(item).length > 0
+    );
+  },
+  correctImageSrc: (src) => {
+    const http = new XMLHttpRequest();
+    http.open('HEAD', src, false);
+    http.send();
+
+    return http.status !== 404;
   }
 };
 

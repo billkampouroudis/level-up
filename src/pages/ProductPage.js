@@ -14,27 +14,32 @@ import { Rating } from 'semantic-ui-react';
 import Loading from '../components/Loading';
 import ProductOptions from '../components/Products/ProductOptions';
 import Button from '../components/Ui/Button';
-import Products from '../components/Products';
+// import Products from '../components/Products';
+
+// Images
+import ilImages from '../assets/images/il-images.svg';
 
 // Redux Actions
 import { getProduct, listProducts } from '../redux/Products/products.actions';
-import { fetchSellers } from '../redux/Sellers/sellers.actions';
+import { getStore } from '../redux/Stores/stores.actions';
 
 // Hooks
 import useDidMountEffect from '../utils/hooks/useDidMountEffect';
 
+// API Calls
+// import productsApi from '../api/products';
+
 const ProductPage = (props) => {
-  const [productId, setProductId] = useState(null);
   const [product, setProduct] = useState({});
+  // const [otherProducts, setOtherProducts] = useState([]);
 
   const history = useHistory();
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (props.match.params.id) {
       const productIdFromParams = parseInt(props.match.params.id);
-      setProductId(productIdFromParams);
-      window.scrollTo(0, 0);
-      props.getProduct(parseInt(props.match.params.id));
+      props.getProduct(productIdFromParams);
     } else {
       history.push(urls.NOT_FOUND);
     }
@@ -42,116 +47,122 @@ const ProductPage = (props) => {
   }, [props.match.params.id]);
 
   useDidMountEffect(() => {
-    if (!props.productsReducer.isListingProducts) {
-      const productFromStore = props.productsReducer.data.find(
-        (product) => product.id === productId
-      );
-
-      if (!productFromStore) {
+    if (!props.productsReducer.isGettingProduct) {
+      const _product = props.productsReducer.data[0];
+      if (!_product) {
         history.push(urls.NOT_FOUND);
-        return;
       }
 
-      setProduct(productFromStore);
-      props.fetchSellers(productFromStore.seller.id);
+      setProduct(_product);
+      listOtherStoreProducts(_product.store.id);
     }
-  }, [props.productsReducer.isListingProducts]);
+  }, [props.productsReducer.isGettingProduct]);
+
+  function listOtherStoreProducts(id) {
+    console.warn('TODO');
+
+    // productsApi.listProducts(id).then((res) => {
+    //   console.log(res);
+    // });
+  }
 
   return (
     <>
-      {props.productsReducer.isFetchingSellers ||
-      is.emptyObject(product) ||
-      product.id !== productId ? (
+      {props.productsReducer.isGettingStores || is.emptyObject(product) ? (
         <Loading loading={props.productsReducer.loading} fullHeight />
       ) : (
-        is.notEmptyObject(product) &&
-        product.id === productId && (
-          <>
-            <section className="pb-0 pb-sm-auto">
-              <Container>
-                <Row>
-                  <Col md={6} xl={7}>
-                    <img
-                      src={product.image}
-                      className="product-image"
-                      alt={product.name}
-                    />
-                  </Col>
-                  <Col md={6} xl={5}>
-                    <ProductOptions productId={productId} />
-                  </Col>
-                </Row>
-              </Container>
-            </section>
+        <>
+          <section className="pb-0 pb-sm-auto">
+            <Container>
+              <Row>
+                <Col
+                  md={6}
+                  xl={7}
+                  className={
+                    !is.correctImageSrc(product.image) &&
+                    'align-self-center text-center'
+                  }
+                >
+                  <img
+                    src={get.safeImageSrc(product.image, ilImages)}
+                    className={`product-image `}
+                    alt={product.name}
+                    style={
+                      !is.correctImageSrc(product.image) && {
+                        maxWidth: '150px'
+                      }
+                    }
+                  />
+                </Col>
+                <Col md={6} xl={5}>
+                  <ProductOptions />
+                </Col>
+              </Row>
+            </Container>
+          </section>
 
-            <section className="mb-0">
-              <Container>
-                <Row>
-                  <Col md={6} lg={4} className="mb-4">
-                    <h3>{get.safe(() => product.seller.name)}</h3>
+          <section className="mb-0">
+            <Container>
+              <Row>
+                <Col md={6} lg={4} className="mb-4">
+                  <h3>{get.safe(() => product.store.brandName)}</h3>
+
+                  {get.safe(() => product.store.stars) && (
                     <div className="mb-1">
-                      {get.safe(() => product.seller.stars) ? (
-                        <>
-                          <Rating
-                            defaultRating={product.seller.stars}
-                            maxRating={5}
-                            disabled
-                          />
-                          <span className="pl-1 text-sm">
-                            {product.ratings}
-                          </span>
-                        </>
-                      ) : null}
+                      <Rating
+                        defaultRating={product.store.stars}
+                        maxRating={5}
+                        disabled
+                      />
+                      <span className="pl-1 text-sm">{product.ratings}</span>
                     </div>
+                  )}
+                  {get.safe(() => product.store.totalOrders) && (
                     <div className="mb-3">
-                      {get.safe(() => product.seller.totalOrders)} Συνολικές
-                      παραγγελίες
+                      {product.store.totalOrders} Συνολικές παραγγελίες
                     </div>
-                    <div>
-                      <Link
-                        to={
-                          urls.SELLERS + get.safe(() => product.seller.id, '')
-                        }
-                      >
-                        <Button className="custom secondary mr-3">
-                          Επίσκεψη καταστήματος
-                        </Button>
-                      </Link>
-                    </div>
-                  </Col>
-                  <Col>
-                    <h3>Πληροφορίες προϊόντος</h3>
-                    <p>{product.description}</p>
-                  </Col>
-                </Row>
-              </Container>
-            </section>
-            {!props.sellersReducer.isFetchingSellers &&
-              get.safe(() => props.sellersReducer.data[0].products.length, 0) >
-                1 && (
-                <section className="bg-background-dark">
-                  <Container>
-                    <Row>
-                      <Col>
-                        <h3 className="mb-3">
-                          Περισσότερα προϊόντα στο κατάστημα
-                        </h3>
+                  )}
+                  <div>
+                    <Link
+                      to={`${urls.STORE}/${get.safe(
+                        () => product.store.id,
+                        ''
+                      )}`}
+                    >
+                      <Button className="custom secondary mr-3">
+                        Επίσκεψη καταστήματος
+                      </Button>
+                    </Link>
+                  </div>
+                </Col>
+                <Col>
+                  <h3>Πληροφορίες προϊόντος</h3>
+                  <p>{product.description}</p>
+                </Col>
+              </Row>
+            </Container>
+          </section>
+          {!props.storesReducer.isGettingStores &&
+            get.safe(() => props.storesReducer.data[0].products.length, 0) >
+              1 && (
+              <section className="bg-background-dark">
+                <Container>
+                  <Row>
+                    <Col>
+                      <h3 className="mb-3">
+                        Περισσότερα προϊόντα στο κατάστημα
+                      </h3>
 
-                        <Products
-                          data={get.safe(
-                            () => props.sellersReducer.data[0].products,
-                            []
-                          )}
-                          loading={props.sellersReducer.isFetchingSellers}
-                          exclude={[product.id]}
-                        />
-                      </Col>
-                    </Row>
-                  </Container>
-                </section>
-              )}
-          </>
-        )
+                      {/* <Products
+                        data={otherProducts}
+                        exclude={[product.id]}
+                      /> */}
+                    </Col>
+                  </Row>
+                </Container>
+              </section>
+            )}
+        </>
       )}
     </>
   );
@@ -160,7 +171,7 @@ const ProductPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     productsReducer: state.productsReducer,
-    sellersReducer: state.sellersReducer
+    storesReducer: state.storesReducer
   };
 };
 
@@ -168,15 +179,16 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProduct: (id) => dispatch(getProduct.call(id)),
     listProducts: (id) => dispatch(listProducts.call()),
-    fetchSellers: (id) => dispatch(fetchSellers(id))
+    getStore: (id) => dispatch(getStore.call(id))
   };
 };
 
 ProductPage.propTypes = {
   match: PropTypes.object,
   productsReducer: PropTypes.object,
-  sellersReducer: PropTypes.object,
+  storesReducer: PropTypes.object,
   listProducts: PropTypes.func,
-  fetchSellers: PropTypes.func
+  getStore: PropTypes.func,
+  getProduct: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

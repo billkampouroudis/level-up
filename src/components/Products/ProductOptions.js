@@ -27,6 +27,7 @@ const ProductOptions = (props) => {
     },
     errorMessage: ''
   });
+  const [sizes, setSizes] = useState([]);
 
   const user = null;
 
@@ -40,16 +41,6 @@ const ProductOptions = (props) => {
     XXL: 'XX-Large',
     XXXL: 'XXX-Large',
     XXXXL: 'XXXX-Large'
-  };
-
-  const sizes = () => {
-    if (product.sizes) {
-      return product.sizes.map((size) => {
-        return { key: size, value: size, text: mapSizes[size] || size };
-      });
-    }
-
-    return [];
   };
 
   const handleFavorites = () => {
@@ -69,17 +60,27 @@ const ProductOptions = (props) => {
   };
 
   useEffect(() => {
-    setProduct(
-      props.productsReducer.data.find(
-        (product) => product.id === props.productId
-      )
-    );
-  }, [props.productId, props.productsReducer]);
+    const _product = props.productsReducer.data[0];
+    if (_product) {
+      setProduct(_product);
+    }
+  }, [props.productsReducer]);
 
   useEffect(() => {
     if (product) {
-      setIsFavorite(product.isFavorite);
+      setIsFavorite(!!product.isFavorite);
+
+      if (product.sizes) {
+        const _sizes = product.sizes.split(' ');
+
+        setSizes(
+          _sizes.map((size) => {
+            return { key: size, value: size, text: mapSizes[size] || size };
+          })
+        );
+      }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   return (
@@ -88,8 +89,8 @@ const ProductOptions = (props) => {
         <Container fluid className="product-options p-0 mt-4 mt-lg-0">
           <Row>
             <Col>
-              <Link to={urls.SELLERS + product.seller.id}>
-                {product.seller.name}
+              <Link to={`${urls.STORES}/${product.store.id}`}>
+                {product.store.name}
               </Link>
             </Col>
           </Row>
@@ -103,7 +104,7 @@ const ProductOptions = (props) => {
               <label className="text-bold mb-1">{sizeSelect.label}</label>
               <CustomSelect
                 placeholder="Επέλεξε μέγεθος"
-                options={sizes()}
+                options={sizes}
                 errorMessage={sizeSelect.errorMessage}
                 onChange={(e, value) => {
                   setSizeSelect(validateOne({ ...sizeSelect, value }));
@@ -181,7 +182,6 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 ProductOptions.propTypes = {
-  productId: PropTypes.number.isRequired,
   productsReducer: PropTypes.object,
   addToFavorites: PropTypes.func
 };

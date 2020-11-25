@@ -25,37 +25,41 @@ const reducer = (state = INITIAL_STATE, action) => {
     case GET_PRODUCT_REQUEST:
       return {
         ...state,
-        isFetchingProducts: true
+        isGettingProduct: true
       };
     case GET_PRODUCT_SUCCESS:
+      const data = Array.isArray(action.response)
+        ? action.response
+        : [action.response];
+
       return {
         ...state,
-        isFetchingProducts: false,
-        data: action.response
+        isGettingProduct: false,
+        data
       };
     case GET_PRODUCT_ERROR:
       return {
         ...state,
-        isFetchingProducts: false,
-        isFetchingProductsError: action.error
+        isGettingProduct: false,
+        isGettingProductError: action.error
       };
 
     case LIST_PRODUCTS_REQUEST:
       return {
         ...state,
-        isFetchingProducts: true
+        isListingProducts: true
       };
     case LIST_PRODUCTS_SUCCESS:
       return {
         ...state,
-        isFetchingProducts: false,
+        isListingProducts: false,
         data: action.response
       };
     case LIST_PRODUCTS_ERROR:
       return {
         ...state,
         isFetchingProducts: false,
-        isFetchingProductsError: action.error
+        isListingProductsError: action.error
       };
 
     case ADD_TO_FAVORITES_REQUEST:

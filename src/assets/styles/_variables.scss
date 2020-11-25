@@ -5,14 +5,14 @@
 //
 // Color system
 //
-$primary: #000;
-$primaryLight: lighten($primary, 20%);
-$primaryDark: #000;
-$primaryDarker: #000;
 $background: #fff;
 $background-dark: #fafafa;
 $accent: #5015cf;
 $accentDark: darken($accent, 10%);
+$primary: $accentDark;
+$primaryLight: lighten($accent, 20%);
+$primaryDark: darken($accent, 30%);
+$primaryDarker: darken($accent, 35%);
 
 $grey-lighter: #e2e2e2;
 $grey-light: #a9a9a9;

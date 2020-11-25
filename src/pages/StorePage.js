@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from '../pages/router/Urls';
+import urls from './router/Urls';
 import { Rating } from 'semantic-ui-react';
 
 // Components
@@ -16,17 +16,17 @@ import Products from '../components/Products';
 import HeroImage from '../assets/images/Hero-Image-4.jpg';
 
 // Redux Actions
-import { fetchSellers } from '../redux/Sellers/sellers.actions';
+import { getStore } from '../redux/Stores/stores.actions';
 
-const SellerPage = (props) => {
+const StorePage = (props) => {
   const history = useHistory();
 
   const [pageError, setPageError] = useState(null);
 
   useEffect(() => {
-    const sellerId = parseInt(props.match.params.id);
-    if (sellerId) {
-      props.fetchSellers(sellerId);
+    const storeId = parseInt(props.match.params.id);
+    if (storeId) {
+      props.getStore(storeId);
     } else {
       history.push(urls.NOT_FOUND);
     }
@@ -34,35 +34,35 @@ const SellerPage = (props) => {
   }, []);
 
   useEffect(() => {
-    setPageError(props.sellersReducer.isFetchingSellersError);
-  }, [props.sellersReducer.isFetchingSellersError]);
+    setPageError(props.storesReducer.isGettingStoresError);
+  }, [props.storesReducer.isGettingStoresError]);
 
   return (
     <>
-      {props.sellersReducer.isFetchingSellers ||
-      !props.sellersReducer.data.length ? (
-        <Loading fullHeight loading={props.sellersReducer.isFetchingSellers} />
+      {props.storesReducer.isGettingStores ||
+      !props.storesReducer.data.length ? (
+        <Loading fullHeight loading={props.storesReducer.isGettingStores} />
       ) : (
         <>
-          <Header backgroundImage={HeroImage} className="seller" />
+          <Header backgroundImage={HeroImage} className="store" />
           <section>
             <Container>
               <Row>
                 <Col className="">
                   <div className="d-flex align-content-center mb-3">
                     <Rating
-                      defaultRating={props.sellersReducer.data[0].stars}
+                      defaultRating={props.storesReducer.data[0].stars}
                       maxRating={5}
                       disabled
                       size="huge"
                     />
                     <span className="pl-1 text-sm">
-                      {props.sellersReducer.data[0].ratings} Αξιολογίσεις
+                      {props.storesReducer.data[0].ratings} Αξιολογίσεις
                       προϊόντων
                     </span>
                   </div>
                   <h1 className="d-inline-block">Caliroots</h1>
-                  <p>{props.sellersReducer.data[0].description}</p>
+                  <p>{props.storesReducer.data[0].description}</p>
                 </Col>
               </Row>
             </Container>
@@ -74,8 +74,8 @@ const SellerPage = (props) => {
                   <h3 className="mb-3">Προϊόντα</h3>
 
                   <Products
-                    data={() => props.sellersReducer.data[0].products}
-                    loading={props.sellersReducer.isFetchingSellers}
+                    data={() => props.storesReducer.data[0].products}
+                    loading={props.storesReducer.isGettingStores}
                   />
                 </Col>
               </Row>
@@ -90,19 +90,19 @@ const SellerPage = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    sellersReducer: state.sellersReducer
+    storesReducer: state.storesReducer
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchSellers: (id) => dispatch(fetchSellers(id))
+    getStore: (id) => dispatch(getStore.call(id))
   };
 };
 
-SellerPage.propTypes = {
-  sellersReducer: PropTypes.object,
-  fetchSellers: PropTypes.func,
+StorePage.propTypes = {
+  storesReducer: PropTypes.object,
+  getStore: PropTypes.func,
   match: PropTypes.object
 };
-export default connect(mapStateToProps, mapDispatchToProps)(SellerPage);
+export default connect(mapStateToProps, mapDispatchToProps)(StorePage);

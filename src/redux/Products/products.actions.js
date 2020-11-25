@@ -103,14 +103,14 @@ export const addToFavorites = {
 
   call: (id) => {
     return (dispatch) => {
-      productsApi
-        .addToFavorites(id)
-        .then((res) => {
-          dispatch(addToFavorites.addToFavoritesSuccess(res.data));
-        })
-        .catch((err) => {
-          dispatch(addToFavorites.addToFavoritesError(err.message));
-        });
+      // productsApi
+      //   .addToFavorites(id)
+      //   .then((res) => {
+      //     dispatch(addToFavorites.addToFavoritesSuccess(res.data));
+      //   })
+      //   .catch((err) => {
+      //     dispatch(addToFavorites.addToFavoritesError(err.message));
+      //   });
     };
   }
 };

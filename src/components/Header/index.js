@@ -24,7 +24,7 @@ Header.propTypes = {
   children: PropTypes.node.isRequired,
   backgroundImage: PropTypes.string,
   home: PropTypes.bool,
-  seller: PropTypes.bool,
+  store: PropTypes.bool,
   className: PropTypes.string
 };
 

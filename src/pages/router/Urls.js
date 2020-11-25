@@ -2,7 +2,7 @@ const Urls = {
   HOME: '/',
   LOGIN: '/login',
   PRODUCTS: '/products',
-  SELLERS: '/sellers',
+  STORES: '/stores',
   MY_CART: '/my-cart',
   FAVORITES: '/favorites',
   MY_ORDERS: '/my-orders',

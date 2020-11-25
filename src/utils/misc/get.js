@@ -5,6 +5,16 @@ const get = {
     } catch (e) {
       return defaultValue;
     }
+  },
+  safeImageSrc: (src, aleternativeSrc) => {
+    const http = new XMLHttpRequest();
+    http.open('HEAD', src, false);
+    http.send();
+
+    if (http.status !== 404) {
+      return src;
+    }
+    return aleternativeSrc;
   }
 };
 
