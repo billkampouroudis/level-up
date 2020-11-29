@@ -1,34 +1,40 @@
 import {
-  GET_STORES_REQUEST,
-  GET_STORES_SUCCESS,
-  GET_STORES_ERROR
+  GET_STORE_REQUEST,
+  GET_STORE_SUCCESS,
+  GET_STORE_ERROR
 } from './stores.types';
 
 const INITIAL_STATE = {
-  data: [],
-  isGettingStores: false,
-  isGettingStoresError: null
+  store: {},
+  isGettingStore: false,
+  getStoreError: null,
+  stores: [],
+  isListingStores: false,
+  listStoresError: null
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case GET_STORES_REQUEST:
+    // Get store
+    case GET_STORE_REQUEST:
       return {
         ...state,
-        isGettingStores: true
+        isGettingStore: true,
+        getStoreError: false
       };
-    case GET_STORES_SUCCESS:
+    case GET_STORE_SUCCESS:
       return {
         ...state,
-        isGettingStores: false,
-        data: action.response
+        isGettingStore: false,
+        store: action.response
       };
-    case GET_STORES_ERROR:
+    case GET_STORE_ERROR:
       return {
         ...state,
-        isGettingStores: false,
-        isGettingStoresError: action.error
+        isGettingStore: false,
+        getStoreError: action.error
       };
+
     default:
       return state;
   }

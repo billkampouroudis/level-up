@@ -26,12 +26,8 @@ import { getStore } from '../redux/Stores/stores.actions';
 // Hooks
 import useDidMountEffect from '../utils/hooks/useDidMountEffect';
 
-// API Calls
-// import productsApi from '../api/products';
-
 const ProductPage = (props) => {
   const [product, setProduct] = useState({});
-  // const [otherProducts, setOtherProducts] = useState([]);
 
   const history = useHistory();
 
@@ -43,34 +39,31 @@ const ProductPage = (props) => {
     } else {
       history.push(urls.NOT_FOUND);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   useDidMountEffect(() => {
     if (!props.productsReducer.isGettingProduct) {
-      const _product = props.productsReducer.data[0];
+      const _product = props.productsReducer.product;
       if (!_product) {
         history.push(urls.NOT_FOUND);
       }
 
       setProduct(_product);
-      listOtherStoreProducts(_product.store.id);
+      // listOtherStoreProducts(_product.store.id);
     }
   }, [props.productsReducer.isGettingProduct]);
 
   function listOtherStoreProducts(id) {
     console.warn('TODO');
+  }
 
-    // productsApi.listProducts(id).then((res) => {
-    //   console.log(res);
-    // });
+  if (get.safe(() => props.productsReducer.getProductError)) {
+    console.error(props.productsReducer.getProductError);
   }
 
   return (
     <>
-      {props.productsReducer.isGettingStores || is.emptyObject(product) ? (
-        <Loading loading={props.productsReducer.loading} fullHeight />
-      ) : (
+      {!props.productsReducer.isGettingProduct && !is.emptyObject(product) ? (
         <>
           <section className="pb-0 pb-sm-auto">
             <Container>
@@ -123,12 +116,7 @@ const ProductPage = (props) => {
                     </div>
                   )}
                   <div>
-                    <Link
-                      to={`${urls.STORE}/${get.safe(
-                        () => product.store.id,
-                        ''
-                      )}`}
-                    >
+                    <Link to={`${urls.STORES}/${product.store.id}`}>
                       <Button className="custom secondary mr-3">
                         Επίσκεψη καταστήματος
                       </Button>
@@ -142,8 +130,8 @@ const ProductPage = (props) => {
               </Row>
             </Container>
           </section>
-          {!props.storesReducer.isGettingStores &&
-            get.safe(() => props.storesReducer.data[0].products.length, 0) >
+          {/* {!props.storesReducer.isListingStores &&
+            get.safe(() => props.storesReducer.store.products.length, 0) >
               1 && (
               <section className="bg-background-dark">
                 <Container>
@@ -153,16 +141,15 @@ const ProductPage = (props) => {
                         Περισσότερα προϊόντα στο κατάστημα
                       </h3>
 
-                      {/* <Products
-                        data={otherProducts}
-                        exclude={[product.id]}
-                      /> */}
+                      <Products data={otherProducts} exclude={[product.id]} />
                     </Col>
                   </Row>
                 </Container>
               </section>
-            )}
+            )} */}
         </>
+      ) : (
+        <Loading />
       )}
     </>
   );

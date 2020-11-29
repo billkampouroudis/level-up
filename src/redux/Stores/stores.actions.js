@@ -1,8 +1,8 @@
-import storeApi from '../../api/stores';
+import storesApi from '../../api/stores';
 import {
-  GET_STORE_ERROR,
   GET_STORE_REQUEST,
-  GET_STORE_SUCCESS
+  GET_STORE_SUCCESS,
+  GET_STORE_ERROR
 } from './stores.types';
 
 export const getStore = {
@@ -27,7 +27,7 @@ export const getStore = {
   call: (id) => {
     return (dispatch) => {
       dispatch(getStore.request());
-      storeApi
+      storesApi
         .getStore({ id })
         .then((res) => {
           dispatch(getStore.success(res.data));

@@ -60,15 +60,15 @@ const ProductOptions = (props) => {
   };
 
   useEffect(() => {
-    const _product = props.productsReducer.data[0];
+    const _product = props.productsReducer.product;
     if (_product) {
       setProduct(_product);
     }
-  }, [props.productsReducer]);
+  }, []);
 
   useEffect(() => {
     if (product) {
-      setIsFavorite(!!product.isFavorite);
+      // setIsFavorite(!!product.isFavorite);
 
       if (product.sizes) {
         const _sizes = product.sizes.split(' ');
@@ -80,7 +80,6 @@ const ProductOptions = (props) => {
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   return (
@@ -127,17 +126,21 @@ const ProductOptions = (props) => {
                     user ? 'delete' : ''
                   }`}
                 >
-                  35.00$
+                  {product.originalPrice}€
                 </span>
 
-                <Locked32 />
-                <span
-                  className={`discount-price align-items-center ${
-                    user ? 'text-primary' : 'text-danger'
-                  }`}
-                >
-                  25.00$
-                </span>
+                {product.discoundPrice && (
+                  <span>
+                    <Locked32 />
+                    <span
+                      className={`discount-price align-items-center ${
+                        user ? 'text-primary' : 'text-danger'
+                      }`}
+                    >
+                      {product.discoundPrice}
+                    </span>
+                  </span>
+                )}
               </div>
             </Col>
           </Row>

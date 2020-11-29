@@ -21,7 +21,7 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
   backgroundImage: PropTypes.string,
   home: PropTypes.bool,
   store: PropTypes.bool,

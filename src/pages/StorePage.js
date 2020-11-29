@@ -21,28 +21,27 @@ import { getStore } from '../redux/Stores/stores.actions';
 const StorePage = (props) => {
   const history = useHistory();
 
-  const [pageError, setPageError] = useState(null);
+  function checkForError() {
+    if (props.storesReducer.getStoreError) {
+      return <ErrorAlert message={props.storesReducer.getStoreError.message} />;
+    }
+  }
 
   useEffect(() => {
     const storeId = parseInt(props.match.params.id);
+
     if (storeId) {
       props.getStore(storeId);
     } else {
       history.push(urls.NOT_FOUND);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [history, props.match.params.id]);
 
-  useEffect(() => {
-    setPageError(props.storesReducer.isGettingStoresError);
-  }, [props.storesReducer.isGettingStoresError]);
+  checkForError();
 
   return (
     <>
-      {props.storesReducer.isGettingStores ||
-      !props.storesReducer.data.length ? (
-        <Loading fullHeight loading={props.storesReducer.isGettingStores} />
-      ) : (
+      {!props.storesReducer.isGettingStore && props.storesReducer.store ? (
         <>
           <Header backgroundImage={HeroImage} className="store" />
           <section>
@@ -51,18 +50,23 @@ const StorePage = (props) => {
                 <Col className="">
                   <div className="d-flex align-content-center mb-3">
                     <Rating
-                      defaultRating={props.storesReducer.data[0].stars}
+                      defaultRating={props.storesReducer.store.stars}
                       maxRating={5}
                       disabled
                       size="huge"
                     />
                     <span className="pl-1 text-sm">
-                      {props.storesReducer.data[0].ratings} Αξιολογίσεις
-                      προϊόντων
+                      ({props.storesReducer.store.ratings || 0})
                     </span>
                   </div>
-                  <h1 className="d-inline-block">Caliroots</h1>
-                  <p>{props.storesReducer.data[0].description}</p>
+
+                  <h1 className="d-inline-block">
+                    {props.storesReducer.store.brandName}
+                  </h1>
+
+                  {props.storesReducer.store.ratings && (
+                    <p>{props.storesReducer.store.description}</p>
+                  )}
                 </Col>
               </Row>
             </Container>
@@ -72,25 +76,23 @@ const StorePage = (props) => {
               <Row>
                 <Col>
                   <h3 className="mb-3">Προϊόντα</h3>
-
-                  <Products
-                    data={() => props.storesReducer.data[0].products}
-                    loading={props.storesReducer.isGettingStores}
-                  />
+                  <Products storeId={props.storesReducer.store.id} />
                 </Col>
               </Row>
             </Container>
           </section>
         </>
+      ) : (
+        <Loading loading={props.storesReducer.isGettingStore} />
       )}
-      {pageError ? <ErrorAlert message={pageError} /> : null}
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    storesReducer: state.storesReducer
+    storesReducer: state.storesReducer,
+    productsReducer: state.productsReducer
   };
 };
 
@@ -102,6 +104,7 @@ const mapDispatchToProps = (dispatch) => {
 
 StorePage.propTypes = {
   storesReducer: PropTypes.object,
+  productsReducer: PropTypes.object,
   getStore: PropTypes.func,
   match: PropTypes.object
 };

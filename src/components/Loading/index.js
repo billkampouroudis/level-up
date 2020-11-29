@@ -1,24 +1,19 @@
 import React from 'react';
 import HashLoader from 'react-spinners/HashLoader';
 import SCSS from '../../assets/styles/_variables.scss';
+import PropTypes from 'prop-types';
 
-const CustomNav = (props) => {
-  const { loading, fullHeight } = props;
-
-  return loading ? (
-    <div
-      className={`sweet-loading text-center d-flex align-items-center ${
-        fullHeight && loading ? 'full-height' : ''
-      } `}
-    >
+const Loading = (props) => {
+  return (
+    <div className={`sweet-loading text-center d-flex align-items-center`}>
       <HashLoader
         size={100}
         color={SCSS.color_primary}
-        loading={loading}
+        loading={true}
         css="margin: 0 auto;"
       />
     </div>
-  ) : null;
+  );
 };
 
-export default CustomNav;
+export default Loading;

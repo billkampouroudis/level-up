@@ -35,6 +35,7 @@ module.exports = {
         ignore: ['i18n'],
         customValidators: []
       }
-    ]
+    ],
+    'react-hooks/exhaustive-deps': 'off'
   }
 };
