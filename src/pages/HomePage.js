@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 // import Counter from '../components/Counter';
+import PropTypes from 'prop-types';
 
 // Components
 import Products from '../components/Products';
@@ -13,8 +15,15 @@ import HeroImage2 from '../assets/images/Hero-Image-2.jpg';
 import HeroImage3 from '../assets/images/Hero-Image-3.jpg';
 import HeroImage4 from '../assets/images/Hero-Image-4.jpg';
 
-const HomePage = () => {
+// Reduc actions
+import { listProducts } from '../redux/Products/products.actions';
+
+const HomePage = (props) => {
   const [heroImage, setHeroImage] = useState(HeroImage1);
+
+  useEffect(() => {
+    props.listProducts();
+  }, []);
 
   useEffect(() => {
     const changeHeroImage = setTimeout(() => {
@@ -62,10 +71,28 @@ const HomePage = () => {
       </Header>
 
       <section>
-        <Products />
+        <Products data={props.productsReducer.products} />
       </section>
     </>
   );
 };
 
-export default HomePage;
+const mapStateToProps = (state) => {
+  return {
+    storesReducer: state.storesReducer,
+    productsReducer: state.productsReducer
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listProducts: (id) => dispatch(listProducts.call(id))
+  };
+};
+
+HomePage.propTypes = {
+  listProducts: PropTypes.func,
+  productsReducer: PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

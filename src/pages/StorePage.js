@@ -17,6 +17,7 @@ import HeroImage from '../assets/images/Hero-Image-4.jpg';
 
 // Redux Actions
 import { getStore } from '../redux/Stores/stores.actions';
+import { listStoreProducts } from '../redux/Products/products.actions';
 
 const StorePage = (props) => {
   const history = useHistory();
@@ -32,6 +33,7 @@ const StorePage = (props) => {
 
     if (storeId) {
       props.getStore(storeId);
+      props.listStoreProducts(storeId);
     } else {
       history.push(urls.NOT_FOUND);
     }
@@ -47,7 +49,7 @@ const StorePage = (props) => {
           <section>
             <Container>
               <Row>
-                <Col className="">
+                <Col>
                   <div className="d-flex align-content-center mb-3">
                     <Rating
                       defaultRating={props.storesReducer.store.stars}
@@ -71,16 +73,20 @@ const StorePage = (props) => {
               </Row>
             </Container>
           </section>
-          <section className="pt-0">
-            <Container>
-              <Row>
-                <Col>
-                  <h3 className="mb-3">Προϊόντα</h3>
-                  <Products storeId={props.storesReducer.store.id} />
-                </Col>
-              </Row>
-            </Container>
-          </section>
+
+          {!props.productsReducer.isListingProductsByStore &&
+            props.productsReducer.products.length && (
+              <section className="pt-0">
+                <Container>
+                  <Row>
+                    <Col>
+                      <h3 className="mb-3">Προϊόντα</h3>
+                      <Products data={props.productsReducer.products} />
+                    </Col>
+                  </Row>
+                </Container>
+              </section>
+            )}
         </>
       ) : (
         <Loading loading={props.storesReducer.isGettingStore} />
@@ -98,7 +104,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getStore: (id) => dispatch(getStore.call(id))
+    getStore: (id) => dispatch(getStore.call(id)),
+    listStoreProducts: (id) => dispatch(listStoreProducts.call(id))
   };
 };
 
@@ -106,6 +113,7 @@ StorePage.propTypes = {
   storesReducer: PropTypes.object,
   productsReducer: PropTypes.object,
   getStore: PropTypes.func,
-  match: PropTypes.object
+  match: PropTypes.object,
+  listStoreProducts: PropTypes.func
 };
 export default connect(mapStateToProps, mapDispatchToProps)(StorePage);

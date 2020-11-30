@@ -8,20 +8,19 @@ import is from '../utils/misc/is';
 import get from '../utils/misc/get';
 import { Rating } from 'semantic-ui-react';
 
-// import styles from '../assets/styles/_variables.scss';
-
 // Components
 import Loading from '../components/Loading';
 import ProductOptions from '../components/Products/ProductOptions';
 import Button from '../components/Ui/Button';
-// import Products from '../components/Products';
+import Products from '../components/Products';
 
 // Images
 import ilImages from '../assets/images/il-images.svg';
 
 // Redux Actions
-import { getProduct, listProducts } from '../redux/Products/products.actions';
+import { getProduct } from '../redux/Products/products.actions';
 import { getStore } from '../redux/Stores/stores.actions';
+import { listSuggestionsByStore } from '../redux/Suggestions/suggestions.actions';
 
 // Hooks
 import useDidMountEffect from '../utils/hooks/useDidMountEffect';
@@ -33,6 +32,7 @@ const ProductPage = (props) => {
 
   useEffect(() => {
     window.scrollTo(0, 0);
+
     if (props.match.params.id) {
       const productIdFromParams = parseInt(props.match.params.id);
       props.getProduct(productIdFromParams);
@@ -49,13 +49,10 @@ const ProductPage = (props) => {
       }
 
       setProduct(_product);
-      // listOtherStoreProducts(_product.store.id);
+      console.log(_product);
+      props.listSuggestionsByStore(_product.store.id);
     }
   }, [props.productsReducer.isGettingProduct]);
-
-  function listOtherStoreProducts(id) {
-    console.warn('TODO');
-  }
 
   if (get.safe(() => props.productsReducer.getProductError)) {
     console.error(props.productsReducer.getProductError);
@@ -130,9 +127,8 @@ const ProductPage = (props) => {
               </Row>
             </Container>
           </section>
-          {/* {!props.storesReducer.isListingStores &&
-            get.safe(() => props.storesReducer.store.products.length, 0) >
-              1 && (
+          {!props.suggestionsReducer.isListingSuggestionsByStore &&
+            props.suggestionsReducer.suggestions.length > 1 && (
               <section className="bg-background-dark">
                 <Container>
                   <Row>
@@ -141,12 +137,15 @@ const ProductPage = (props) => {
                         Περισσότερα προϊόντα στο κατάστημα
                       </h3>
 
-                      <Products data={otherProducts} exclude={[product.id]} />
+                      <Products
+                        data={props.suggestionsReducer.suggestions}
+                        exclude={[product.id]}
+                      />
                     </Col>
                   </Row>
                 </Container>
               </section>
-            )} */}
+            )}
         </>
       ) : (
         <Loading />
@@ -158,14 +157,14 @@ const ProductPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     productsReducer: state.productsReducer,
-    storesReducer: state.storesReducer
+    suggestionsReducer: state.suggestionsReducer
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
     getProduct: (id) => dispatch(getProduct.call(id)),
-    listProducts: (id) => dispatch(listProducts.call()),
+    listSuggestionsByStore: (id) => dispatch(listSuggestionsByStore.call(id)),
     getStore: (id) => dispatch(getStore.call(id))
   };
 };
@@ -173,8 +172,8 @@ const mapDispatchToProps = (dispatch) => {
 ProductPage.propTypes = {
   match: PropTypes.object,
   productsReducer: PropTypes.object,
-  storesReducer: PropTypes.object,
-  listProducts: PropTypes.func,
+  suggestionsReducer: PropTypes.object,
+  listSuggestionsByStore: PropTypes.func,
   getStore: PropTypes.func,
   getProduct: PropTypes.func
 };
