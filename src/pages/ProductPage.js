@@ -73,16 +73,21 @@ const ProductPage = (props) => {
                     'align-self-center text-center'
                   }
                 >
-                  <img
-                    src={get.safeImageSrc(product.image, ilImages)}
-                    className={`product-image `}
-                    alt={product.name}
-                    style={
-                      !is.correctImageSrc(product.image) && {
-                        maxWidth: '150px'
-                      }
-                    }
-                  />
+                  <div className={`product-image`}>
+                    <figure>
+                      <img
+                        src={get.safeImageSrc(product.image, ilImages)}
+                        alt={product.name}
+                        style={
+                          !is.correctImageSrc(product.image)
+                            ? {
+                                maxWidth: '150px'
+                              }
+                            : {}
+                        }
+                      />
+                    </figure>
+                  </div>
                 </Col>
                 <Col md={6} xl={5}>
                   <ProductOptions />

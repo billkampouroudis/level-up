@@ -17,9 +17,14 @@ const ProductCard = (props) => {
   return (
     <div className="product-card">
       <Link to={productUrl}>
-        <figure>
-          <img src={get.safeImageSrc(product.image, ilImages)} alt="product1" />
-        </figure>
+        <div className="image-container">
+          <figure>
+            <img
+              src={get.safeImageSrc(product.image, ilImages)}
+              alt={product.description}
+            />
+          </figure>
+        </div>
       </Link>
 
       <div className="content">
