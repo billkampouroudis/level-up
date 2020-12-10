@@ -6,9 +6,8 @@ import {
   LIST_PRODUCTS_REQUEST,
   LIST_PRODUCTS_SUCCESS,
   LIST_PRODUCTS_ERROR,
-  // ADD_TO_FAVORITES_REQUEST,
-  // ADD_TO_FAVORITES_SUCCESS,
-  // ADD_TO_FAVORITES_ERROR,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
   LIST_STORE_PRODUCTS_REQUEST,
   LIST_STORE_PRODUCTS_SUCCESS,
   LIST_STORE_PRODUCTS_ERROR
@@ -70,33 +69,23 @@ const reducer = (state = INITIAL_STATE, action) => {
         listProductsError: action.error
       };
 
-    // Add to favorites
-    // case ADD_TO_FAVORITES_REQUEST:
-    //   return {
-    //     ...state,
-    //     isAddingToFavorites: true
-    //   };
-    // case ADD_TO_FAVORITES_SUCCESS:
-    //   let _data = [];
-    //   for (let i = 0; i < state.data.length; i++) {
-    //     if (state.data[i].id === action.response.id) {
-    //       _data[i] = { ...action.response };
-    //     } else {
-    //       _data[i] = { ...state.data[i] };
-    //     }
-    //   }
-    //   return {
-    //     ...state,
-    //     isAddingToFavorites: false,
-    //     data: [..._data]
-    //   };
-
-    // case ADD_TO_FAVORITES_ERROR:
-    //   return {
-    //     ...state,
-    //     isAddingToFavorites: false,
-    //     isAddingToFavoritesError: action.error
-    //   };
+    // Favorites
+    case ADD_TO_FAVORITES:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          isFavorite: true
+        }
+      };
+    case REMOVE_FROM_FAVORITES:
+      return {
+        ...state,
+        product: {
+          ...state.product,
+          isFavorite: false
+        }
+      };
 
     // List store products
     case LIST_STORE_PRODUCTS_REQUEST:

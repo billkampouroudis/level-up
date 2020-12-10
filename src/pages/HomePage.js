@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // Components
 import Products from '../components/Products';
 import Header from '../components/Header';
-import Button from '../components/Ui/Button';
+import CustomButton from '../components/Ui/CustomButton';
 
 // Images
 import HeroImage1 from '../assets/images/Hero-Image.jpg';
@@ -23,6 +23,7 @@ const HomePage = (props) => {
 
   useEffect(() => {
     props.listProducts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -62,7 +63,9 @@ const HomePage = (props) => {
                   <p className="text-xl mb-4">
                     Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
                   </p>
-                  <Button className="custom primary">Μάθετε περισσότερα</Button>
+                  <CustomButton className="custom primary">
+                    Μάθετε περισσότερα
+                  </CustomButton>
                 </header>
               </Col>
             </Row>

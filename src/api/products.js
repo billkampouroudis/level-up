@@ -28,18 +28,6 @@ const productsApi = {
     } catch (error) {
       return Promise.reject(error);
     }
-  },
-
-  addToFavorites: ({ id, options }) => {
-    // return new Promise((resolve, reject) => {
-    //   setTimeout(() => {
-    //     const product = products.find((product) => product.id === id);
-    //     product.isFavorite = !product.isFavorite;
-    //     resolve({
-    //       data: product
-    //     });
-    //   }, 200);
-    // });
   }
 };
 

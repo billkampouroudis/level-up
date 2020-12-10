@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
@@ -37,6 +37,7 @@ const StorePage = (props) => {
     } else {
       history.push(urls.NOT_FOUND);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history, props.match.params.id]);
 
   checkForError();

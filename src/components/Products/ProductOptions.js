@@ -9,16 +9,20 @@ import { validateOne } from '../../utils/validation/index';
 
 // Component
 import Counter from '../misc/Counter';
-import Button from '../Ui/Button';
+import Button from '../Ui/CustomButton';
 import ErrorAlert from '../Alerts/ErrorAlert';
 import CustomSelect from '../Inputs/CustomSelect';
 
 // Redux Actions
-import { addToFavorites } from '../../redux/Products/products.actions';
+import {
+  addToFavorites,
+  removeFromFavorites
+} from '../../redux/Products/products.actions';
+
+// API
+import favoritesApi from '../../api/favorites';
 
 const ProductOptions = (props) => {
-  const [isFavorite, setIsFavorite] = useState(false);
-  const [product, setProduct] = useState(null);
   const [sizeSelect, setSizeSelect] = useState({
     value: null,
     label: 'Μέγεθος',
@@ -30,6 +34,7 @@ const ProductOptions = (props) => {
   const [sizes, setSizes] = useState([]);
 
   const user = null;
+  const { product } = props.productsReducer;
 
   const mapSizes = {
     XXS: 'XX-Small',
@@ -44,8 +49,25 @@ const ProductOptions = (props) => {
   };
 
   const handleFavorites = () => {
-    setIsFavorite(!isFavorite);
-    props.addToFavorites(product.id);
+    if (product.isFavorite) {
+      favoritesApi
+        .removeFromFavorites(product.id)
+        .then(() => {
+          props.removeFromFavorites();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } else {
+      favoritesApi
+        .addToFavorites(product.id)
+        .then(() => {
+          props.addToFavorites();
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   };
 
   const addToCart = () => {
@@ -60,16 +82,7 @@ const ProductOptions = (props) => {
   };
 
   useEffect(() => {
-    const _product = props.productsReducer.product;
-    if (_product) {
-      setProduct(_product);
-    }
-  }, []);
-
-  useEffect(() => {
     if (product) {
-      // setIsFavorite(!!product.isFavorite);
-
       if (product.sizes) {
         const _sizes = product.sizes.split(' ');
 
@@ -80,6 +93,7 @@ const ProductOptions = (props) => {
         );
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [product]);
 
   return (
@@ -150,7 +164,7 @@ const ProductOptions = (props) => {
                 Προσθήκη στο καλάθι
               </Button>
 
-              {isFavorite ? (
+              {product.isFavorite ? (
                 <FavoriteFilled32
                   className="cursor-pointer text-primary"
                   onClick={handleFavorites}
@@ -180,13 +194,15 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addToFavorites: (id) => dispatch(addToFavorites(id))
+    addToFavorites: () => dispatch(addToFavorites()),
+    removeFromFavorites: () => dispatch(removeFromFavorites())
   };
 };
 
 ProductOptions.propTypes = {
   productsReducer: PropTypes.object,
-  addToFavorites: PropTypes.func
+  addToFavorites: PropTypes.func,
+  removeFromFavorites: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductOptions);

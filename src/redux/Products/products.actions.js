@@ -6,9 +6,8 @@ import {
   GET_PRODUCT_REQUEST,
   GET_PRODUCT_SUCCESS,
   GET_PRODUCT_ERROR,
-  ADD_TO_FAVORITES_REQUEST,
-  ADD_TO_FAVORITES_SUCCESS,
-  ADD_TO_FAVORITES_ERROR,
+  ADD_TO_FAVORITES,
+  REMOVE_FROM_FAVORITES,
   LIST_STORE_PRODUCTS_REQUEST,
   LIST_STORE_PRODUCTS_SUCCESS,
   LIST_STORE_PRODUCTS_ERROR
@@ -90,39 +89,6 @@ export const listProducts = {
   }
 };
 
-export const addToFavorites = {
-  request: () => {
-    return {
-      type: ADD_TO_FAVORITES_REQUEST
-    };
-  },
-  success: (response) => {
-    return {
-      type: ADD_TO_FAVORITES_SUCCESS,
-      response
-    };
-  },
-  error: (error) => {
-    return {
-      type: ADD_TO_FAVORITES_ERROR,
-      error
-    };
-  },
-
-  call: (id) => {
-    return (dispatch) => {
-      // productsApi
-      //   .addToFavorites(id)
-      //   .then((res) => {
-      //     dispatch(addToFavorites.addToFavoritesSuccess(res.data));
-      //   })
-      //   .catch((err) => {
-      //     dispatch(addToFavorites.addToFavoritesError(err.message));
-      //   });
-    };
-  }
-};
-
 export const listStoreProducts = {
   request: () => {
     return {
@@ -156,3 +122,11 @@ export const listStoreProducts = {
     };
   }
 };
+
+export const addToFavorites = () => ({
+  type: ADD_TO_FAVORITES
+});
+
+export const removeFromFavorites = () => ({
+  type: REMOVE_FROM_FAVORITES
+});

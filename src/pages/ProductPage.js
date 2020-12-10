@@ -11,7 +11,7 @@ import { Rating } from 'semantic-ui-react';
 // Components
 import Loading from '../components/Loading';
 import ProductOptions from '../components/Products/ProductOptions';
-import Button from '../components/Ui/Button';
+import CustomButton from '../components/Ui/CustomButton';
 import Products from '../components/Products';
 
 // Images
@@ -39,6 +39,7 @@ const ProductPage = (props) => {
     } else {
       history.push(urls.NOT_FOUND);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
 
   useDidMountEffect(() => {
@@ -119,9 +120,9 @@ const ProductPage = (props) => {
                   )}
                   <div>
                     <Link to={`${urls.STORES}/${product.store.id}`}>
-                      <Button className="custom secondary mr-3">
+                      <CustomButton className="custom secondary mr-3">
                         Επίσκεψη καταστήματος
-                      </Button>
+                      </CustomButton>
                     </Link>
                   </div>
                 </Col>

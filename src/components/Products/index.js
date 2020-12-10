@@ -17,6 +17,7 @@ const Products = (props) => {
       _products = _products.filter((item) => !props.exclude.includes(item.id));
     }
     setProducts(_products);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.data]);
 
   return (

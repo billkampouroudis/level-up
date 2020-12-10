@@ -1,7 +1,6 @@
 import React from 'react';
 import HashLoader from 'react-spinners/HashLoader';
 import SCSS from '../../assets/styles/_variables.scss';
-import PropTypes from 'prop-types';
 
 const Loading = (props) => {
   return (
