@@ -3,11 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 // import Counter from '../components/Counter';
 import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 
 // Components
-import Products from '../components/Products';
-import Header from '../components/Header';
-import CustomButton from '../components/ui/button/CustomButton';
+import ProductsList from '../components/misc/products/ProductsList';
+import MainHeader from '../components/misc/header/MainHeader';
 
 // Images
 import HeroImage1 from '../assets/images/Hero-Image.jpg';
@@ -50,31 +50,27 @@ const HomePage = (props) => {
 
   return (
     <>
-      <Header backgroundImage={heroImage} className="home">
+      <MainHeader backgroundImage={heroImage} className="home">
         <div className="content">
           <Container>
             <Row>
               <Col>
-                <header>
-                  <h1>
-                    Ανέβασε <span className="text-bold">level</span> στις αγορές
-                    σου!
-                  </h1>
-                  <p className="text-xl mb-4">
-                    Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
-                  </p>
-                  <CustomButton className="custom primary">
-                    Μάθετε περισσότερα
-                  </CustomButton>
-                </header>
+                <h1>
+                  Ανέβασε <span className="text-bold">level</span> στις αγορές
+                  σου!
+                </h1>
+                <p className="text-xl mb-4">
+                  Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
+                </p>
+                <Button className="custom primary">Μάθετε περισσότερα</Button>
               </Col>
             </Row>
           </Container>
         </div>
-      </Header>
+      </MainHeader>
 
       <section>
-        <Products data={props.productsReducer.products} />
+        <ProductsList data={props.productsReducer.products} />
       </section>
     </>
   );
@@ -95,7 +91,7 @@ const mapDispatchToProps = (dispatch) => {
 
 HomePage.propTypes = {
   listProducts: PropTypes.func,
-  productsReducer: PropTypes.func
+  productsReducer: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomePage);

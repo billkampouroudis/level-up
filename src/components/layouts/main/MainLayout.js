@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Navbar from '../../Menu/Navbar';
-import SideMenu from '../../Menu/SideMenu';
+import Navbar from '../../menus/navbar/Navbar';
+import Sidebar from '../../menus/sidebar/Sidebar';
 
 const MainLayout = (props) => {
   const { children } = props;
@@ -10,7 +10,7 @@ const MainLayout = (props) => {
   return (
     <>
       <Navbar />
-      <SideMenu />
+      <Sidebar />
       <main>{children}</main>
     </>
   );

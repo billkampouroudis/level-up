@@ -3,24 +3,23 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from '../../pages/router/Urls';
+import urls from '../../../pages/router/Urls';
 import { Locked32, Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
-import { validateOne } from '../../utils/validation/index';
+import { validateOne } from '../../../utils/validation/index';
 
 // Component
-import Counter from '../misc/Counter';
-import Button from '../ui/button/CustomButton';
-import ErrorAlert from '../Alerts/ErrorAlert';
-import CustomSelect from '../Inputs/CustomSelect';
+import Counter from '../counter/Counter';
+import { Message, Button } from 'semantic-ui-react';
+import CustomSelect from '../../formElements/select/CustomSelect';
 
 // Redux Actions
 import {
   addToFavorites,
   removeFromFavorites
-} from '../../redux/Products/products.actions';
+} from '../../../redux/Products/products.actions';
 
 // API
-import favoritesApi from '../../api/favorites';
+import favoritesApi from '../../../api/favorites';
 
 const ProductOptions = (props) => {
   const [sizeSelect, setSizeSelect] = useState({
@@ -179,7 +178,10 @@ const ProductOptions = (props) => {
           </Row>
         </Container>
         {props.productsReducer.isFetchingProductsError && (
-          <ErrorAlert message={props.productsReducer.isFetchingProductsError} />
+          <Message
+            negative
+            content={props.productsReducer.isFetchingProductsError}
+          />
         )}
       </>
     )

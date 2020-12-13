@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Subtract32, Add32 } from '@carbon/icons-react';
 import { Form } from 'semantic-ui-react';
-import CustomTextInput from '../../Inputs/textInput/CustomTextInput';
-import CustomButton from '../../ui/button/CustomButton';
+import CustomTextInput from '../../formElements/textInput/CustomTextInput';
+import { Button } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import Urls from '../../../pages/router/Urls';
 
@@ -27,13 +27,9 @@ const LoginForm = (props) => {
 
       <div className="text-center">
         <Form.Field className="mb-3">
-          <CustomButton
-            type="submit"
-            className="custom primary w-25"
-            onClick={onLogin}
-          >
+          <Button type="submit" className="custom primary" onClick={onLogin}>
             Είσοδος
-          </CustomButton>
+          </Button>
         </Form.Field>
         <Form.Field className="mb-3">
           <Link to={Urls.REGISTER}>Δημιουργία λογαριασμού</Link>

@@ -1,0 +1,20 @@
+.ui.input {
+  width: 100%;
+
+  &.icon {
+    i.icon {
+      top: 0;
+      right: 4px;
+      height: 24px;
+      transform: translateY(65%);
+    }
+  }
+  &.icon.left {
+    i.icon {
+      top: 0;
+      left: 4px;
+      height: 24px;
+      transform: translateY(65%);
+    }
+  }
+}

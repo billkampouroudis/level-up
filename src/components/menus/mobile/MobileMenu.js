@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 
 //Components
 // import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
-import UserMenuLinks from '../../misc/UserMenuLinks';
+import UserMenuLinks from '../UserMenuLinks';
 
 const CustomNav = () => {
   return (

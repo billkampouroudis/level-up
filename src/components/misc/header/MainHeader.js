@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Container } from 'react-bootstrap';
 
-const Header = (props) => {
+const MainHeader = (props) => {
   const style = {
     backgroundImage: `url(${props.backgroundImage})`
   };
@@ -15,12 +15,12 @@ const Header = (props) => {
       }`}
       style={style}
     >
-      {props.children}
+      <header>{props.children}</header>
     </Container>
   );
 };
 
-Header.propTypes = {
+MainHeader.propTypes = {
   children: PropTypes.node,
   backgroundImage: PropTypes.string,
   home: PropTypes.bool,
@@ -28,4 +28,4 @@ Header.propTypes = {
   className: PropTypes.string
 };
 
-export default Header;
+export default MainHeader;

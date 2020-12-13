@@ -2,7 +2,7 @@ import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 // Components
-import LoginForm from '../../Forms/login/LoginForm';
+import LoginForm from '../../forms/login/LoginForm';
 
 // Images
 import logo from '../../../assets/images/Logo-Large.svg';

@@ -1,21 +1,21 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Loader } from 'semantic-ui-react';
 
 // Component
 import ProductCard from './ProductCard';
-import Loading from '../Loading';
 
 const Products = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
     let _products = props.data || [];
-    console.log(_products);
 
     if (props.exclude) {
       _products = _products.filter((item) => !props.exclude.includes(item.id));
     }
+
     setProducts(_products);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.data]);
@@ -39,7 +39,7 @@ const Products = (props) => {
             ))}
           </Row>
         ) : (
-          <Loading />
+          <Loader active inline="centered" />
         )}
       </Container>
     </>

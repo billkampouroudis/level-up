@@ -5,8 +5,8 @@ import Urls from '../../../pages/router/Urls';
 import { Menu32 } from '@carbon/icons-react';
 
 // Components
-import MobileMenu from '../MobileMenu';
-import CategoriesMenuLinks from '../../misc/CategoriesMenuLinks';
+import MobileMenu from '../mobile/MobileMenu';
+import CategoriesMenuLinks from '../CategoriesMenuLinks';
 
 // Images
 import logo from '../../../assets/images/Logo-Small.svg';

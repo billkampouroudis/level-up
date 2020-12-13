@@ -4,13 +4,11 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/Urls';
-import { Rating } from 'semantic-ui-react';
+import { Rating, Message, Loader } from 'semantic-ui-react';
 
 // Components
-import Header from '../components/Header';
-import Loading from '../components/Loading';
-import ErrorAlert from '../components/Alerts/ErrorAlert';
-import Products from '../components/Products';
+import MainHeader from '../components/misc/header/MainHeader';
+import ProductsList from '../components/misc/products/ProductsList';
 
 // Images
 import HeroImage from '../assets/images/Hero-Image-4.jpg';
@@ -24,7 +22,9 @@ const StorePage = (props) => {
 
   function checkForError() {
     if (props.storesReducer.getStoreError) {
-      return <ErrorAlert message={props.storesReducer.getStoreError.message} />;
+      return (
+        <Message negative content={props.storesReducer.getStoreError.message} />
+      );
     }
   }
 
@@ -46,7 +46,7 @@ const StorePage = (props) => {
     <>
       {!props.storesReducer.isGettingStore && props.storesReducer.store ? (
         <>
-          <Header backgroundImage={HeroImage} className="store" />
+          <MainHeader backgroundImage={HeroImage} className="store" />
           <section>
             <Container>
               <Row>
@@ -82,7 +82,7 @@ const StorePage = (props) => {
                   <Row>
                     <Col>
                       <h3 className="mb-3">Προϊόντα</h3>
-                      <Products data={props.productsReducer.products} />
+                      <ProductsList data={props.productsReducer.products} />
                     </Col>
                   </Row>
                 </Container>
@@ -90,7 +90,7 @@ const StorePage = (props) => {
             )}
         </>
       ) : (
-        <Loading loading={props.storesReducer.isGettingStore} />
+        <Loader active inline="centered" />
       )}
     </>
   );

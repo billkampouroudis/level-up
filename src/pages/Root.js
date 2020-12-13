@@ -3,8 +3,8 @@ import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import Urls from './router/Urls';
 
-import MainLayout from '../components/Layout/MainLayout';
-import EmptyLayout from '../components/Layout/EmptyLayout';
+import MainLayout from '../components/layouts/main/MainLayout';
+import EmptyLayout from '../components/layouts/empty/EmptyLayout';
 
 import HomePage from './HomePage';
 import LoginRegisterPage from './LoginRegisterPage';

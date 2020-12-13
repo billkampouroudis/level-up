@@ -119,3 +119,89 @@ form {
   color: $accent !important;
   border: none;
 }
+
+//
+// Buttons
+//
+.ui.button.custom {
+  border-radius: 100px;
+  padding: 14px 32px;
+  min-width: 180px;
+
+  svg {
+    margin-left: 8px;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &.primary {
+    background-color: $accent;
+    color: #fff;
+    border: 2px solid $accent;
+
+    &:hover {
+      background-color: $accentDark;
+    }
+
+    &:focus,
+    &:active {
+      background-color: $accentDark;
+      border: 2px solid $accent;
+    }
+  }
+
+  &.secondary {
+    background-color: #fff;
+    border: 2px solid $accent;
+    color: $primary;
+
+    &:hover {
+      background-color: $accentDark;
+      color: #fff;
+    }
+
+    &:focus,
+    &:active {
+      background-color: darken($accent, 10%);
+      border: 2px solid $accent;
+      color: #fff;
+    }
+  }
+
+  &.sm {
+    padding: 8px 24px;
+    min-width: 100px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  &.lg {
+    padding: 14px 34px;
+  }
+
+  &.xl {
+    padding: 16px 40px;
+    font-size: 1.25rem;
+    line-height: 1.5;
+    min-width: 220px;
+
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}
+
+//
+// Loader
+//
+.ui.loader:after {
+  border-color: $accent transparent transparent;
+}

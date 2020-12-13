@@ -4,7 +4,7 @@ import Urls from '../../../pages/router/Urls';
 import { ChevronRight32, ChevronLeft32 } from '@carbon/icons-react';
 
 // Components
-import UserMenu from '../../misc/UserMenuLinks';
+import UserMenu from '../UserMenuLinks';
 
 // Images
 import logoWhite from '../../../assets/images/Logo-Small-White.svg';

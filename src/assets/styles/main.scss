@@ -10,14 +10,15 @@
 @import '_typography';
 
 // Components styling
-@import '../../components/misc/Counter/style.scss';
-@import '../../components/Header/style.scss';
-@import '../../components/Loading/style.scss';
-@import '../../components/Menu/MobileMenu/style.scss';
-@import '../../components/Menu/Navbar/style.scss';
-@import '../../components/Menu/SideMenu/style.scss';
-@import '../../components/Products/style.scss';
-@import '../../components/ui/button/_customButton.scss';
-@import '../../components/Alerts/style.scss';
-@import '../../components/Inputs/style.scss';
+@import '../../components/menus/mobile/_mobileMenu.scss';
+@import '../../components/menus/sidebar/_sidebar.scss';
+@import '../../components/menus/navbar/_navbar.scss';
+
 @import '../../components/misc/loginRegister/_loginRegister.scss';
+@import '../../components/misc/header/_mainHeader.scss';
+@import '../../components/misc/counter/_counter.scss';
+@import '../../components/misc/products/_products.scss';
+
+@import '../../components/formElements/_formElements.scss';
+@import '../../components/formElements/select/_customSelect.scss';
+@import '../../components/formElements/textInput/_customTextInput.scss';

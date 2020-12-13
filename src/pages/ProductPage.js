@@ -6,13 +6,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/Urls';
 import is from '../utils/misc/is';
 import get from '../utils/misc/get';
-import { Rating } from 'semantic-ui-react';
+import { Rating, Button, Loader } from 'semantic-ui-react';
 
 // Components
-import Loading from '../components/Loading';
-import ProductOptions from '../components/Products/ProductOptions';
-import CustomButton from '../components/ui/button/CustomButton';
-import Products from '../components/Products';
+import ProductOptions from '../components/misc/products/ProductOptions';
+import ProductsList from '../components/misc/products/ProductsList';
 
 // Images
 import ilImages from '../assets/images/il-images.svg';
@@ -120,9 +118,9 @@ const ProductPage = (props) => {
                   )}
                   <div>
                     <Link to={`${urls.STORES}/${product.store.id}`}>
-                      <CustomButton className="custom secondary mr-3">
+                      <Button className="custom secondary mr-3">
                         Επίσκεψη καταστήματος
-                      </CustomButton>
+                      </Button>
                     </Link>
                   </div>
                 </Col>
@@ -143,7 +141,7 @@ const ProductPage = (props) => {
                         Περισσότερα προϊόντα στο κατάστημα
                       </h3>
 
-                      <Products
+                      <ProductsList
                         data={props.suggestionsReducer.suggestions}
                         exclude={[product.id]}
                       />
@@ -154,7 +152,7 @@ const ProductPage = (props) => {
             )}
         </>
       ) : (
-        <Loading />
+        <Loader active inline="centered" />
       )}
     </>
   );
