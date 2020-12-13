@@ -9,7 +9,7 @@ import { validateOne } from '../../utils/validation/index';
 
 // Component
 import Counter from '../misc/Counter';
-import Button from '../Ui/CustomButton';
+import Button from '../ui/button/CustomButton';
 import ErrorAlert from '../Alerts/ErrorAlert';
 import CustomSelect from '../Inputs/CustomSelect';
 

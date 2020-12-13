@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 // Components
 import Products from '../components/Products';
 import Header from '../components/Header';
-import CustomButton from '../components/Ui/CustomButton';
+import CustomButton from '../components/ui/button/CustomButton';
 
 // Images
 import HeroImage1 from '../assets/images/Hero-Image.jpg';

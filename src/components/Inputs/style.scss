@@ -1,98 +1,123 @@
 //
 // General
 //
-.ui.input input,
-.ui.selection.dropdown {
-  width: 100% !important;
-  border-radius: 10px;
-  padding: 16px 24px;
-  background-color: $background-dark !important;
-  border: 2px solid $grey-lighter;
+.ui.form,
+form {
+  .ui.input input,
+  .ui.selection.dropdown {
+    width: 100% !important;
+    border-radius: 10px;
+    padding: 16px 24px;
+    // background-color: $background-dark !important;
+    border: 1px solid $grey-lighter;
 
-  &:focus,
-  &:active,
-  &:hover {
-    border: 2px solid rgba(red($accentDark), green($accentDark), blue($accentDark), 0.5) !important;
-  }
-}
-
-//
-// Input
-//
-.ui.input {
-  width: 100%;
-
-  &.icon {
-    i.icon {
-      top: 0;
-      right: 16px;
-      height: 24px;
-      width: 24px;
-      transform: translateY(65%);
+    &:focus,
+    &:active,
+    &:hover {
+      border: 1px solid
+        rgba(red($accentDark), green($accentDark), blue($accentDark), 0.5) !important;
     }
   }
-}
 
-//
-// Select
-//
-.ui.selection.dropdown {
-  .dropdown.icon {
-    padding: 16px 24px;
+  .error-message {
+    height: 1rem !important;
+    color: $danger;
+    transform: translateY(-16px);
+
+    &::after {
+      content: '\00a0\00a0';
+    }
   }
 
-  .menu {
-    border: 2px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
-    border-top-width: 0 !important;
-    width: -webkit-fill-available;
-    margin-left: -2px;
-    margin-right: -2px;
-    border-radius: 0 0 10px 10px;
+  .field {
+    margin-bottom: 8px;
   }
 
-  .item {
-    &:hover {
+  .ui.icon.input {
+    color: $accent;
+  }
+
+  //
+  // Input
+  //
+  .ui.input {
+    width: 100%;
+
+    &.icon {
+      i.icon {
+        top: 0;
+        right: 4px;
+        height: 24px;
+        transform: translateY(65%);
+      }
+    }
+    &.icon.left {
+      i.icon {
+        top: 0;
+        left: 4px;
+        height: 24px;
+        transform: translateY(65%);
+      }
+    }
+  }
+
+  //
+  // Select
+  //
+  .ui.selection.dropdown {
+    .dropdown.icon {
+      padding: 16px 24px;
+    }
+
+    .menu {
+      border: 1px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
+      border-top-width: 0 !important;
+      width: -webkit-fill-available;
+      margin-left: -1px;
+      margin-right: -1px;
+      border-radius: 0 0 10px 10px;
+    }
+
+    .item {
+      &:hover {
+        background: rgba(
+          red($background-dark),
+          green($background-dark),
+          blue($background-dark),
+          0.2
+        );
+      }
+    }
+
+    .selected.item {
       background: rgba(
         red($background-dark),
         green($background-dark),
         blue($background-dark),
-        0.2
+        0.6
       );
     }
-  }
 
-  .selected.item {
-    background: rgba(
-      red($background-dark),
-      green($background-dark),
-      blue($background-dark),
-      0.6
-    );
-  }
+    &.upward.active {
+      border: 1px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
+      border-radius: 0 0 10px 10px !important;
 
-  &.upward.active {
-    border: 2px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
-    border-radius: 0 0 10px 10px !important;
+      .menu {
+        border-radius: 10px 10px 0 0;
+      }
+    }
 
-    .menu {
-      border-radius: 10px 10px 0 0;
+    i.icon.dropdown:before {
+      color: $primaryLight !important;
     }
   }
 
-  i.icon.dropdown:before{
-    color: $primaryLight !important;
+  .ui.default.dropdown:not(.button) > .text,
+  .ui.dropdown:not(.button) > .default.text {
+    color: $grey-light;
   }
-}
 
-.ui.default.dropdown:not(.button) > .text, .ui.dropdown:not(.button) > .default.text {
-  color: $grey-light;
-}
-
-.ui.selection.active.dropdown {
-  border: 2px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
-}
-
-.error-message {
-  color: $danger;
-  transform: translateY(-16px);
+  .ui.selection.active.dropdown {
+    border: 1px solid rgba(red($accent), green($accent), blue($accent), 0.5) !important;
+  }
 }

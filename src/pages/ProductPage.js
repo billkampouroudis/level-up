@@ -11,7 +11,7 @@ import { Rating } from 'semantic-ui-react';
 // Components
 import Loading from '../components/Loading';
 import ProductOptions from '../components/Products/ProductOptions';
-import CustomButton from '../components/Ui/CustomButton';
+import CustomButton from '../components/ui/button/CustomButton';
 import Products from '../components/Products';
 
 // Images

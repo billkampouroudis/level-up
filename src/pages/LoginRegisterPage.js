@@ -1,13 +1,13 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+
+// Components
+import LoginRegister from '../components/misc/loginRegister/LoginRegister';
 
 const LoginRegisterPage = () => {
   return (
-    <Container className="pt-6">
-      <header className="App-header">
-        <h1>Login</h1>
-      </header>
-    </Container>
+    <section className="py-0">
+      <LoginRegister />
+    </section>
   );
 };
 

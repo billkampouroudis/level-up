@@ -1,6 +1,8 @@
 const Urls = {
   HOME: '/',
   LOGIN: '/login',
+  RESET_PASSWORD: '/login',
+  REGISTER: '/register',
   PRODUCTS: '/products',
   STORES: '/stores',
   MY_CART: '/my-cart',

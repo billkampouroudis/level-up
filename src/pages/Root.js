@@ -4,6 +4,7 @@ import PrivateRoute from './router/PrivateRoute';
 import Urls from './router/Urls';
 
 import MainLayout from '../components/Layout/MainLayout';
+import EmptyLayout from '../components/Layout/EmptyLayout';
 
 import HomePage from './HomePage';
 import LoginRegisterPage from './LoginRegisterPage';
@@ -29,7 +30,7 @@ const Root = () => {
         <PrivateRoute
           path={Urls.LOGIN}
           component={LoginRegisterPage}
-          layout={MainLayout}
+          layout={EmptyLayout}
         />
         <PrivateRoute
           path={`${Urls.PRODUCTS}/:id?`}
@@ -66,7 +67,6 @@ const Root = () => {
           component={StorePage}
           layout={MainLayout}
         />
-
         <PrivateRoute
           path={Urls.NOT_FOUND}
           component={Error404}
