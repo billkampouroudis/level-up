@@ -58,5 +58,47 @@ export const validateOne = (input) => {
     }
   }
 
-  return {...tempInput, errorMessage: ''};
+  return { ...tempInput, errorMessage: '' };
+};
+
+/**
+ * Checks if there are errors in the given form values
+ * @param {object} inputsToCheck
+ */
+export const hasErrors = (inputsToCheck) => {
+  for (let inputKey in inputsToCheck) {
+    if (!!inputsToCheck[inputKey].errorMessage) {
+      return true;
+    }
+  }
+  return false;
+};
+
+export const handleOnKeyUp = (e, key, inputs) => {
+  let _input = {
+    ...inputs[key],
+    value: e.target.value
+  };
+
+  if (inputs[key].errorMessage || (!_input.value && inputs[key].value)) {
+    _input = validateOne({
+      ...inputs[key],
+      value: e.target.value
+    });
+  }
+
+  return {
+    ...inputs,
+    [key]: _input
+  };
+};
+
+export const handleOnBlur = (e, key, inputs) => {
+  return {
+    ...inputs,
+    [key]: validateOne({
+      ...inputs[key],
+      value: e.target.value
+    })
+  };
 };

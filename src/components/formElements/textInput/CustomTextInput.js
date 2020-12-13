@@ -6,13 +6,16 @@ const CustomTextInput = (props) => {
   const { label, errorMessage } = props;
 
   const propsToAdd = () => {
-    const propsToHide = ['label'];
+    const propsToHide = ['label', 'errorMessage'];
     const _props = { ...props };
 
     for (let prop of propsToHide) {
       delete _props[prop];
     }
-    console.log(_props);
+
+    if (errorMessage) {
+      _props.error = true;
+    }
 
     return _props;
   };

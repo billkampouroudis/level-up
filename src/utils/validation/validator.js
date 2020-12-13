@@ -29,6 +29,12 @@ export const nameRegex = /^([^.<>!@#$+()/%&=*_-][^0-9]*)$/;
 // eslint-disable-next-line no-useless-escape
 export const phoneRegex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
 
+export const lettersOnlyRegex = /^[a-zA-Z]+$/;
+
+export const password = {
+  length: 8
+};
+
 const locale = 'el';
 const formMessages = require(`./messages`).default;
 
@@ -84,6 +90,12 @@ const Validator = {
       }
     }
 
+    return true;
+  },
+  password: (inputValue) => {
+    if (inputValue.length < password.length) {
+      return { error: formMessages[locale].password.length(8) };
+    }
     return true;
   }
 };

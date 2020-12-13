@@ -1,7 +1,7 @@
 import React from 'react';
 
 // Components
-import LoginRegister from '../components/misc/loginRegister/LoginRegister';
+import LoginRegister from '../components/misc/login/Login';
 
 const LoginRegisterPage = () => {
   return (

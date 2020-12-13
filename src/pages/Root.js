@@ -7,7 +7,8 @@ import MainLayout from '../components/layouts/main/MainLayout';
 import EmptyLayout from '../components/layouts/empty/EmptyLayout';
 
 import HomePage from './HomePage';
-import LoginRegisterPage from './LoginRegisterPage';
+import LoginPage from './LoginPage';
+import RegisterPage from './RegisterPage';
 import ProductPage from './ProductPage';
 import Error404 from './Error404';
 import MyCartPage from './MyCartPage';
@@ -29,7 +30,12 @@ const Root = () => {
         />
         <PrivateRoute
           path={Urls.LOGIN}
-          component={LoginRegisterPage}
+          component={LoginPage}
+          layout={EmptyLayout}
+        />
+        <PrivateRoute
+          path={Urls.REGISTER}
+          component={RegisterPage}
           layout={EmptyLayout}
         />
         <PrivateRoute
