@@ -16,7 +16,7 @@ import HeroImage3 from '../assets/images/Hero-Image-3.jpg';
 import HeroImage4 from '../assets/images/Hero-Image-4.jpg';
 
 // Reduc actions
-import { listProducts } from '../redux/Products/products.actions';
+import { listProducts } from '../redux/products/products.actions';
 
 const HomePage = (props) => {
   const [heroImage, setHeroImage] = useState(HeroImage1);

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Urls from '../../../pages/router/Urls';
+import urls from '../../../pages/router/urls';
 
 // Components
 import RegisterForm from '../../forms/register/RegisterForm';
@@ -27,11 +27,11 @@ const Register = () => {
             </p>
             <RegisterForm />
             <div className="mb-3 text-center">
-              <Link to={Urls.LOGIN}>Έχω ήδη λογαριασμό</Link>
+              <Link to={urls.LOGIN}>Έχω ήδη λογαριασμό</Link>
             </div>
 
             <div className="text-center">
-              <Link to={Urls.RESET_PASSWORD} className="text-grey-light">
+              <Link to={urls.RESET_PASSWORD} className="text-grey-light">
                 Ξέχασα τον κωδικό μου
               </Link>
             </div>

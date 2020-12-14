@@ -1,0 +1,6 @@
+export const AUTH_CLEANUP = 'AUTH_CLEANUP';
+export const CLEAR_LOGIN_ERROR = 'CLEAR_LOGIN_ERROR';
+
+export const LOGIN_REQUEST = 'LOGIN_REQUEST';
+export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
+export const LOGIN_ERROR = 'LOGIN_ERROR';

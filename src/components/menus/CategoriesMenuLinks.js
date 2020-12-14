@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import Urls from '../../pages/router/Urls';
+import Urls from '../../pages/router/urls';
 import { Row, Col } from 'react-bootstrap';
 
 const CategoriesMenuLinks = () => {

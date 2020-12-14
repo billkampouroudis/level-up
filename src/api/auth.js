@@ -1,15 +1,15 @@
 import makeRequest, { requestMethods } from './request';
 import { API_URL } from '../constants';
 
-const favoritesApi = {
-  addToFavorites: async (id, options) => {
+const authApi = {
+  login: async (data, options) => {
     try {
       const response = await makeRequest({
         method: requestMethods.POST,
-        url: `${API_URL}/api/favorites/${id}`,
+        url: `${API_URL}/api/auth/login`,
+        data,
         options
       });
-
       return Promise.resolve(response.data);
     } catch (error) {
       return Promise.reject(error);
@@ -20,7 +20,7 @@ const favoritesApi = {
     try {
       const response = await makeRequest({
         method: requestMethods.DELETE,
-        url: `${API_URL}/api/favorites/${id}`,
+        url: `${API_URL}/favorites/${id}`,
         options
       });
 
@@ -31,4 +31,4 @@ const favoritesApi = {
   }
 };
 
-export default favoritesApi;
+export default authApi;

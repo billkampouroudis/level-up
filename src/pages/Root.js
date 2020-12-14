@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
-import Urls from './router/Urls';
+import Urls from './router/urls';
 
 import MainLayout from '../components/layouts/main/MainLayout';
 import EmptyLayout from '../components/layouts/empty/EmptyLayout';

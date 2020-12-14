@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from '../../../pages/router/Urls';
+import urls from '../../../pages/router/urls';
 import { Locked32, Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
 import { validateOne } from '../../../utils/validation/index';
 
@@ -16,7 +16,7 @@ import CustomSelect from '../../formElements/select/CustomSelect';
 import {
   addToFavorites,
   removeFromFavorites
-} from '../../../redux/Products/products.actions';
+} from '../../../redux/products/products.actions';
 
 // API
 import favoritesApi from '../../../api/favorites';

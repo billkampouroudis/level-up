@@ -3,16 +3,15 @@ import ReactDOM from 'react-dom';
 import './assets/styles/main.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-
-// REDUX
+import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
-import store from './redux/store';
+import store, { persistor } from './redux/store';
 
 ReactDOM.render(
   <Provider store={store}>
-    {/* <React.StrictMode> */}
-    <App />
-    {/* </React.StrictMode> */}
+    <PersistGate loading={null} persistor={persistor}>
+      <App />
+    </PersistGate>
   </Provider>,
 
   document.getElementById('root')

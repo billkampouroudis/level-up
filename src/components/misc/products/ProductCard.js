@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import urls from '../../../pages/router/Urls';
+import urls from '../../../pages/router/urls';
 import { Locked24 } from '@carbon/icons-react';
 import { Rating } from 'semantic-ui-react';
 import get from '../../../utils/misc/get';

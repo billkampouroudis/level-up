@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from './router/Urls';
+import urls from './router/urls';
 import { Rating, Message, Loader } from 'semantic-ui-react';
 
 // Components
@@ -14,8 +14,8 @@ import ProductsList from '../components/misc/products/ProductsList';
 import HeroImage from '../assets/images/Hero-Image-4.jpg';
 
 // Redux Actions
-import { getStore } from '../redux/Stores/stores.actions';
-import { listStoreProducts } from '../redux/Products/products.actions';
+import { getStore } from '../redux/stores/stores.actions';
+import { listStoreProducts } from '../redux/products/products.actions';
 
 const StorePage = (props) => {
   const history = useHistory();

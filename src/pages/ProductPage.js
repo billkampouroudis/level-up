@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from './router/Urls';
+import urls from './router/urls';
 import is from '../utils/misc/is';
 import get from '../utils/misc/get';
 import { Rating, Button, Loader } from 'semantic-ui-react';
@@ -16,9 +16,9 @@ import ProductsList from '../components/misc/products/ProductsList';
 import ilImages from '../assets/images/il-images.svg';
 
 // Redux Actions
-import { getProduct } from '../redux/Products/products.actions';
-import { getStore } from '../redux/Stores/stores.actions';
-import { listSuggestionsByStore } from '../redux/Suggestions/suggestions.actions';
+import { getProduct } from '../redux/products/products.actions';
+import { getStore } from '../redux/stores/stores.actions';
+import { listSuggestionsByStore } from '../redux/suggestions/suggestions.actions';
 
 // Hooks
 import useDidMountEffect from '../utils/hooks/useDidMountEffect';
@@ -48,7 +48,6 @@ const ProductPage = (props) => {
       }
 
       setProduct(_product);
-      console.log(_product);
       props.listSuggestionsByStore(_product.store.id);
     }
   }, [props.productsReducer.isGettingProduct]);

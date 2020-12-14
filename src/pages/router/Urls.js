@@ -1,4 +1,4 @@
-const Urls = {
+const urls = {
   HOME: '/',
   LOGIN: '/login',
   RESET_PASSWORD: '/login',
@@ -13,4 +13,4 @@ const Urls = {
   NOT_FOUND: '/not-found'
 };
 
-export default Urls;
+export default urls;

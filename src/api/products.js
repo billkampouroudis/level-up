@@ -6,7 +6,7 @@ const productsApi = {
     try {
       const response = await makeRequest({
         method: requestMethods.GET,
-        url: `${API_URL}/products/${id}`,
+        url: `${API_URL}/api/products/${id}`,
         options
       });
 
@@ -20,7 +20,7 @@ const productsApi = {
     try {
       const response = await makeRequest({
         method: requestMethods.GET,
-        url: `${API_URL}/products`,
+        url: `${API_URL}/api/products`,
         options
       });
 

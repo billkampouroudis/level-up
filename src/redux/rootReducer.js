@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import counterReducer from './Counter/counter.reducer';
-import productsReducer from './Products/products.reducer';
-import storesReducer from './Stores/stores.reducer';
-import suggestionsReducer from './Suggestions/suggestions.reducer';
+import authReducer from './auth/auth.reducer';
+import productsReducer from './products/products.reducer';
+import storesReducer from './stores/stores.reducer';
+import suggestionsReducer from './suggestions/suggestions.reducer';
 
 const rootReducer = combineReducers({
-  counter: counterReducer,
+  authReducer,
   productsReducer,
   storesReducer,
   suggestionsReducer

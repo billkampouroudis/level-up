@@ -34,7 +34,7 @@ const RegisterForm = (props) => {
   });
 
   const onRegister = () => {
-    console.log(inputs);
+    console.warn('Unimplemented');
   };
 
   return (
@@ -54,6 +54,7 @@ const RegisterForm = (props) => {
           placeholder={inputs.password.placeholder}
           icon="lock"
           iconPosition="left"
+          type="password"
           onKeyUp={(e) => setInputs(handleOnKeyUp(e, 'password', inputs))}
           onBlur={(e) => setInputs(handleOnBlur(e, 'password', inputs))}
           errorMessage={inputs.password.errorMessage}

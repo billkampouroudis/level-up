@@ -205,3 +205,27 @@ form {
 .ui.loader:after {
   border-color: $accent transparent transparent;
 }
+
+//
+// Messages
+//
+
+.ui.message {
+  position: fixed;
+  top: $navbarHeight;
+  left: 15px;
+  width: calc(100% - 30px);
+  padding-right: 40px;
+
+  @include media-breakpoint-up(sm) {
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+  }
+  .close.icon {
+    top: 50%;
+    transform: translate(-20%, -50%);
+    color: darken($danger, 30);
+    opacity: 0.5;
+  }
+}
