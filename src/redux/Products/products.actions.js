@@ -44,7 +44,7 @@ export const getProduct = {
       dispatch(getProduct.request());
 
       productsApi
-        .getProduct({ id })
+        .getProduct(id)
         .then((res) => {
           dispatch(getProduct.success(res.data));
         })

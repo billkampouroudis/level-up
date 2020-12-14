@@ -2,7 +2,7 @@ import makeRequest, { requestMethods } from './request';
 import { API_URL } from '../constants';
 
 const productsApi = {
-  getProduct: async ({ id, options }) => {
+  getProduct: async (id, options) => {
     try {
       const response = await makeRequest({
         method: requestMethods.GET,

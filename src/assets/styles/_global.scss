@@ -29,6 +29,12 @@ main {
   height: 56px !important;
 }
 
+a {
+  &:hover {
+    color: $accent;
+  }
+}
+
 //
 // Sections
 //

@@ -28,6 +28,8 @@ const ProductPage = (props) => {
 
   const history = useHistory();
 
+  const { productsReducer, authReducer } = props;
+
   useEffect(() => {
     window.scrollTo(0, 0);
 
@@ -41,20 +43,23 @@ const ProductPage = (props) => {
   }, [props.match.params.id]);
 
   useDidMountEffect(() => {
-    if (!props.productsReducer.isGettingProduct) {
-      const _product = props.productsReducer.product;
-      if (!_product) {
+    if (!productsReducer.isGettingProduct) {
+      const _product = productsReducer.product;
+      if (is.falsy(_product)) {
         history.push(urls.NOT_FOUND);
       }
 
       setProduct(_product);
-      props.listSuggestionsByStore(_product.store.id);
+      if (_product.store) {
+        props.listSuggestionsByStore(_product.store.id);
+      }
     }
-  }, [props.productsReducer.isGettingProduct]);
+  }, [productsReducer.isGettingProduct]);
 
-  if (get.safe(() => props.productsReducer.getProductError)) {
-    console.error(props.productsReducer.getProductError);
-  }
+  useDidMountEffect(() => {
+    const productIdFromParams = parseInt(props.match.params.id);
+    props.getProduct(productIdFromParams);
+  }, [authReducer.token]);
 
   return (
     <>
@@ -160,7 +165,8 @@ const ProductPage = (props) => {
 const mapStateToProps = (state) => {
   return {
     productsReducer: state.productsReducer,
-    suggestionsReducer: state.suggestionsReducer
+    suggestionsReducer: state.suggestionsReducer,
+    authReducer: state.authReducer
   };
 };
 
@@ -178,6 +184,7 @@ ProductPage.propTypes = {
   suggestionsReducer: PropTypes.object,
   listSuggestionsByStore: PropTypes.func,
   getStore: PropTypes.func,
-  getProduct: PropTypes.func
+  getProduct: PropTypes.func,
+  authReducer: PropTypes.object
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

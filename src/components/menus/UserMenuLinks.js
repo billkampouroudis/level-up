@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import urls from '../../pages/router/urls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Popup } from 'semantic-ui-react';
 
 // Redux Actions
 import { authCleanup } from '../../redux/auth/auth.actions';
@@ -31,38 +32,46 @@ const UserMenuLinks = (props) => {
 
   return (
     <ul>
-      <li>
-        <h4>
-          <Link to={urls.MY_CART}>
-            <ShoppingCart32 />
-            <span>Καλάθι</span>
-          </Link>
-        </h4>
-      </li>
-      <li>
-        <h4>
-          <Link to={urls.FAVORITES}>
-            <Favorite32 />
-            <span>Αγαπημένα πρϊόντα</span>
-          </Link>
-        </h4>
-      </li>
-      <li>
-        <h4>
-          <Link to={urls.MY_ORDERS}>
-            <RecentlyViewed32 />
-            <span>Παραγγελίες</span>
-          </Link>
-        </h4>
-      </li>
-      <li>
-        <h4>
-          <Link to={urls.MY_LEVEL}>
-            <Unlocked32 />
-            <span>Level</span>
-          </Link>
-        </h4>
-      </li>
+      {loggedIn && (
+        <li>
+          <h4>
+            <Link to={urls.MY_CART}>
+              <ShoppingCart32 />
+              <span>Καλάθι</span>
+            </Link>
+          </h4>
+        </li>
+      )}
+      {loggedIn && (
+        <li>
+          <h4>
+            <Link to={urls.FAVORITES}>
+              <Favorite32 />
+              <span>Αγαπημένα πρϊόντα</span>
+            </Link>
+          </h4>
+        </li>
+      )}
+      {loggedIn && (
+        <li>
+          <h4>
+            <Link to={urls.MY_ORDERS}>
+              <RecentlyViewed32 />
+              <span>Παραγγελίες</span>
+            </Link>
+          </h4>
+        </li>
+      )}
+      {loggedIn && (
+        <li>
+          <h4>
+            <Link to={urls.MY_LEVEL}>
+              <Unlocked32 />
+              <span>Level</span>
+            </Link>
+          </h4>
+        </li>
+      )}
       <li>
         <h4>
           <Link to={loggedIn ? urls.MY_ACCOUNT : urls.LOGIN}>
@@ -73,10 +82,16 @@ const UserMenuLinks = (props) => {
       </li>
       {loggedIn && (
         <li>
-          <h4 onClick={logout}>
-            <Logout32 />
-            <span>Αποσύνδεση</span>
-          </h4>
+          <Popup
+            trigger={
+              <h4 onClick={logout}>
+                <Logout32 />
+                <span>Αποσύνδεση</span>
+              </h4>
+            }
+            content="Αποσύνδεση"
+            position="top right"
+          />
         </li>
       )}
     </ul>

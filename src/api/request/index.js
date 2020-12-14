@@ -1,4 +1,12 @@
 import axios from 'axios';
+import store from '../../redux/store';
+import get from '../../utils/misc/get';
+
+let authReducer = null;
+
+store.subscribe(() => {
+  authReducer = store.getState().authReducer;
+});
 
 export const requestMethods = {
   POST: 'post',
@@ -8,14 +16,10 @@ export const requestMethods = {
   DELETE: 'delete'
 };
 
-const defaultConfig = {
+const config = {
   headers: {
     'Content-Type': 'application/json'
   }
-};
-
-const defaultOptions = {
-  withAuth: false
 };
 
 /**
@@ -27,29 +31,27 @@ const defaultOptions = {
  */
 const makeRequest = async ({
   method = requestMethods.GET,
-  url,
-  data,
-  options = defaultOptions
+  url = '',
+  data = {}
 }) => {
-  if (options.withAuth) {
-    defaultConfig.header = {
-      ...defaultConfig.headers,
-      Authorization: 'JWT fefege...'
-    };
+  if (authReducer.token) {
+    // config.headers = {
+    //   ...config.headers,
+    //   Authorization: `bearer ${authReducer.token}`
+    // };
+    axios.defaults.headers.common[
+      'Authorization'
+    ] = `bearer ${authReducer.token}`;
+  } else {
+    delete axios.defaults.headers.common['Authorization'];
   }
 
   try {
-    const res = await axios[method](url, data, defaultConfig);
+    const res = await axios[method](url, data, config);
     return res;
   } catch (error) {
     throw new Error(error);
   }
-
-  // return new Promise((resolve, reject) => {
-  //   axios[method](url, data, defaultConfig)
-  //     .then((response) => resolve(response))
-  //     .catch((error) => reject(error));
-  // });
 };
 
 export default makeRequest;

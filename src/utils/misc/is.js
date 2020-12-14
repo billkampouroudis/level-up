@@ -8,8 +8,7 @@ const is = {
       item === ' ' ||
       item === [] ||
       item === {} ||
-      item === false ||
-      isNaN(item)
+      item === false
     );
   },
   truthy: (item) => {
