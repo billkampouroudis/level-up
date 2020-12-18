@@ -79,7 +79,7 @@ const ProductPage = (props) => {
                   <div className={`product-image`}>
                     <figure>
                       <img
-                        src={get.safeImageSrc(product.image, ilImages)}
+                        src={product.image}
                         alt={product.name}
                         style={
                           !is.correctImageSrc(product.image)

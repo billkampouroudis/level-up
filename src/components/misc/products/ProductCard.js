@@ -19,10 +19,7 @@ const ProductCard = (props) => {
       <Link to={productUrl}>
         <div className="image-container">
           <figure>
-            <img
-              src={get.safeImageSrc(product.image, ilImages)}
-              alt={product.description}
-            />
+            <img src={product.image} alt={product.description} />
           </figure>
         </div>
       </Link>
