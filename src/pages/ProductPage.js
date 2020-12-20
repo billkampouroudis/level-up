@@ -68,27 +68,10 @@ const ProductPage = (props) => {
           <section className="pb-0 pb-sm-auto">
             <Container>
               <Row>
-                <Col
-                  md={6}
-                  xl={7}
-                  className={
-                    !is.correctImageSrc(product.image) &&
-                    'align-self-center text-center'
-                  }
-                >
+                <Col md={6} xl={7}>
                   <div className={`product-image`}>
                     <figure>
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        style={
-                          !is.correctImageSrc(product.image)
-                            ? {
-                                maxWidth: '150px'
-                              }
-                            : {}
-                        }
-                      />
+                      <img src={product.image} alt={product.name} />
                     </figure>
                   </div>
                 </Col>

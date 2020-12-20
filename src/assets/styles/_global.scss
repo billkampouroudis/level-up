@@ -228,10 +228,35 @@ form {
     transform: translateX(-50%);
     width: auto;
   }
+
   .close.icon {
     top: 50%;
     transform: translate(-20%, -50%);
-    color: darken($danger, 30);
     opacity: 0.5;
+  }
+
+  &.negative {
+    .close.icon {
+      color: darken($danger, 30);
+    }
+  }
+
+  &.positive,
+  &.success {
+    .close.icon {
+      color: darken($success, 20);
+    }
+  }
+
+  &.warning {
+    .close.icon {
+      color: darken($warning, 30);
+    }
+  }
+
+  &.info {
+    .close.icon {
+      color: darken($info, 30);
+    }
   }
 }

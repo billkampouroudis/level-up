@@ -20,6 +20,7 @@ import {
 
 // API
 import favoritesApi from '../../../api/favorites';
+import orderItemsApi from '../../../api/orderItems';
 
 const ProductOptions = (props) => {
   const [sizeSelect, setSizeSelect] = useState({
@@ -31,6 +32,9 @@ const ProductOptions = (props) => {
     errorMessage: ''
   });
   const [sizes, setSizes] = useState([]);
+  const [quantity, setQuantity] = useState(1);
+  const [showAddToCartSuccess, setShowAddToCartSuccess] = useState(false);
+  const [showAddToCartError, setShowAddToCartError] = useState(false);
 
   const user = null;
   const { product } = props.productsReducer;
@@ -77,7 +81,18 @@ const ProductOptions = (props) => {
       return;
     }
 
-    alert('success');
+    orderItemsApi
+      .createOrderItem({
+        productId: product.id,
+        quantity,
+        size: sizeSelect.value
+      })
+      .then(() => {
+        setShowAddToCartSuccess(true);
+      })
+      .catch(() => {
+        setShowAddToCartError(true);
+      });
   };
 
   useEffect(() => {
@@ -127,7 +142,7 @@ const ProductOptions = (props) => {
           <Row className="mb-3">
             <Col>
               <label className="text-bold mb-1">Ποσότητα</label>
-              <Counter />
+              <Counter onChange={setQuantity} />
             </Col>
           </Row>
           <Row className="mb-3">
@@ -181,6 +196,20 @@ const ProductOptions = (props) => {
           <Message
             negative
             content={props.productsReducer.isFetchingProductsError}
+          />
+        )}
+        {showAddToCartSuccess && (
+          <Message
+            success
+            content="Το προϊόν προστέθηκε στο καλάθι."
+            onDismiss={() => setShowAddToCartSuccess(false)}
+          />
+        )}
+        {showAddToCartError && (
+          <Message
+            negative
+            content="Σφάλμα κατά την προσθήκη στο καλάθι."
+            onDismiss={() => setShowAddToCartError(false)}
           />
         )}
       </>

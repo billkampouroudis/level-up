@@ -11,13 +11,17 @@ function Counter(props) {
 
   const decrease = () => {
     if (count > 1) {
-      setCount(count - 1);
+      const _count = count - 1;
+      setCount(_count);
+      props.onChange(_count);
     }
   };
 
   const increase = () => {
     if ((maxCount && count < maxCount) || count < defaultMaxCount) {
-      setCount(count + 1);
+      const _count = count + 1;
+      setCount(_count);
+      props.onChange(_count);
     }
   };
 
@@ -40,7 +44,8 @@ function Counter(props) {
 }
 
 Counter.propTypes = {
-  maxCount: PropTypes.number
+  maxCount: PropTypes.number,
+  onChange: PropTypes.func
 };
 
 export default Counter;
