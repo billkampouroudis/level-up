@@ -260,3 +260,18 @@ form {
     }
   }
 }
+
+// Order Items
+.order-item {
+  background: #fff !important;
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+  border-radius: 8px !important;
+
+  .content {
+    padding: 16px !important;
+  }
+
+  img {
+    border-radius: 8px !important;
+  }
+}

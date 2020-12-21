@@ -32,18 +32,28 @@ const config = {
 const makeRequest = async ({
   method = requestMethods.GET,
   url = '',
-  data = {}
+  data = {},
+  options = {}
 }) => {
   if (authReducer.token) {
-    // config.headers = {
-    //   ...config.headers,
-    //   Authorization: `bearer ${authReducer.token}`
-    // };
     axios.defaults.headers.common[
       'Authorization'
     ] = `bearer ${authReducer.token}`;
   } else {
     delete axios.defaults.headers.common['Authorization'];
+  }
+
+  const { filters } = options;
+  if (filters && filters.length > 0) {
+    url += '?';
+
+    for (let i = 0; i < filters.length; i++) {
+      url += filters[i];
+
+      if (i !== filters.length - 1) {
+        url += '&';
+      }
+    }
   }
 
   try {

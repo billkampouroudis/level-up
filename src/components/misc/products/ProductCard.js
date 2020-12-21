@@ -17,7 +17,7 @@ const ProductCard = (props) => {
   return (
     <div className="product-card">
       <Link to={productUrl}>
-        <div className="image-container">
+        <div className="product-image-container">
           <figure>
             <img src={product.image} alt={product.description} />
           </figure>
@@ -34,7 +34,7 @@ const ProductCard = (props) => {
             <p className="text-lg">{product.name}</p>
           </div>
         </Link>
-        <div className="price  mb-1">
+        <div className="price mb-1">
           <span className="mr-2 text-semi-bold">{product.originalPrice}€</span>
           {product.reducedPrice && (
             <span>

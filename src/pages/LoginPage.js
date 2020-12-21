@@ -17,6 +17,7 @@ const LoginPage = (props) => {
       history.push(urls.HOME);
     }
   });
+
   return (
     <section className="py-0">
       <Login />

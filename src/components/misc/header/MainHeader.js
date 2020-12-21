@@ -10,7 +10,7 @@ const MainHeader = (props) => {
   return (
     <Container
       fluid
-      className={`header d-flex align-items-center ${
+      className={`main-header d-flex align-items-center ${
         props.className ? props.className : ''
       }`}
       style={style}

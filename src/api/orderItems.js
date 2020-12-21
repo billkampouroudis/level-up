@@ -16,11 +16,11 @@ const orderItemsApi = {
     }
   },
 
-  listProducts: async (options) => {
+  listOrderItems: async (options) => {
     try {
       const response = await makeRequest({
         method: requestMethods.GET,
-        url: `${API_URL}/api/products`,
+        url: `${API_URL}/api/orderItems`,
         options
       });
 

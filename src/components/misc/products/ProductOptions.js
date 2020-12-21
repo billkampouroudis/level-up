@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import urls from '../../../pages/router/urls';
 import { Locked32, Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
 import { validateOne } from '../../../utils/validation/index';
+import { useHistory } from 'react-router-dom';
 
 // Component
 import Counter from '../counter/Counter';
@@ -23,6 +24,8 @@ import favoritesApi from '../../../api/favorites';
 import orderItemsApi from '../../../api/orderItems';
 
 const ProductOptions = (props) => {
+  let history = useHistory();
+
   const [sizeSelect, setSizeSelect] = useState({
     value: null,
     label: 'Μέγεθος',
@@ -74,6 +77,10 @@ const ProductOptions = (props) => {
   };
 
   const addToCart = () => {
+    if (!props.authReducer.token) {
+      history.push(urls.LOGIN);
+    }
+
     const validatedSizeSelect = validateOne(sizeSelect);
 
     if (validatedSizeSelect.errorMessage) {
@@ -219,7 +226,8 @@ const ProductOptions = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    productsReducer: state.productsReducer
+    productsReducer: state.productsReducer,
+    authReducer: state.authReducer
   };
 };
 
@@ -233,7 +241,8 @@ const mapDispatchToProps = (dispatch) => {
 ProductOptions.propTypes = {
   productsReducer: PropTypes.object,
   addToFavorites: PropTypes.func,
-  removeFromFavorites: PropTypes.func
+  removeFromFavorites: PropTypes.func,
+  authReducer: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductOptions);
