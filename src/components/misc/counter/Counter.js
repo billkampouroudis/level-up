@@ -4,8 +4,8 @@ import { Subtract32, Add32 } from '@carbon/icons-react';
 import { Button } from 'semantic-ui-react';
 
 function Counter(props) {
-  const { maxCount } = props;
-  const [count, setCount] = useState(1);
+  const { maxCount, initialCount } = props;
+  const [count, setCount] = useState(initialCount || 1);
 
   const defaultMaxCount = 99;
 
@@ -45,7 +45,8 @@ function Counter(props) {
 
 Counter.propTypes = {
   maxCount: PropTypes.number,
-  onChange: PropTypes.func
+  onChange: PropTypes.func,
+  initialCount: PropTypes.number
 };
 
 export default Counter;

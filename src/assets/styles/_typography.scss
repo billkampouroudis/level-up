@@ -25,12 +25,12 @@ h1 {
 h2 {
   font-size: $h2-mobile-font-size;
   font-weight: 500;
-  margin-bottom: 24px;
+  margin-bottom: 16px;
   font-family: $font-family-sans-serif;
 
   @include media-breakpoint-up(xl) {
     font-size: $h2-font-size;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 }
 

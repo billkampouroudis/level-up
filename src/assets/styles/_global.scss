@@ -271,6 +271,18 @@ form {
     padding: 16px !important;
   }
 
+  .image {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    max-height: 120px;
+
+    img {
+      max-height: 100%;
+      width: auto !important;
+    }
+  }
+
   img {
     border-radius: 8px !important;
   }

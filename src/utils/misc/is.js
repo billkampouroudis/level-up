@@ -27,6 +27,9 @@ const is = {
     http.send();
 
     return http.status !== 404;
+  },
+  number: (value) => {
+    return typeof value === 'number';
   }
 };
 

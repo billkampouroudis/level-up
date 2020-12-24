@@ -28,6 +28,33 @@ const orderItemsApi = {
     } catch (error) {
       return Promise.reject(error);
     }
+  },
+
+  updateOrderItem: async (id, data, options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.PATCH,
+        url: `${API_URL}/api/orderItems/${id}`,
+        data,
+        options
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
+  removeOrderItem: async (id, options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.DELETE,
+        url: `${API_URL}/api/orderItems/${id}`,
+        options
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   }
 };
 
