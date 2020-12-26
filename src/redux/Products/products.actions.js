@@ -74,11 +74,11 @@ export const listProducts = {
     };
   },
 
-  call: () => {
+  call: (options = {}) => {
     return (dispatch) => {
       dispatch(listProducts.request());
       productsApi
-        .listProducts()
+        .listProducts(options)
         .then((res) => {
           dispatch(listProducts.success(res.data));
         })

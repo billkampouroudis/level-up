@@ -4,10 +4,6 @@ import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
 import { Locked24 } from '@carbon/icons-react';
 import { Rating } from 'semantic-ui-react';
-import get from '../../../utils/misc/get';
-
-// Images
-import ilImages from '../../../assets/images/il-images.svg';
 
 const ProductCard = (props) => {
   const { product } = props;

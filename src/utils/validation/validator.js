@@ -57,7 +57,7 @@ const Validator = {
     if (inputValue.length < max) {
       return true;
     }
-    return { error: formMessages[locale].minLength(max) };
+    return { error: formMessages[locale].maxLength(max) };
   },
   email: (inputValue) => {
     if (emailRegex.test(inputValue)) {
@@ -97,6 +97,12 @@ const Validator = {
       return { error: formMessages[locale].password.length(8) };
     }
     return true;
+  },
+  numeric: (inputValue) => {
+    if (Number(inputValue)) {
+      return true;
+    }
+    return { error: formMessages[locale].numeric };
   }
 };
 export default Validator;

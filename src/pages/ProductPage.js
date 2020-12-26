@@ -12,9 +12,6 @@ import { Rating, Button, Loader } from 'semantic-ui-react';
 import ProductOptions from '../components/misc/products/ProductOptions';
 import ProductsList from '../components/misc/products/ProductsList';
 
-// Images
-import ilImages from '../assets/images/il-images.svg';
-
 // Redux Actions
 import { getProduct } from '../redux/products/products.actions';
 import { getStore } from '../redux/stores/stores.actions';

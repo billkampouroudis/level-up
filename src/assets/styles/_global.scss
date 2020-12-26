@@ -35,6 +35,14 @@ a {
   }
 }
 
+.link {
+  text-decoration: underline;
+  &:hover {
+    color: $accent !important;
+    cursor: pointer;
+  }
+}
+
 //
 // Sections
 //
@@ -133,6 +141,12 @@ form {
   border-radius: 100px;
   padding: 14px 32px;
   min-width: 180px;
+  width: 100%;
+  margin-bottom: 8px;
+
+  @include media-breakpoint-up(sm) {
+    width: auto;
+  }
 
   svg {
     margin-left: 8px;
@@ -286,4 +300,14 @@ form {
   img {
     border-radius: 8px !important;
   }
+}
+
+// Modals
+.ui.modal {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  height: fit-content;
+  max-height: 700px;
+  overflow-y: auto;
 }

@@ -1,12 +1,6 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'semantic-ui-react';
-import {
-  validateAll,
-  validateOne,
-  hasErrors,
-  handleOnBlur,
-  handleOnKeyUp
-} from '../../../utils/validation';
+import { handleOnBlur, handleOnKeyUp } from '../../../utils/validation';
 
 // Components
 import CustomTextInput from '../../formElements/textInput/CustomTextInput';

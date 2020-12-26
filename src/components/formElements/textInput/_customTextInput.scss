@@ -17,4 +17,8 @@
       transform: translateY(65%);
     }
   }
+
+  &.cursor-pointer input {
+    cursor: pointer;
+  }
 }

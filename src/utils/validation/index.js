@@ -14,12 +14,12 @@ export const validateAll = (inputs) => {
       if (inputs[inputKey].file) {
         result = Validator[ruleKey](
           inputs[inputKey].file,
-          inputs[inputKey][ruleKey]
+          inputs[inputKey].rules[ruleKey]
         );
       } else {
         result = Validator[ruleKey](
           inputs[inputKey].value,
-          inputs[inputKey][ruleKey]
+          inputs[inputKey].rules[ruleKey]
         );
       }
 
@@ -28,7 +28,9 @@ export const validateAll = (inputs) => {
         errorMessage: result.error || ''
       };
 
-      break;
+      if (result.error) {
+        break;
+      }
     }
   }
   return resultInputs;
@@ -45,9 +47,9 @@ export const validateOne = (input) => {
     let result = {};
 
     if (input.file) {
-      result = Validator[ruleKey](input.file, input[ruleKey]);
+      result = Validator[ruleKey](input.file, input.rules[ruleKey]);
     } else {
-      result = Validator[ruleKey](input.value, input[ruleKey]);
+      result = Validator[ruleKey](input.value, input.rules[ruleKey]);
     }
 
     if (result.error) {
@@ -62,10 +64,10 @@ export const validateOne = (input) => {
 };
 
 /**
- * Checks if there are errors in the given form values
+ * Checks if there are errors in the given form inputs
  * @param {object} inputsToCheck
  */
-export const hasErrors = (inputsToCheck) => {
+export const haveErrors = (inputsToCheck = {}) => {
   for (let inputKey in inputsToCheck) {
     if (!!inputsToCheck[inputKey].errorMessage) {
       return true;

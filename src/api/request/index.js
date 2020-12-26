@@ -1,6 +1,5 @@
 import axios from 'axios';
 import store from '../../redux/store';
-import get from '../../utils/misc/get';
 
 let authReducer = null;
 

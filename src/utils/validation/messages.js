@@ -16,7 +16,8 @@ const formMessages = {
     password: {
       length: (length) =>
         `Ο κωδικός πρέπει να περιέχει τουλάχιστον ${length} χαρακτήρες`
-    }
+    },
+    numeric: 'Εισάγετε έναν αριθμό'
   }
 };
 

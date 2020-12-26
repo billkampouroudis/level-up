@@ -6,7 +6,7 @@ const CustomTextInput = (props) => {
   const { label, errorMessage } = props;
 
   const propsToAdd = () => {
-    const propsToHide = ['label', 'errorMessage'];
+    const propsToHide = ['label', 'errorMessage', 'hideError'];
     const _props = { ...props };
 
     for (let prop of propsToHide) {
@@ -24,13 +24,16 @@ const CustomTextInput = (props) => {
     <div className="mb-2">
       {label && <label className="mb-1 ml-1">{label}</label>}
       <Input {...propsToAdd()} />
-      <span className="error-message ml-1">{errorMessage}</span>
+      {!props.hideError && (
+        <span className="error-message ml-1">{errorMessage}</span>
+      )}
     </div>
   );
 };
 
 CustomTextInput.propTypes = {
   errorMessage: PropTypes.string,
-  label: PropTypes.string
+  label: PropTypes.string,
+  hideError: PropTypes.bool
 };
 export default CustomTextInput;
