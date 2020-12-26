@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 // Components
@@ -6,6 +6,8 @@ import Orders from '../components/misc/orders/Orders';
 import SelectAddress from '../components/misc/selectAddress/SelectAddress';
 
 const MyCartPage = () => {
+  const [selectedAddress, setSelectedAddress] = useState(null);
+
   return (
     <Container className="pt-6">
       <Row>
@@ -20,7 +22,9 @@ const MyCartPage = () => {
         <Col md={5}>
           <section className="pt-0">
             <h3>Επιλογή διεύθυνσης</h3>
-            <SelectAddress />
+            <SelectAddress
+              onValueChange={(address) => setSelectedAddress(address)}
+            />
           </section>
         </Col>
       </Row>

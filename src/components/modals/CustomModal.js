@@ -1,6 +1,6 @@
 import React from 'react';
 import { Button, Modal } from 'semantic-ui-react';
-import propsToRemove from '../../utils/misc/removeProps';
+import keepProps from '../../utils/props/keepProps';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 
@@ -13,17 +13,9 @@ const CustomModal = (props) => {
     }
   };
 
-  const onCancel = () => {
-    props.onCancel();
-
-    if (!props.stayAfterAction) {
-      props.onClose();
-    }
-  };
-
   const renderCancel = () => {
     return props.onCancel ? (
-      <Button onClick={onCancel} className="custom secondary">
+      <Button onClick={props.onClose} className="custom secondary">
         {props.cancelMessage || 'Άκυρο'}
       </Button>
     ) : null;
@@ -38,21 +30,8 @@ const CustomModal = (props) => {
   };
 
   return (
-    <Modal
-      {...propsToRemove(
-        [
-          'content',
-          'cancelMessage',
-          'onCancel',
-          'confirmMessage',
-          'onConfirm',
-          'title',
-          'stayAfterAction'
-        ],
-        props
-      )}
-    >
-      <Container className="p-5">
+    <Modal {...keepProps(['onOpen', 'onClose', 'open', 'trigger'], props)}>
+      <Container className="p-3 p-sm-4 p-md-5">
         <Row>
           <Col className="mb-4">
             <h1 className="h2">{props.title}</h1>

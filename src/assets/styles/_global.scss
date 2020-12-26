@@ -43,6 +43,14 @@ a {
   }
 }
 
+.disabled {
+  opacity: 0.25;
+}
+
+.shadow-filter {
+  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1)) !important;
+}
+
 //
 // Sections
 //
@@ -277,9 +285,9 @@ form {
 
 // Order Items
 .order-item {
-  background: #fff !important;
-  filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+  @extend .shadow-filter;
   border-radius: 8px !important;
+  background: #fff !important;
 
   .content {
     padding: 16px !important;

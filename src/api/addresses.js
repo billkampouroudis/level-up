@@ -44,6 +44,34 @@ const favoritesApi = {
     }
   },
 
+  updateAddress: async (id, data, options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.PATCH,
+        url: `${API_URL}/api/addresses/${id}`,
+        data,
+        options
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
+  setPrimaryAddress: async (data, options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.POST,
+        url: `${API_URL}/api/addresses/setPrimaryAddress`,
+        data,
+        options
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
   removeAddress: async (id, options) => {
     try {
       const response = await makeRequest({

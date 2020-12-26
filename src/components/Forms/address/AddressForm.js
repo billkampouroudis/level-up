@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Form, Button } from 'semantic-ui-react';
 import { Row, Col } from 'react-bootstrap';
 import {
   validateAll,
-  validateOne,
   haveErrors,
   handleOnBlur,
   handleOnKeyUp
@@ -17,7 +16,7 @@ import CustomTextInput from '../../formElements/textInput/CustomTextInput';
 import addressesApi from '../../../api/addresses';
 
 const AddressForm = (props) => {
-  const initialInputs = {
+  let initialInputs = {
     street: {
       label: 'Οδός',
       placeholder: 'Ιερού Λόχου',
@@ -80,7 +79,47 @@ const AddressForm = (props) => {
     }
   };
 
+  const formId = props.index ? `address-form-${props.index}` : 'address-form';
+
   const [inputs, setInputs] = useState(initialInputs);
+
+  const onSubmit = () => {
+    const validatedInputs = validateAll(inputs);
+    setInputs(validatedInputs);
+
+    if (!haveErrors(validatedInputs)) {
+      const data = {
+        street: inputs.street.value,
+        number: inputs.number.value,
+        zipCode: inputs.zipCode.value,
+        city: inputs.city.value,
+        country: inputs.country.value,
+        floor: inputs.floor.value
+      };
+
+      if (props.address) {
+        addressesApi.updateAddress(props.address.id, data).then(() => {
+          clearInputs();
+          props.onSuccess && props.onSuccess();
+        });
+      } else {
+        addressesApi.createAddress(data).then(() => {
+          clearInputs();
+          props.onSuccess && props.onSuccess();
+        });
+      }
+    }
+  };
+
+  const onCancel = () => {
+    clearInputs();
+    props.onCancel && props.onCancel();
+  };
+
+  const clearInputs = () => {
+    setInputs(initialInputs);
+    document.getElementById('address-form').reset();
+  };
 
   const renderInputs = () => {
     return Object.keys(inputs).map((key) => {
@@ -103,39 +142,33 @@ const AddressForm = (props) => {
     });
   };
 
-  const onSubmit = () => {
-    const validatedInputs = validateAll(inputs);
-    setInputs(validatedInputs);
-
-    if (!haveErrors(validatedInputs)) {
-      const data = {
-        street: inputs.street.value,
-        number: inputs.number.value,
-        zipCode: inputs.zipCode.value,
-        city: inputs.city.value,
-        country: inputs.country.value,
-        floor: inputs.floor.value
-      };
-
-      addressesApi.createAddress(data).then(() => {
-        props.onSuccess && props.onSuccess();
+  const setInitialInputs = () => {
+    if (props.address) {
+      const _inputs = Object.keys(inputs).map((inputKey) => {
+        const input = inputs[inputKey];
+        input.value = props.address[inputKey];
+        return input;
       });
+
+      initialInputs = _inputs;
     }
   };
-  const onCancel = () => {
-    props.onCancel && props.onCancel();
-  };
+
+  useEffect(() => {
+    setInitialInputs();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.address, props.rerender]);
 
   return (
-    <Form>
+    <Form id={formId}>
       <Row>
         {renderInputs()}
         <Col xs={12} className="text-right">
           <Button className="custom secondary" onClick={onCancel}>
-            Άκυρο
+            {props.cancelText || 'Άκυρο'}
           </Button>
           <Button className="custom primary" onClick={onSubmit}>
-            Δημιουργία
+            {props.submitText || 'Δημιουργία'}
           </Button>
         </Col>
       </Row>
@@ -144,10 +177,13 @@ const AddressForm = (props) => {
 };
 
 AddressForm.propTypes = {
-  cancel: PropTypes.number,
-  submit: PropTypes.number,
   onSuccess: PropTypes.func,
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
+  cancelText: PropTypes.string,
+  submitText: PropTypes.string,
+  address: PropTypes.object,
+  index: PropTypes.number,
+  rerender: PropTypes.any
 };
 
 export default AddressForm;
