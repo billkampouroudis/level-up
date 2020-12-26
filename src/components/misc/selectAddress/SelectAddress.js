@@ -23,13 +23,14 @@ const Products = (props) => {
     addressesAPI.listAddresses().then((res) => {
       const { data } = res;
 
-      const primaryAddress =
-        addresses.find((address) => address.primary) || data[0];
-
-      setPrimaryAddress(primaryAddress);
+      setPrimaryAddress(findPrimaryAddress(data));
       setAddresses(data);
       !options.withoutLoading && setLoading(false);
     });
+  };
+
+  const findPrimaryAddress = (addressList = []) => {
+    return addressList.find((address) => address.primary) || addressList[0];
   };
 
   const renderCreateAddressTrigger = (options = {}) => {
@@ -77,6 +78,7 @@ const Products = (props) => {
           onUpdateAddress={() => listAddresses({ withoutLoading: true })}
           onSelectAddress={(data) => {
             setAddresses(data);
+            setPrimaryAddress(findPrimaryAddress(data));
             setSelectAddressModalOpen(false);
           }}
           open={isSelectAddressModalOpen}
