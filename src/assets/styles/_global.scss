@@ -283,6 +283,11 @@ form {
   }
 }
 
+// Items
+.ui.items {
+  margin-top: 0;
+}
+
 // Order Items
 .order-item {
   @extend .shadow-filter;
