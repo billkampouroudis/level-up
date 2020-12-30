@@ -62,16 +62,6 @@ const UserMenuLinks = (props) => {
           </h4>
         </li>
       )}
-      {loggedIn && (
-        <li>
-          <h4>
-            <Link to={urls.MY_LEVEL}>
-              <Unlocked32 />
-              <span>Level</span>
-            </Link>
-          </h4>
-        </li>
-      )}
       <li>
         <h4>
           <Link to={loggedIn ? urls.MY_ACCOUNT : urls.LOGIN}>

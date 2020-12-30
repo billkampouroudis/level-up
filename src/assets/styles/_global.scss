@@ -324,3 +324,13 @@ form {
   max-height: 700px;
   overflow-y: auto;
 }
+
+.ui.statistic {
+  .value {
+    color: $grey-dark !important;
+  }
+
+  .label {
+    color: $grey !important;
+  }
+}

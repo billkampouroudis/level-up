@@ -1,7 +1,7 @@
 import is from '../misc/is';
 
 export const levels = [
-  { key: 0, minXp: 0 },
+  { key: 0, minXp: 0 }, // not in use
   { key: 1, minXp: 200 },
   { key: 2, minXp: 400 },
   { key: 3, minXp: 600 },
