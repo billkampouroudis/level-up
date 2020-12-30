@@ -215,6 +215,7 @@ const OrderItem = (props) => {
 
   useEffect(() => {
     calculateCosts();
+    props.getOrders(orders);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders]);
 
@@ -227,7 +228,8 @@ OrderItem.defaultProps = {
 
 OrderItem.propTypes = {
   status: PropTypes.oneOf(['in_cart']),
-  costs: PropTypes.func
+  costs: PropTypes.func,
+  getOrders: PropTypes.func
 };
 
 export default OrderItem;
