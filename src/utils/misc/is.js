@@ -29,7 +29,7 @@ const is = {
     return http.status !== 404;
   },
   number: (value) => {
-    return typeof value === 'number';
+    return typeof value === 'number' && !isNaN(value);
   }
 };
 

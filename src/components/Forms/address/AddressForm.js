@@ -164,7 +164,7 @@ const AddressForm = (props) => {
       <Row>
         {renderInputs()}
         <Col xs={12} className="text-right">
-          <Button className="custom secondary" onClick={onCancel}>
+          <Button className="custom secondary mr-0 mr-sm-1" onClick={onCancel}>
             {props.cancelText || 'Άκυρο'}
           </Button>
           <Button className="custom primary" onClick={onSubmit}>

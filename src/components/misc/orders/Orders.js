@@ -22,6 +22,13 @@ const OrderItem = (props) => {
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  /**
+   * Changes the count of the given products in the cart
+   *
+   * @param {number} orderItemId
+   * @param {number} orderItemIndex
+   * @param {number} newCount
+   */
   const changeOrderItemCount = (orderItemId, orderItemIndex, newCount) => {
     orderItemsApi
       .updateOrderItem(orderItemId, { quantity: newCount })
@@ -70,7 +77,7 @@ const OrderItem = (props) => {
       orders.map((order) =>
         get.safe(() => order.orderItems.length) ? (
           <div key={order.id} className="mb-5">
-            <h2>{order.orderItems[0].product.store.brandName}</h2>
+            <h3>{order.orderItems[0].product.store.brandName}</h3>
             {renderOrderItems(order.orderItems)}
           </div>
         ) : null
@@ -93,7 +100,7 @@ const OrderItem = (props) => {
     return (
       <Item.Group>
         {orderItems.map((orderItem, index) => (
-          <Item className="order-item my-3" key={orderItem.id}>
+          <Item className="order-item mb-3" key={orderItem.id}>
             <Item.Image
               size="tiny"
               src={orderItem.product.image}
@@ -150,14 +157,43 @@ const OrderItem = (props) => {
                   </div>
                 </div>
               </Item.Description>
-              {/* {orderItem.quantity} <br />
-               <br />
-              {orderItem.price} */}
             </Item.Content>
           </Item>
         ))}
       </Item.Group>
     );
+  };
+
+  /**
+   * Calculates the cost before and after discount.
+   *
+   * @returns {object} Object with strings values of the original cost, the reduced cost and the total discount.
+   */
+  const calculateCosts = () => {
+    let originalCost = 0;
+    let reducedCost = 0;
+    let totalDiscount = 0;
+    for (let order of orders) {
+      for (let orderItem of order.orderItems) {
+        const original =
+          parseFloat(get.safe(() => orderItem.product.originalPrice)) *
+          orderItem.quantity;
+        const reduced =
+          parseFloat(get.safe(() => orderItem.product.reducedPrice)) *
+          orderItem.quantity;
+
+        originalCost += is.number(original) ? original : 0;
+        reducedCost += is.number(reduced) ? reduced : 0;
+      }
+    }
+
+    totalDiscount = reducedCost ? (originalCost - reducedCost).toFixed(2) : 0;
+    originalCost = originalCost.toFixed(2);
+    reducedCost = reducedCost ? reducedCost.toFixed(2) : originalCost;
+
+    const costs = { originalCost, reducedCost, totalDiscount };
+    props.costs && props.costs(costs);
+    return costs;
   };
 
   useEffect(() => {
@@ -174,7 +210,13 @@ const OrderItem = (props) => {
     };
 
     listOrders();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.status]);
+
+  useEffect(() => {
+    calculateCosts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orders]);
 
   return !loading ? renderOrders() : <Loader active inline="centered" />;
 };
@@ -184,7 +226,8 @@ OrderItem.defaultProps = {
 };
 
 OrderItem.propTypes = {
-  status: PropTypes.oneOf(['in_cart'])
+  status: PropTypes.oneOf(['in_cart']),
+  costs: PropTypes.func
 };
 
 export default OrderItem;

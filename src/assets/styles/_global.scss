@@ -150,7 +150,7 @@ form {
   padding: 14px 32px;
   min-width: 180px;
   width: 100%;
-  margin-bottom: 8px;
+  margin: 0 0 8px 0;
 
   @include media-breakpoint-up(sm) {
     width: auto;
