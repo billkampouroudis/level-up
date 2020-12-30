@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import Urls from './router/urls';
+import PropTypes from 'prop-types';
 
+// Components
 import MainLayout from '../components/layouts/main/MainLayout';
 import EmptyLayout from '../components/layouts/empty/EmptyLayout';
 
+// Pages
 import HomePage from './HomePage';
 import LoginPage from './LoginPage';
 import RegisterPage from './RegisterPage';
@@ -18,7 +22,14 @@ import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
 import StorePage from './StorePage';
 
-const Root = () => {
+// Redux Actions
+import { getUser } from '../redux/user/user.actions';
+
+const Root = (props) => {
+  useEffect(() => {
+    props.getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <Router>
       <Switch>
@@ -84,4 +95,18 @@ const Root = () => {
   );
 };
 
-export default Root;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: (id) => dispatch(getUser.call(id))
+  };
+};
+
+Root.propTypes = {
+  getUser: PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Root);

@@ -50,7 +50,10 @@ const HomePage = (props) => {
 
   return (
     <>
-      <MainHeader backgroundImage={heroImage} className="home">
+      <MainHeader
+        style={{ backgroundImage: `url(${heroImage})` }}
+        className="home"
+      >
         <div className="content">
           <Container>
             <Row>

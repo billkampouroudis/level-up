@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import urls from './router/urls';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -11,13 +13,18 @@ import SelectAddress from '../components/misc/selectAddress/SelectAddress';
 // API
 import ordersApi from '../api/orders';
 
-const MyCartPage = () => {
+// Redux Action
+import { updateUser } from '../redux/user/user.actions';
+import { propTypes } from 'react-bootstrap/esm/Image';
+
+const MyCartPage = (props) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [costs, setCosts] = useState(0);
   const [orders, setOrders] = useState([]);
   const [submitError, setSubmitError] = useState(false);
 
   let history = useHistory();
+
   const submitOrders = () => {
     const orderIds = [];
     for (let order of orders) {
@@ -32,7 +39,8 @@ const MyCartPage = () => {
 
     ordersApi
       .updateOrders(data)
-      .then(() => {
+      .then((res) => {
+        props.updateUser(res.data);
         history.push(urls.HOME);
       })
       .catch(() => setSubmitError(true));
@@ -117,4 +125,18 @@ const MyCartPage = () => {
   );
 };
 
-export default MyCartPage;
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUser: (user) => dispatch(updateUser(user))
+  };
+};
+
+MyCartPage.propTypes = {
+  updateUser: PropTypes.func
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MyCartPage);

@@ -46,7 +46,10 @@ const StorePage = (props) => {
     <>
       {!props.storesReducer.isGettingStore && props.storesReducer.store ? (
         <>
-          <MainHeader backgroundImage={HeroImage} className="store" />
+          <MainHeader
+            style={{ backgroundImage: `url(${HeroImage})` }}
+            className="store"
+          />
           <section>
             <Container>
               <Row>

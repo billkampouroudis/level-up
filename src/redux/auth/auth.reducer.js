@@ -5,11 +5,8 @@ import {
   LOGIN_SUCCESS,
   LOGIN_ERROR
 } from './auth.types';
-import jwt_decode from 'jwt-decode';
-import get from '../../utils/misc/get';
 
 const INITIAL_STATE = {
-  userInfo: {},
   token: null,
   isGettingToken: false,
   getTokenError: null
@@ -35,7 +32,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isGettingUser: false,
-        userInfo: get.safe(() => jwt_decode(token).user, {}),
         token
       };
     case LOGIN_ERROR:
