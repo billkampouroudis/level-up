@@ -2,26 +2,38 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
-import is from '../../../utils/misc/is';
-import get from '../../../utils/misc/get';
-import { calculateCosts } from '../../../utils/orders/orders';
+import { connect } from 'react-redux';
 
 import { Item, Popup, Button, Loader } from 'semantic-ui-react';
 import { TrashCan24 } from '@carbon/icons-react';
+
+// Utils
+import is from '../../../utils/misc/is';
+import get from '../../../utils/misc/get';
+import { calculateCosts } from '../../../utils/orders/orders';
 
 // Components
 import Counter from '../counter/Counter';
 
 // API
-import ordersApi from '../../../api/orders';
 import orderItemsApi from '../../../api/orderItems';
 
 // Images
 import EmptyCartIllustration from '../../../assets/images/undraw_empty_cart_co35.svg';
 
+// Redux Action
+import {
+  listOrders,
+  updateOrders,
+  setOrders
+} from '../../../redux/orders/orders.actions';
+
 const OrderItem = (props) => {
-  const [orders, setOrders] = useState([]);
+  // const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const { ordersReducer, setOrders } = props;
+  const { orders } = ordersReducer;
 
   /**
    * Changes the count of the given products in the cart
@@ -73,17 +85,41 @@ const OrderItem = (props) => {
     );
   };
 
+  const renderStatus = (order) => {
+    switch (order.status) {
+      case 'in_cart':
+        return 'Στο καλάθι';
+      case 'registered':
+        return 'Καταχωρήθηκε';
+      case 'sent':
+        return 'Απεστάλλει';
+      case 'done':
+        return 'Ολοκληρώθηκε';
+      default:
+        return '';
+    }
+  };
+
   const renderOrders = () => {
     return orders.length ? (
       orders.map((order) =>
         get.safe(() => order.orderItems.length) ? (
           <div key={order.id} className="mb-5">
-            <div className="mb-sm-2 d-sm-flex justify-content-between align-items-center">
-              <h3 className="mb-0 mr-3">
-                {order.orderItems[0].product.store.brandName}
-              </h3>
-              <div className="text-bold">
-                {calculateCosts(order).reducedCost}€
+            <div className="mb-sm-2">
+              <h3>{order.orderItems[0].product.store.brandName}</h3>
+              <div>
+                <p className="mb-0">
+                  Κόστος:{' '}
+                  <span className="text-bold">
+                    {calculateCosts(order).reducedCost}€
+                  </span>
+                </p>
+                {order.status !== 'in_cart' ? (
+                  <p>
+                    Κατάσταση:{' '}
+                    <span className="text-bold">{renderStatus(order)}</span>
+                  </p>
+                ) : null}
               </div>
             </div>
             {renderOrderItems(order.orderItems)}
@@ -177,44 +213,49 @@ const OrderItem = (props) => {
   };
 
   useEffect(() => {
-    const listOrders = () => {
-      let options = {};
-      if (props.status.length) {
-        options.filters = [`status=${props.status.join()}`];
-      }
-
-      setLoading(true);
-      ordersApi.listOrders(options).then((res) => {
-        setOrders(res.data);
-        setLoading(false);
-      });
-    };
-
-    listOrders();
+    let options = {};
+    if (props.status.length) {
+      options.filters = [`status=${props.status.join()}`];
+    }
+    props.listOrders(options);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [props.status]);
+  }, []);
 
   useEffect(() => {
-    const costs = calculateCosts();
-
-    // Return values to parent component
-    props.costs && props.costs(costs);
-    props.getOrders && props.getOrders(orders);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [orders]);
+    if (ordersReducer.isListingOrders) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+    }
+  }, [ordersReducer.isListingOrders]);
 
   return !loading ? renderOrders() : <Loader active inline="centered" />;
 };
 
 OrderItem.defaultProps = {
-  status: ['in_cart']
+  status: []
+};
+
+const mapStateToProps = (state) => {
+  return {
+    ordersReducer: state.ordersReducer
+  };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    listOrders: (options) => dispatch(listOrders.call(options)),
+    updateOrders: (data, options) => dispatch(updateOrders.call(data, options)),
+    setOrders: (orders) => dispatch(setOrders(orders))
+  };
 };
 
 OrderItem.propTypes = {
-  status: PropTypes.array,
-  costs: PropTypes.func,
-  getOrders: PropTypes.func
+  ordersReducer: PropTypes.object,
+  listOrders: PropTypes.func,
+  updateOrders: PropTypes.func,
+  getOrders: PropTypes.func,
+  status: PropTypes.array
 };
 
-export default OrderItem;
+export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);

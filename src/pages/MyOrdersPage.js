@@ -5,9 +5,6 @@ import { Container, Row, Col } from 'react-bootstrap';
 import Orders from '../components/misc/orders/Orders';
 
 const MyOrdersPage = () => {
-  // const [orders, setOrders] = useState([]);
-  let orders = [];
-
   return (
     <Container className="pt-6">
       <Row>
@@ -20,12 +17,7 @@ const MyOrdersPage = () => {
       <Row>
         <Col>
           <section>
-            <Orders
-              getOrders={(newOrders) => {
-                orders = newOrders;
-              }}
-              status={['registered', 'sent', 'closed']}
-            />
+            <Orders status={['registered', 'sent', 'closed']} />
           </section>
         </Col>
       </Row>

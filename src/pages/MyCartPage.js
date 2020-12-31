@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import urls from './router/urls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+
+// Utils
+import { calculateCosts } from '../utils/orders/orders';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -15,16 +18,19 @@ import ordersApi from '../api/orders';
 
 // Redux Action
 import { updateUser } from '../redux/user/user.actions';
+import { updateOrders } from '../redux/orders/orders.actions';
 
 const MyCartPage = (props) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [costs, setCosts] = useState(0);
-  const [orders, setOrders] = useState([]);
   const [submitError, setSubmitError] = useState(false);
+
+  const { orders } = props.ordersReducer;
 
   let history = useHistory();
 
   const submitOrders = () => {
+    const { orders } = props.ordersReducer;
     const orderIds = [];
     for (let order of orders) {
       orderIds.push(order.id);
@@ -45,6 +51,10 @@ const MyCartPage = (props) => {
       .catch(() => setSubmitError(true));
   };
 
+  useEffect(() => {
+    setCosts(calculateCosts(orders));
+  }, [orders]);
+
   return (
     <>
       <Container className="pt-6">
@@ -54,7 +64,7 @@ const MyCartPage = (props) => {
         <Row>
           <Col lg={orders.length ? 7 : 12}>
             <section>
-              <Orders getOrders={setOrders} status="in_cart" costs={setCosts} />
+              <Orders status={['in_cart']} />
             </section>
           </Col>
           {orders.length ? (
@@ -125,17 +135,22 @@ const MyCartPage = (props) => {
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return {
+    ordersReducer: state.ordersReducer
+  };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUser: (user) => dispatch(updateUser(user))
+    updateUser: (user) => dispatch(updateUser(user)),
+    updateOrders: (data, options) => dispatch(updateOrders.call(data, options))
   };
 };
 
 MyCartPage.propTypes = {
-  updateUser: PropTypes.func
+  ordersReducer: PropTypes.object,
+  updateUser: PropTypes.func,
+  updateOrders: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MyCartPage);
