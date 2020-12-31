@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
 import is from '../../../utils/misc/is';
 import get from '../../../utils/misc/get';
+import { calculateCosts } from '../../../utils/orders/orders';
 
 import { Item, Popup, Button, Loader } from 'semantic-ui-react';
 import { TrashCan24 } from '@carbon/icons-react';
@@ -77,7 +78,14 @@ const OrderItem = (props) => {
       orders.map((order) =>
         get.safe(() => order.orderItems.length) ? (
           <div key={order.id} className="mb-5">
-            <h3>{order.orderItems[0].product.store.brandName}</h3>
+            <div className="mb-sm-2 d-sm-flex justify-content-between align-items-center">
+              <h3 className="mb-0 mr-3">
+                {order.orderItems[0].product.store.brandName}
+              </h3>
+              <div className="text-bold">
+                {calculateCosts(order).reducedCost}€
+              </div>
+            </div>
             {renderOrderItems(order.orderItems)}
           </div>
         ) : null
@@ -115,26 +123,28 @@ const OrderItem = (props) => {
                   >
                     {orderItem.product.name}
                   </Link>
-                  <span>
-                    <Popup
-                      wide
-                      trigger={
-                        <TrashCan24 className="text-danger cursor-pointer" />
-                      }
-                      on="click"
-                    >
-                      Θέλεις να διαγράψεις το προϊόν από το καλάθι σου;
-                      <div className="text-right mt-3">
-                        <Button
-                          type="submit"
-                          className="custom primary sm"
-                          onClick={() => removeOrderItem(orderItem.id, index)}
-                        >
-                          Διαγραφή
-                        </Button>
-                      </div>
-                    </Popup>
-                  </span>
+                  {props.status.includes('in_cart') ? (
+                    <span>
+                      <Popup
+                        wide
+                        trigger={
+                          <TrashCan24 className="text-danger cursor-pointer" />
+                        }
+                        on="click"
+                      >
+                        Θέλεις να διαγράψεις το προϊόν από το καλάθι σου;
+                        <div className="text-right mt-3">
+                          <Button
+                            type="submit"
+                            className="custom primary sm"
+                            onClick={() => removeOrderItem(orderItem.id, index)}
+                          >
+                            Διαγραφή
+                          </Button>
+                        </div>
+                      </Popup>
+                    </span>
+                  ) : null}
                 </div>
               </Item.Header>
               <Item.Description>
@@ -147,14 +157,16 @@ const OrderItem = (props) => {
                       <strong>{orderItem.price}€</strong>
                     </p>
                   </div>
-                  <div className="mt-2 mt-md-0 text-center text-md-left">
-                    <Counter
-                      initialCount={orderItem.quantity}
-                      onChange={(newCount) =>
-                        changeOrderItemCount(orderItem.id, index, newCount)
-                      }
-                    />
-                  </div>
+                  {props.status.includes('in_cart') ? (
+                    <div className="mt-2 mt-md-0 text-center text-md-left">
+                      <Counter
+                        initialCount={orderItem.quantity}
+                        onChange={(newCount) =>
+                          changeOrderItemCount(orderItem.id, index, newCount)
+                        }
+                      />
+                    </div>
+                  ) : null}
                 </div>
               </Item.Description>
             </Item.Content>
@@ -164,43 +176,12 @@ const OrderItem = (props) => {
     );
   };
 
-  /**
-   * Calculates the cost before and after discount.
-   *
-   * @returns {object} Object with strings values of the original cost, the reduced cost and the total discount.
-   */
-  const calculateCosts = () => {
-    let originalCost = 0;
-    let reducedCost = 0;
-    let totalDiscount = 0;
-    for (let order of orders) {
-      for (let orderItem of order.orderItems) {
-        const original =
-          parseFloat(get.safe(() => orderItem.product.originalPrice)) *
-          orderItem.quantity;
-        const reduced =
-          parseFloat(get.safe(() => orderItem.product.reducedPrice)) *
-          orderItem.quantity;
-
-        originalCost += is.number(original) ? original : 0;
-        reducedCost += is.number(reduced) ? reduced : 0;
-      }
-    }
-
-    totalDiscount = reducedCost ? (originalCost - reducedCost).toFixed(2) : 0;
-    originalCost = originalCost.toFixed(2);
-    reducedCost = reducedCost ? reducedCost.toFixed(2) : originalCost;
-
-    const costs = { originalCost, reducedCost, totalDiscount };
-    props.costs && props.costs(costs);
-    return costs;
-  };
-
   useEffect(() => {
     const listOrders = () => {
-      const options = {
-        filters: [`status=${props.status}`]
-      };
+      let options = {};
+      if (props.status.length) {
+        options.filters = [`status=${props.status.join()}`];
+      }
 
       setLoading(true);
       ordersApi.listOrders(options).then((res) => {
@@ -214,8 +195,12 @@ const OrderItem = (props) => {
   }, [props.status]);
 
   useEffect(() => {
-    calculateCosts();
-    props.getOrders(orders);
+    const costs = calculateCosts();
+
+    // Return values to parent component
+    props.costs && props.costs(costs);
+    props.getOrders && props.getOrders(orders);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders]);
 
@@ -223,11 +208,11 @@ const OrderItem = (props) => {
 };
 
 OrderItem.defaultProps = {
-  status: 'in_cart'
+  status: ['in_cart']
 };
 
 OrderItem.propTypes = {
-  status: PropTypes.oneOf(['in_cart']),
+  status: PropTypes.array,
   costs: PropTypes.func,
   getOrders: PropTypes.func
 };

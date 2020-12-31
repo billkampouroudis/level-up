@@ -286,6 +286,11 @@ form {
 // Items
 .ui.items {
   margin-top: 0;
+
+  .item {
+    margin-top: 8px !important;
+    margin-bottom: 8px !important;
+  }
 }
 
 // Order Items

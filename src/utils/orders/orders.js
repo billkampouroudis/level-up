@@ -2,7 +2,7 @@ import get from '../misc/get';
 import is from '../misc/is';
 
 /**
- * Calculates the cost before and after discount.
+ * Calculates the cost before and after discount of a give order or collection of orders.
  *
  * @returns {object} costs: Object with strings values of the original cost, the reduced cost and the total discount.
  * @returns {string} costs.originalCost
@@ -13,6 +13,11 @@ export const calculateCosts = (orders = []) => {
   let originalCost = 0;
   let reducedCost = 0;
   let totalDiscount = 0;
+
+  // Convert orders to array if a single object was given
+  if (!is.array(orders) && is.object(orders)) {
+    orders = [orders];
+  }
 
   for (let order of orders) {
     for (let orderItem of order.orderItems || []) {

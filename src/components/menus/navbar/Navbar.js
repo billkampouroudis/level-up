@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Container, Navbar, Nav } from 'react-bootstrap';
 import Urls from '../../../pages/router/urls';
-import { Menu32 } from '@carbon/icons-react';
+import { Menu32, Close32 } from '@carbon/icons-react';
 
 // Components
 import MobileMenu from '../mobile/MobileMenu';
@@ -53,6 +53,24 @@ const CustomNav = () => {
     }
   };
 
+  const renderMenuIcon = () => {
+    return mobileOpen ? (
+      <Close32
+        className="mobile-control"
+        onClick={() => {
+          setMobileOpen(!mobileOpen);
+        }}
+      />
+    ) : (
+      <Menu32
+        className="mobile-control"
+        onClick={() => {
+          setMobileOpen(!mobileOpen);
+        }}
+      />
+    );
+  };
+
   useEffect(() => {
     closeMenu();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -65,12 +83,7 @@ const CustomNav = () => {
           <Link to={Urls.HOME}>
             <img src={logo} alt="Logo" className="logo" />
           </Link>
-          <Menu32
-            className="mobile-control"
-            onClick={() => {
-              setMobileOpen(!mobileOpen);
-            }}
-          />
+          {renderMenuIcon()}
           <Nav className="main-nav-links mr-auto">
             <h3
               className={`nav-link cursor-pointer ${

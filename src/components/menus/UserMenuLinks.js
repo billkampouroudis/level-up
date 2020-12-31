@@ -12,7 +12,6 @@ import {
   ShoppingCart32,
   Favorite32,
   RecentlyViewed32,
-  Unlocked32,
   User32,
   Logout32
 } from '@carbon/icons-react';
@@ -33,43 +32,44 @@ const UserMenuLinks = (props) => {
   return (
     <ul>
       {loggedIn && (
-        <li>
-          <h4>
-            <Link to={urls.MY_CART}>
+        <Link to={urls.MY_CART}>
+          <li>
+            <h4>
               <ShoppingCart32 />
               <span>Καλάθι</span>
-            </Link>
-          </h4>
-        </li>
+            </h4>
+          </li>
+        </Link>
       )}
       {loggedIn && (
-        <li>
-          <h4>
-            <Link to={urls.FAVORITES}>
+        <Link to={urls.FAVORITES}>
+          <li>
+            <h4>
               <Favorite32 />
               <span>Αγαπημένα πρϊόντα</span>
-            </Link>
-          </h4>
-        </li>
+            </h4>
+          </li>
+        </Link>
       )}
       {loggedIn && (
-        <li>
-          <h4>
-            <Link to={urls.MY_ORDERS}>
+        <Link to={urls.MY_ORDERS}>
+          <li>
+            <h4>
               <RecentlyViewed32 />
               <span>Παραγγελίες</span>
-            </Link>
-          </h4>
-        </li>
+            </h4>
+          </li>
+        </Link>
       )}
-      <li>
-        <h4>
-          <Link to={loggedIn ? urls.MY_ACCOUNT : urls.LOGIN}>
+      <Link to={loggedIn ? urls.MY_ACCOUNT : urls.LOGIN}>
+        <li>
+          <h4>
             <User32 />
             <span>{loggedIn ? 'Λογαριασμός' : 'Σύνδεση'}</span>
-          </Link>
-        </h4>
-      </li>
+          </h4>
+        </li>
+      </Link>
+
       {loggedIn && (
         <li>
           <Popup

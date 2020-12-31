@@ -15,7 +15,6 @@ import ordersApi from '../api/orders';
 
 // Redux Action
 import { updateUser } from '../redux/user/user.actions';
-import { propTypes } from 'react-bootstrap/esm/Image';
 
 const MyCartPage = (props) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
