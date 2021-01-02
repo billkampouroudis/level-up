@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 // Utils
-import { calculateCosts } from '../utils/orders/orders';
+import { calculateCosts } from '../utils/prices/prices';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -76,7 +76,7 @@ const MyCartPage = (props) => {
                 />
               </section>
               <section className="py-0">
-                <h2>Σύνολο</h2>
+                <h2>Σύνοψη</h2>
                 <table className="w-100 mb-4">
                   <tbody>
                     {costs.originalCost !== costs.reducedCost ? (

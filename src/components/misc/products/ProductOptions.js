@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from '../../../pages/router/urls';
-import { Locked32, Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
+import { Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
 import { validateOne } from '../../../utils/validation/index';
 import { useHistory } from 'react-router-dom';
 
@@ -12,6 +12,7 @@ import { useHistory } from 'react-router-dom';
 import Counter from '../counter/Counter';
 import { Message, Button } from 'semantic-ui-react';
 import CustomSelect from '../../formElements/select/CustomSelect';
+import ProductPrices from './ProductPrices';
 
 // Redux Actions
 import {
@@ -39,7 +40,6 @@ const ProductOptions = (props) => {
   const [showAddToCartSuccess, setShowAddToCartSuccess] = useState(false);
   const [showAddToCartError, setShowAddToCartError] = useState(false);
 
-  const user = null;
   const { product } = props.productsReducer;
 
   const mapSizes = {
@@ -155,28 +155,7 @@ const ProductOptions = (props) => {
           <Row className="mb-3">
             <Col>
               <label className="text-bold mb-1 d-block">Τιμή</label>
-              <div className="d-flex align-items-center">
-                <span
-                  className={`original-price  align-items-center mr-2 ${
-                    user ? 'delete' : ''
-                  }`}
-                >
-                  {product.originalPrice}€
-                </span>
-
-                {product.discoundPrice && (
-                  <span>
-                    <Locked32 />
-                    <span
-                      className={`discount-price align-items-center ${
-                        user ? 'text-primary' : 'text-danger'
-                      }`}
-                    >
-                      {product.discoundPrice}
-                    </span>
-                  </span>
-                )}
-              </div>
+              <ProductPrices product={product} textSize="xl" />
             </Col>
           </Row>
           <Row className="d-flex align-items-center">

@@ -1,5 +1,29 @@
 import get from '../misc/get';
 import is from '../misc/is';
+import { levels } from '../levels/levels';
+import store from '../../redux/store';
+import { calculateUserLevel } from '../levels/levels';
+
+/**
+ * Calculates the reduced price of a product based on the dicount level it was set for it.
+ * @param {object} product
+ * @param {Number} count Number of the given products in an order. By default is 1.
+ * @param {number} userLevel
+ */
+export const getReducedPrice = (product, count = 1) => {
+  const { originalPrice, discountLevel } = product;
+
+  if (!originalPrice || !discountLevel) {
+    return originalPrice;
+  }
+
+  const originalPriceNumber = Number(originalPrice);
+  const reducedPrice =
+    (originalPriceNumber - originalPrice * levels[discountLevel].discount) *
+    count;
+
+  return reducedPrice.toFixed(2);
+};
 
 /**
  * Calculates the cost before and after discount of a give order or collection of orders.
@@ -10,6 +34,9 @@ import is from '../misc/is';
  * @returns {string} costs.totalDiscount
  */
 export const calculateCosts = (orders = []) => {
+  const userLevel = calculateUserLevel(
+    get.safe(() => store.getState().userReducer.user.xp)
+  );
   let originalCost = 0;
   let reducedCost = 0;
   let totalDiscount = 0;
@@ -25,9 +52,9 @@ export const calculateCosts = (orders = []) => {
         parseFloat(get.safe(() => orderItem.product.originalPrice)) *
         orderItem.quantity;
       const reduced =
-        parseFloat(get.safe(() => orderItem.product.reducedPrice)) *
-        orderItem.quantity;
-
+        userLevel >= orderItem.product.discountLevel
+          ? parseFloat(getReducedPrice(orderItem.product, orderItem.quantity))
+          : original;
       originalCost += is.number(original) ? original : 0;
       reducedCost += is.number(reduced) ? reduced : 0;
     }

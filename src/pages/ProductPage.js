@@ -167,4 +167,5 @@ ProductPage.propTypes = {
   getProduct: PropTypes.func,
   authReducer: PropTypes.object
 };
+
 export default connect(mapStateToProps, mapDispatchToProps)(ProductPage);

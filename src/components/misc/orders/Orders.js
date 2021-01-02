@@ -10,10 +10,11 @@ import { TrashCan24 } from '@carbon/icons-react';
 // Utils
 import is from '../../../utils/misc/is';
 import get from '../../../utils/misc/get';
-import { calculateCosts } from '../../../utils/orders/orders';
+import { calculateCosts } from '../../../utils/prices/prices';
 
 // Components
 import Counter from '../counter/Counter';
+import ProductPrices from '../products/ProductPrices';
 
 // API
 import orderItemsApi from '../../../api/orderItems';
@@ -61,16 +62,16 @@ const OrderItem = (props) => {
   const removeOrderItem = (orderItemId, orderItemIndex) => {
     orderItemsApi.removeOrderItem(orderItemId).then(() => {
       const orderIndex = findOrderIndex(orderItemId, orderItemIndex);
+
       if (!is.number(orderIndex)) {
         return;
       }
 
-      const _orders = [...orders];
+      let _orders = [...orders];
+      _orders[orderIndex].orderItems.splice(orderItemIndex, 1);
 
-      if (_orders[orderIndex].length === 0) {
-        _orders.splice(orderIndex, 1);
-      } else {
-        _orders[orderIndex].orderItems.splice(orderItemIndex, 1);
+      if (_orders.length === 1 && _orders[orderIndex].orderItems.length === 0) {
+        _orders = [];
       }
 
       setOrders(_orders);
@@ -189,9 +190,10 @@ const OrderItem = (props) => {
                     <p>
                       Μέγεθος: <strong>{orderItem.size}</strong>
                     </p>
-                    <p>
-                      <strong>{orderItem.price}€</strong>
-                    </p>
+                    <ProductPrices
+                      product={orderItem.product}
+                      quantity={orderItem.quantity}
+                    />
                   </div>
                   {props.status.includes('in_cart') ? (
                     <div className="mt-2 mt-md-0 text-center text-md-left">
@@ -255,7 +257,8 @@ OrderItem.propTypes = {
   listOrders: PropTypes.func,
   updateOrders: PropTypes.func,
   getOrders: PropTypes.func,
-  status: PropTypes.array
+  status: PropTypes.array,
+  setOrders: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);

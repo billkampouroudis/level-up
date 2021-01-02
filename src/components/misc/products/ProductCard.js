@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
-import { Locked24 } from '@carbon/icons-react';
+
+// Components
 import { Rating } from 'semantic-ui-react';
+import ProductPrices from './ProductPrices';
 
 const ProductCard = (props) => {
   const { product } = props;
@@ -31,13 +34,7 @@ const ProductCard = (props) => {
           </div>
         </Link>
         <div className="price mb-1">
-          <span className="mr-2 text-semi-bold">{product.originalPrice}€</span>
-          {product.reducedPrice && (
-            <span>
-              <Locked24 />
-              {product.reducedPrice}€
-            </span>
-          )}
+          <ProductPrices product={product} />
         </div>
 
         <div className="store text-sm">
@@ -50,8 +47,19 @@ const ProductCard = (props) => {
   );
 };
 
-ProductCard.propTypes = {
-  product: PropTypes.object.isRequired
+const mapStateToProps = (state) => {
+  return {
+    userReducer: state.userReducer
+  };
 };
 
-export default ProductCard;
+const mapDispatchToProps = (dispatch) => {
+  return {};
+};
+
+ProductCard.propTypes = {
+  product: PropTypes.object.isRequired,
+  userReducer: PropTypes.object
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProductCard);

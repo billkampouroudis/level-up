@@ -2,16 +2,16 @@ import is from '../misc/is';
 
 export const levels = [
   { key: 0, minXp: 0 }, // not in use
-  { key: 1, minXp: 200 },
-  { key: 2, minXp: 400 },
-  { key: 3, minXp: 600 },
-  { key: 4, minXp: 800 },
-  { key: 5, minXp: 1000 },
-  { key: 6, minXp: 2000 },
-  { key: 7, minXp: 3000 },
-  { key: 8, minXp: 4000 },
-  { key: 9, minXp: 5000 },
-  { key: 10, minXp: 8000 }
+  { key: 1, minXp: 200, discount: 0.02 },
+  { key: 2, minXp: 400, discount: 0.04 },
+  { key: 3, minXp: 600, discount: 0.05 },
+  { key: 4, minXp: 800, discount: 0.1 },
+  { key: 5, minXp: 1000, discount: 0.15 },
+  { key: 6, minXp: 2000, discount: 0.2 },
+  { key: 7, minXp: 3000, discount: 0.25 },
+  { key: 8, minXp: 4000, discount: 0.3 },
+  { key: 9, minXp: 5000, discount: 0.4 },
+  { key: 10, minXp: 8000, discount: 0.6 }
 ];
 
 export const giveXpFromOrder = (cost = 0) => {
