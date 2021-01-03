@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import get from '../../utils/misc/get';
 import {
   USER_CLEANUP,
-  UPDATE_USER,
+  SET_USER,
   USER_REQUEST,
   USER_SUCCESS,
   USER_ERROR
@@ -19,8 +19,8 @@ export const userCleanup = () => ({
   type: USER_CLEANUP
 });
 
-export const updateUser = (user) => ({
-  type: UPDATE_USER,
+export const setUser = (user) => ({
+  type: SET_USER,
   payload: user
 });
 

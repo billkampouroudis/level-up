@@ -15,6 +15,8 @@ export const requestMethods = {
   DELETE: 'delete'
 };
 
+export const requestSource = axios.CancelToken.source();
+
 const config = {
   headers: {
     'Content-Type': 'application/json'
@@ -53,6 +55,11 @@ const makeRequest = async ({
         url += '&';
       }
     }
+  }
+
+  if (options.cancelTokenSource) {
+    console.log('asdas');
+    config.cancelTokenSource = options.cancelTokenSource;
   }
 
   try {

@@ -20,10 +20,15 @@ const MyAccountPage = (props) => {
 
   useEffect(() => {
     const level = calculateUserLevel(get.safe(() => user.xp));
-    const nextLevelAt = get.safe(() => levels[level + 1]).minXp;
-
     setLevel(level);
+
+    let nextLevelAt = '-';
+    if (level !== 10) {
+      nextLevelAt = levels(level + 1).minXp;
+    }
+
     setNextLevelAt(nextLevelAt);
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 

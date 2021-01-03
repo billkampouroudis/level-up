@@ -1,13 +1,13 @@
 import {
   USER_CLEANUP,
-  UPDATE_USER,
+  SET_USER,
   USER_REQUEST,
   USER_SUCCESS,
   USER_ERROR
 } from './user.types';
 
 const INITIAL_STATE = {
-  user: null,
+  user: {},
   isGettingUser: false,
   getUserError: null
 };
@@ -16,7 +16,8 @@ const reducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case USER_CLEANUP:
       return INITIAL_STATE;
-    case UPDATE_USER:
+    case SET_USER:
+      console.log(action);
       return { ...state, user: action.payload };
     case USER_REQUEST:
       return {

@@ -342,6 +342,11 @@ form {
   height: fit-content;
   max-height: 700px;
   overflow-y: auto;
+
+  .actions button {
+    background-color: red;
+    margin: 0 !important;
+  }
 }
 
 .ui.statistic {
@@ -351,5 +356,27 @@ form {
 
   .label {
     color: $grey !important;
+  }
+}
+
+// Level up
+.level-up-il-container {
+  width: 200px;
+  height: fit-content;
+  position: relative;
+  margin: auto;
+
+  img {
+    width: 200px;
+  }
+
+  span {
+    @extend .text-xl, .text-bold;
+
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    bottom: 35%;
+    transform: translateX(-50%);
   }
 }

@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
 import { connect } from 'react-redux';
-
-import { Item, Popup, Button, Loader } from 'semantic-ui-react';
-import { TrashCan24 } from '@carbon/icons-react';
+import axios from 'axios';
 
 // Utils
 import is from '../../../utils/misc/is';
@@ -13,6 +11,8 @@ import get from '../../../utils/misc/get';
 import { calculateCosts } from '../../../utils/prices/prices';
 
 // Components
+import { Item, Popup, Button, Loader } from 'semantic-ui-react';
+import { TrashCan24 } from '@carbon/icons-react';
 import Counter from '../counter/Counter';
 import ProductPrices from '../products/ProductPrices';
 
@@ -36,6 +36,9 @@ const OrderItem = (props) => {
   const { ordersReducer, setOrders } = props;
   const { orders } = ordersReducer;
 
+  const updateOrderItemSource = axios.CancelToken.source();
+  const removeOrderItemSource = axios.CancelToken.source();
+
   /**
    * Changes the count of the given products in the cart
    *
@@ -44,8 +47,12 @@ const OrderItem = (props) => {
    * @param {number} newCount
    */
   const changeOrderItemCount = (orderItemId, orderItemIndex, newCount) => {
+    const options = {
+      cancelTokenSource: updateOrderItemSource
+    };
+
     orderItemsApi
-      .updateOrderItem(orderItemId, { quantity: newCount })
+      .updateOrderItem(orderItemId, { quantity: newCount }, options)
       .then((res) => {
         const orderIndex = findOrderIndex(orderItemId, orderItemIndex);
         if (!is.number(orderIndex)) {
@@ -60,7 +67,11 @@ const OrderItem = (props) => {
   };
 
   const removeOrderItem = (orderItemId, orderItemIndex) => {
-    orderItemsApi.removeOrderItem(orderItemId).then(() => {
+    const options = {
+      cancelTokenSource: removeOrderItemSource
+    };
+
+    orderItemsApi.removeOrderItem(orderItemId, options).then(() => {
       const orderIndex = findOrderIndex(orderItemId, orderItemIndex);
 
       if (!is.number(orderIndex)) {
@@ -215,21 +226,25 @@ const OrderItem = (props) => {
   };
 
   useEffect(() => {
-    let options = {};
-    if (props.status.length) {
-      options.filters = [`status=${props.status.join()}`];
-    }
-    props.listOrders(options);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useEffect(() => {
     if (ordersReducer.isListingOrders) {
       setLoading(true);
     } else {
       setLoading(false);
     }
   }, [ordersReducer.isListingOrders]);
+
+  useEffect(() => {
+    let options = {};
+    if (props.status.length) {
+      options.filters = [`status=${props.status.join()}`];
+    }
+    props.listOrders(options);
+
+    return () => {
+      updateOrderItemSource.cancel();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return !loading ? renderOrders() : <Loader active inline="centered" />;
 };

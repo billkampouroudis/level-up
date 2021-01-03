@@ -43,7 +43,7 @@ const CustomModal = (props) => {
         {props.onCancel || props.onConfirm ? (
           <Row>
             <Col>
-              <Modal.Actions className="p-0">
+              <Modal.Actions className="text-right p-0 mt-4">
                 {renderCancel()}
                 {renderConfirm()}
               </Modal.Actions>

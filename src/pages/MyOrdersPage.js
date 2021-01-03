@@ -10,7 +10,7 @@ const MyOrdersPage = () => {
       <Row>
         <Col>
           <header className="App-header">
-            <h1>My Orders</h1>
+            <h1>Οι παραγγελίες μου</h1>
           </header>
         </Col>
       </Row>

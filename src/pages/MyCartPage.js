@@ -6,26 +6,32 @@ import PropTypes from 'prop-types';
 
 // Utils
 import { calculateCosts } from '../utils/prices/prices';
+import get from '../utils/misc/get';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Message } from 'semantic-ui-react';
 import Orders from '../components/misc/orders/Orders';
 import SelectAddress from '../components/misc/selectAddress/SelectAddress';
+import LevelUpModal from '../components/modals/level/LevelUpModal';
 
 // API
+import { requestSource } from '../api/request';
 import ordersApi from '../api/orders';
 
 // Redux Action
-import { updateUser } from '../redux/user/user.actions';
+import { setUser } from '../redux/user/user.actions';
 import { updateOrders } from '../redux/orders/orders.actions';
+import { calculateUserLevel } from '../utils/levels/levels';
 
 const MyCartPage = (props) => {
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [costs, setCosts] = useState(0);
   const [submitError, setSubmitError] = useState(false);
+  const [levelUpModalOpen, setLevelUpModalOpen] = useState(false);
 
   const { orders } = props.ordersReducer;
+  const { user } = props.userReducer;
 
   let history = useHistory();
 
@@ -45,8 +51,16 @@ const MyCartPage = (props) => {
     ordersApi
       .updateOrders(data)
       .then((res) => {
-        props.updateUser(res.data);
-        history.push(urls.HOME);
+        const newUser = res.data;
+
+        if (calculateUserLevel(newUser.xp) > calculateUserLevel(user.xp)) {
+          props.setUser(newUser);
+          console.log(user.xp);
+          setLevelUpModalOpen(true);
+        } else {
+          props.setUser(newUser);
+          history.push(urls.HOME);
+        }
       })
       .catch(() => setSubmitError(true));
   };
@@ -54,6 +68,12 @@ const MyCartPage = (props) => {
   useEffect(() => {
     setCosts(calculateCosts(orders));
   }, [orders]);
+
+  useEffect(() => {
+    return () => {
+      requestSource.cancel();
+    };
+  }, []);
 
   return (
     <>
@@ -99,7 +119,7 @@ const MyCartPage = (props) => {
                     </tr>
                     {costs.totalDiscount ? (
                       <tr>
-                        <td>Κέρδισες:</td>
+                        <td>Κερδίζετε:</td>
                         <td className="text-right">
                           <span className="text-lg text-bold">
                             {costs.totalDiscount}€
@@ -130,26 +150,41 @@ const MyCartPage = (props) => {
           onDismiss={() => setSubmitError(false)}
         />
       )}
+      <LevelUpModal
+        title="Ανεβήκατε level!"
+        onOpen={() => setLevelUpModalOpen(true)}
+        onClose={() => {
+          setLevelUpModalOpen(false);
+        }}
+        onConfirm={() => {
+          history.push(urls.HOME);
+        }}
+        open={levelUpModalOpen}
+        confirmMessage="Επιστροφή στην αρχική"
+        newLevel={calculateUserLevel(user.xp)}
+      />
     </>
   );
 };
 
 const mapStateToProps = (state) => {
   return {
-    ordersReducer: state.ordersReducer
+    ordersReducer: state.ordersReducer,
+    userReducer: state.userReducer
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    updateUser: (user) => dispatch(updateUser(user)),
+    setUser: (user) => dispatch(setUser(user)),
     updateOrders: (data, options) => dispatch(updateOrders.call(data, options))
   };
 };
 
 MyCartPage.propTypes = {
   ordersReducer: PropTypes.object,
-  updateUser: PropTypes.func,
+  userReducer: PropTypes.object,
+  setUser: PropTypes.func,
   updateOrders: PropTypes.func
 };
 

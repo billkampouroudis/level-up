@@ -16,32 +16,38 @@ const ProductPrices = (props) => {
     <div
       className={`d-flex align-items-center text-${props.textSize} text-semi-bold`}
     >
+      {/* Original Price */}
       <span
         className={`mr-2${
-          product.discountLevel === userLevel ? ' text-line-through' : ''
+          product.discountLevel && userLevel >= product.discountLevel
+            ? ' text-line-through'
+            : ''
         }`}
       >
         {(product.originalPrice * quantity).toFixed(2)}€
       </span>
+      {/* Reduced Price */}
       {product.discountLevel && (
         <Popup
           trigger={
             <span
               className={`d-flex align-items-center ${
-                product.discountLevel === userLevel
+                userLevel >= product.discountLevel
                   ? 'text-accent'
                   : 'text-danger opacity-75'
               }`}
             >
               <img
                 src={`/icons/levels/${
-                  product.discountLevel === userLevel ? 'Unlocked' : 'Locked'
+                  userLevel >= product.discountLevel ? 'Unlocked' : 'Locked'
                 }-${product.discountLevel}.svg`}
                 alt={`Level ${product.discountLevel} discount`}
               />
               <span
                 className={
-                  product.discountLevel > userLevel ? 'text-line-through' : null
+                  product.discountLevel && product.discountLevel > userLevel
+                    ? 'text-line-through'
+                    : null
                 }
               >
                 {getReducedPrice(product, quantity)}€

@@ -19,7 +19,7 @@ export const getReducedPrice = (product, count = 1) => {
 
   const originalPriceNumber = Number(originalPrice);
   const reducedPrice =
-    (originalPriceNumber - originalPrice * levels[discountLevel].discount) *
+    (originalPriceNumber - originalPrice * levels(discountLevel).discount) *
     count;
 
   return reducedPrice.toFixed(2);
@@ -52,9 +52,10 @@ export const calculateCosts = (orders = []) => {
         parseFloat(get.safe(() => orderItem.product.originalPrice)) *
         orderItem.quantity;
       const reduced =
+        orderItem.product.discountLevel &&
         userLevel >= orderItem.product.discountLevel
           ? parseFloat(getReducedPrice(orderItem.product, orderItem.quantity))
-          : original;
+          : 0;
       originalCost += is.number(original) ? original : 0;
       reducedCost += is.number(reduced) ? reduced : 0;
     }
@@ -65,5 +66,6 @@ export const calculateCosts = (orders = []) => {
   reducedCost = reducedCost ? reducedCost.toFixed(2) : originalCost;
 
   const costs = { originalCost, reducedCost, totalDiscount };
+
   return costs;
 };

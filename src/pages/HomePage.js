@@ -59,11 +59,11 @@ const HomePage = (props) => {
             <Row>
               <Col>
                 <h1>
-                  Ανέβασε <span className="text-bold">level</span> στις αγορές
-                  σου!
+                  Ανεβάστε <span className="text-bold">level</span> στις αγορές
+                  σας!
                 </h1>
                 <p className="text-xl mb-4">
-                  Ξεκλείδωσε νέες προσφορές με κάθε νέο level που κατακτάς.
+                  Ξεκλειδώστε νέες προσφορές με κάθε νέο level που κατακτάτε.
                 </p>
                 <Button className="custom primary">Μάθετε περισσότερα</Button>
               </Col>
