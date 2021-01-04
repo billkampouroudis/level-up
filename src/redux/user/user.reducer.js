@@ -17,7 +17,6 @@ const reducer = (state = INITIAL_STATE, action) => {
     case USER_CLEANUP:
       return INITIAL_STATE;
     case SET_USER:
-      console.log(action);
       return { ...state, user: action.payload };
     case USER_REQUEST:
       return {

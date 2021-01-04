@@ -11,7 +11,7 @@ import {
 
 import ordersApi from '../../api/orders';
 
-export const cleanup = () => ({
+export const ordersCleanup = () => ({
   type: ORDERS_CLEANUP
 });
 
@@ -77,7 +77,7 @@ export const updateOrders = {
     return (dispatch) => {
       dispatch(updateOrders.request());
       ordersApi
-        .updateOrders(options)
+        .updateOrders(data, options)
         .then((res) => {
           dispatch(updateOrders.success(res.data));
         })

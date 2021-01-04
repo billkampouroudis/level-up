@@ -20,6 +20,7 @@ const Products = (props) => {
 
   const listAddresses = (options = {}) => {
     !options.withoutLoading && setLoading(true);
+
     addressesAPI.listAddresses().then((res) => {
       const { data } = res;
 

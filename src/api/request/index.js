@@ -57,11 +57,6 @@ const makeRequest = async ({
     }
   }
 
-  if (options.cancelTokenSource) {
-    console.log('asdas');
-    config.cancelTokenSource = options.cancelTokenSource;
-  }
-
   try {
     const res = await axios[method](url, data, config);
     return res;

@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 
 // Utils
 import { calculateCosts } from '../utils/prices/prices';
-import get from '../utils/misc/get';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -16,7 +15,6 @@ import SelectAddress from '../components/misc/selectAddress/SelectAddress';
 import LevelUpModal from '../components/modals/level/LevelUpModal';
 
 // API
-import { requestSource } from '../api/request';
 import ordersApi from '../api/orders';
 
 // Redux Action
@@ -55,7 +53,6 @@ const MyCartPage = (props) => {
 
         if (calculateUserLevel(newUser.xp) > calculateUserLevel(user.xp)) {
           props.setUser(newUser);
-          console.log(user.xp);
           setLevelUpModalOpen(true);
         } else {
           props.setUser(newUser);
@@ -70,10 +67,8 @@ const MyCartPage = (props) => {
   }, [orders]);
 
   useEffect(() => {
-    return () => {
-      requestSource.cancel();
-    };
-  }, []);
+    return () => {};
+  });
 
   return (
     <>

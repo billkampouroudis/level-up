@@ -69,3 +69,14 @@ export const calculateCosts = (orders = []) => {
 
   return costs;
 };
+
+export const calculateRegisteredCost = (order = {}) => {
+  let totalCost = 0;
+
+  for (let orderItem of order.orderItems || []) {
+    const cost = parseFloat(get.safe(() => orderItem.price));
+    totalCost += cost;
+  }
+
+  return totalCost;
+};

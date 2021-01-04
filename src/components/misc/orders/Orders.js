@@ -3,12 +3,15 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
 import { connect } from 'react-redux';
-import axios from 'axios';
+import moment from 'moment';
 
 // Utils
 import is from '../../../utils/misc/is';
 import get from '../../../utils/misc/get';
-import { calculateCosts } from '../../../utils/prices/prices';
+import {
+  calculateCosts,
+  calculateRegisteredCost
+} from '../../../utils/prices/prices';
 
 // Components
 import { Item, Popup, Button, Loader } from 'semantic-ui-react';
@@ -29,15 +32,12 @@ import {
   setOrders
 } from '../../../redux/orders/orders.actions';
 
-const OrderItem = (props) => {
+const Orders = React.memo((props) => {
   // const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const { ordersReducer, setOrders } = props;
   const { orders } = ordersReducer;
-
-  const updateOrderItemSource = axios.CancelToken.source();
-  const removeOrderItemSource = axios.CancelToken.source();
 
   /**
    * Changes the count of the given products in the cart
@@ -47,12 +47,8 @@ const OrderItem = (props) => {
    * @param {number} newCount
    */
   const changeOrderItemCount = (orderItemId, orderItemIndex, newCount) => {
-    const options = {
-      cancelTokenSource: updateOrderItemSource
-    };
-
     orderItemsApi
-      .updateOrderItem(orderItemId, { quantity: newCount }, options)
+      .updateOrderItem(orderItemId, { quantity: newCount })
       .then((res) => {
         const orderIndex = findOrderIndex(orderItemId, orderItemIndex);
         if (!is.number(orderIndex)) {
@@ -67,11 +63,7 @@ const OrderItem = (props) => {
   };
 
   const removeOrderItem = (orderItemId, orderItemIndex) => {
-    const options = {
-      cancelTokenSource: removeOrderItemSource
-    };
-
-    orderItemsApi.removeOrderItem(orderItemId, options).then(() => {
+    orderItemsApi.removeOrderItem(orderItemId).then(() => {
       const orderIndex = findOrderIndex(orderItemId, orderItemIndex);
 
       if (!is.number(orderIndex)) {
@@ -123,14 +115,25 @@ const OrderItem = (props) => {
                 <p className="mb-0">
                   Κόστος:{' '}
                   <span className="text-bold">
-                    {calculateCosts(order).reducedCost}€
+                    {props.status.includes('in_cart')
+                      ? calculateCosts(order).reducedCost
+                      : calculateRegisteredCost(order)}
+                    €
                   </span>
                 </p>
                 {order.status !== 'in_cart' ? (
-                  <p>
-                    Κατάσταση:{' '}
-                    <span className="text-bold">{renderStatus(order)}</span>
-                  </p>
+                  <>
+                    <p className="mb-0">
+                      Κατάσταση:{' '}
+                      <span className="text-bold">{renderStatus(order)}</span>
+                    </p>
+                    <p>
+                      Ημερομηνία:{' '}
+                      <span className="text-bold">
+                        {moment(order.registeredAt).format('YYYY-MM-DD HH:mm')}
+                      </span>
+                    </p>
+                  </>
                 ) : null}
               </div>
             </div>
@@ -201,10 +204,16 @@ const OrderItem = (props) => {
                     <p>
                       Μέγεθος: <strong>{orderItem.size}</strong>
                     </p>
-                    <ProductPrices
-                      product={orderItem.product}
-                      quantity={orderItem.quantity}
-                    />
+                    {!props.status.includes('in_cart') ? (
+                      <span className="text-semi-bold text-lg">
+                        {orderItem.price}€
+                      </span>
+                    ) : (
+                      <ProductPrices
+                        product={orderItem.product}
+                        quantity={orderItem.quantity}
+                      />
+                    )}
                   </div>
                   {props.status.includes('in_cart') ? (
                     <div className="mt-2 mt-md-0 text-center text-md-left">
@@ -240,16 +249,13 @@ const OrderItem = (props) => {
     }
     props.listOrders(options);
 
-    return () => {
-      updateOrderItemSource.cancel();
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return !loading ? renderOrders() : <Loader active inline="centered" />;
-};
+});
 
-OrderItem.defaultProps = {
+Orders.defaultProps = {
   status: []
 };
 
@@ -267,7 +273,7 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-OrderItem.propTypes = {
+Orders.propTypes = {
   ordersReducer: PropTypes.object,
   listOrders: PropTypes.func,
   updateOrders: PropTypes.func,
@@ -276,4 +282,4 @@ OrderItem.propTypes = {
   setOrders: PropTypes.func
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(OrderItem);
+export default connect(mapStateToProps, mapDispatchToProps)(Orders);
