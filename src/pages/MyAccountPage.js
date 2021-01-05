@@ -8,6 +8,7 @@ import { levels, calculateUserLevel } from '../utils/levels/levels';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Statistic } from 'semantic-ui-react';
 import MainHeader from '../components/misc/header/MainHeader';
+import SEO from '../components/misc/seo/SEO';
 
 // Images
 import HeroImage2 from '../assets/images/Hero-Image-2.jpg';
@@ -34,6 +35,7 @@ const MyAccountPage = (props) => {
 
   return (
     <>
+      <SEO title="Λογαριασμός" />
       <MainHeader style={{ backgroundImage: `url(${HeroImage2})` }} />
       <section className="bg-background-dark">
         <Container>

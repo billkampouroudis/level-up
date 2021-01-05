@@ -9,6 +9,7 @@ import EditAddressModal from '../../modals/address/EditAddressModal';
 import SelectAddressModal from '../../modals/address/SelectAddressModal';
 
 // API
+import axios from 'axios';
 import addressesAPI from '../../../api/addresses';
 
 const Products = (props) => {
@@ -18,16 +19,30 @@ const Products = (props) => {
   const [isSelectAddressModalOpen, setSelectAddressModalOpen] = useState(false);
   const [primaryAddress, setPrimaryAddress] = useState(null);
 
+  let listAddressesCancelToken = {};
+
   const listAddresses = (options = {}) => {
+    listAddressesCancelToken = axios.CancelToken.source();
+    const defaultOptions = {
+      cancelToken: listAddressesCancelToken.token
+    };
+    options = { ...defaultOptions, ...options };
+
     !options.withoutLoading && setLoading(true);
+    addressesAPI
+      .listAddresses(options)
+      .then((res) => {
+        const { data } = res;
 
-    addressesAPI.listAddresses().then((res) => {
-      const { data } = res;
-
-      setPrimaryAddress(findPrimaryAddress(data));
-      setAddresses(data);
-      !options.withoutLoading && setLoading(false);
-    });
+        setPrimaryAddress(findPrimaryAddress(data));
+        setAddresses(data);
+        !options.withoutLoading && setLoading(false);
+      })
+      .catch((error) => {
+        if (error.message !== 'Cancel') {
+          alert('Something went wrong');
+        }
+      });
   };
 
   const findPrimaryAddress = (addressList = []) => {
@@ -101,6 +116,10 @@ const Products = (props) => {
 
   useEffect(() => {
     listAddresses();
+
+    return () => {
+      listAddressesCancelToken.cancel();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

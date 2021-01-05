@@ -29,7 +29,7 @@ import EmptyCartIllustration from '../../../assets/images/undraw_empty_cart_co35
 import {
   listOrders,
   updateOrders,
-  setOrders
+  ordersCleanup
 } from '../../../redux/orders/orders.actions';
 
 const Orders = React.memo((props) => {
@@ -150,7 +150,7 @@ const Orders = React.memo((props) => {
             style={{ width: '150px', margin: '0 auto' }}
           />
         </figure>
-        <p>Δεν υπάρχουν προϊόντα στο καλάθι</p>
+        <p>{props.emptyText}</p>
       </div>
     );
   };
@@ -249,6 +249,10 @@ const Orders = React.memo((props) => {
     }
     props.listOrders(options);
 
+    return () => {
+      props.ordersCleanup();
+    };
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -256,7 +260,8 @@ const Orders = React.memo((props) => {
 });
 
 Orders.defaultProps = {
-  status: []
+  status: [],
+  emptyText: 'Δεν υπάρχουν προϊόντα στο καλάθι'
 };
 
 const mapStateToProps = (state) => {
@@ -269,7 +274,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     listOrders: (options) => dispatch(listOrders.call(options)),
     updateOrders: (data, options) => dispatch(updateOrders.call(data, options)),
-    setOrders: (orders) => dispatch(setOrders(orders))
+    ordersCleanup: (orders) => dispatch(ordersCleanup(orders))
   };
 };
 
@@ -279,7 +284,8 @@ Orders.propTypes = {
   updateOrders: PropTypes.func,
   getOrders: PropTypes.func,
   status: PropTypes.array,
-  setOrders: PropTypes.func
+  ordersCleanup: PropTypes.func,
+  emptyText: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Orders);

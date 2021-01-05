@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import Login from '../components/misc/login/Login';
+import SEO from '../components/misc/seo/SEO';
 
 const LoginPage = (props) => {
   let history = useHistory();
@@ -19,9 +20,12 @@ const LoginPage = (props) => {
   });
 
   return (
-    <section className="py-0">
-      <Login />
-    </section>
+    <>
+      <SEO title="Σύνδεση" />
+      <section className="py-0">
+        <Login />
+      </section>
+    </>
   );
 };
 

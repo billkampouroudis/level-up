@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import ProductsList from '../components/misc/products/ProductsList';
+import SEO from '../components/misc/seo/SEO';
 
 // API
 import favoritesApi from '../api/favorites';
@@ -20,14 +21,17 @@ const FavoritesPage = (props) => {
     });
   }, []);
   return (
-    <Container className="pt-6">
-      <header className="App-header">
-        <h1>Αγαπημένα προϊόντα</h1>
-      </header>
-      <section>
-        <ProductsList data={favorites} loading={loading} />
-      </section>
-    </Container>
+    <>
+      <SEO title="Αγαπημένα προϊόντα" />
+      <Container className="pt-6">
+        <header className="App-header">
+          <h1>Αγαπημένα προϊόντα</h1>
+        </header>
+        <section>
+          <ProductsList data={favorites} loading={loading} />
+        </section>
+      </Container>
+    </>
   );
 };
 

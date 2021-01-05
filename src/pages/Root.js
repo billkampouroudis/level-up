@@ -16,7 +16,6 @@ import RegisterPage from './RegisterPage';
 import ProductPage from './ProductPage';
 import Error404 from './Error404';
 import MyCartPage from './MyCartPage';
-import MyLevelPage from './MyLevelPage';
 import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
@@ -67,11 +66,6 @@ const Root = (props) => {
         <PrivateRoute
           path={Urls.MY_ORDERS}
           component={MyOrdersPage}
-          layout={MainLayout}
-        />
-        <PrivateRoute
-          path={Urls.MY_LEVEL}
-          component={MyLevelPage}
           layout={MainLayout}
         />
         <PrivateRoute

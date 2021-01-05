@@ -11,6 +11,7 @@ import { Rating, Button, Loader } from 'semantic-ui-react';
 // Components
 import ProductOptions from '../components/misc/products/ProductOptions';
 import ProductsList from '../components/misc/products/ProductsList';
+import SEO from '../components/misc/seo/SEO';
 
 // Redux Actions
 import { getProduct } from '../redux/products/products.actions';
@@ -62,6 +63,8 @@ const ProductPage = (props) => {
     <>
       {!props.productsReducer.isGettingProduct && !is.emptyObject(product) ? (
         <>
+          <SEO title={product.name} description={product.description} />
+
           <section className="pb-0 pb-sm-auto">
             <Container>
               <Row>

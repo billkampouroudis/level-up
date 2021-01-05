@@ -37,14 +37,13 @@ const makeRequest = async ({
   options = {}
 }) => {
   if (authReducer.token) {
-    axios.defaults.headers.common[
-      'Authorization'
-    ] = `bearer ${authReducer.token}`;
-  } else {
-    delete axios.defaults.headers.common['Authorization'];
+    config.headers = {
+      ...config.headers,
+      Authorization: `bearer ${authReducer.token}`
+    };
   }
 
-  const { filters } = options;
+  const { filters, cancelToken } = options;
   if (filters && filters.length > 0) {
     url += '?';
 
@@ -57,8 +56,19 @@ const makeRequest = async ({
     }
   }
 
+  if (cancelToken) {
+    config.cancelToken = cancelToken;
+  } else {
+    config.cancelToken = null;
+  }
+
   try {
-    const res = await axios[method](url, data, config);
+    const res = await axios({
+      method,
+      url,
+      data,
+      ...config
+    });
     return res;
   } catch (error) {
     throw new Error(error);

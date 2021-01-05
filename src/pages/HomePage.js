@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'semantic-ui-react';
 
 // Components
+import SEO from '../components/misc/seo/SEO';
 import ProductsList from '../components/misc/products/ProductsList';
 import MainHeader from '../components/misc/header/MainHeader';
 
@@ -50,6 +51,7 @@ const HomePage = (props) => {
 
   return (
     <>
+      <SEO title="Αρχική" />
       <MainHeader
         style={{ backgroundImage: `url(${heroImage})` }}
         className="home"

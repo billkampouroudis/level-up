@@ -6,9 +6,13 @@ import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/urls';
 import { Rating, Message, Loader } from 'semantic-ui-react';
 
+// Utils
+import get from '../utils/misc/get';
+
 // Components
 import MainHeader from '../components/misc/header/MainHeader';
 import ProductsList from '../components/misc/products/ProductsList';
+import SEO from '../components/misc/seo/SEO';
 
 // Images
 import HeroImage from '../assets/images/Hero-Image-4.jpg';
@@ -44,6 +48,8 @@ const StorePage = (props) => {
 
   return (
     <>
+      <SEO title={get.safe(() => props.storesReducer.store.brandName, null)} />
+
       {!props.storesReducer.isGettingStore && props.storesReducer.store ? (
         <>
           <MainHeader

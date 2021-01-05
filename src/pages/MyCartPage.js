@@ -10,6 +10,7 @@ import { calculateCosts } from '../utils/prices/prices';
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
 import { Button, Message } from 'semantic-ui-react';
+import SEO from '../components/misc/seo/SEO';
 import Orders from '../components/misc/orders/Orders';
 import SelectAddress from '../components/misc/selectAddress/SelectAddress';
 import LevelUpModal from '../components/modals/level/LevelUpModal';
@@ -72,6 +73,7 @@ const MyCartPage = (props) => {
 
   return (
     <>
+      <SEO title="Το καλάθι μου" />
       <Container className="pt-6">
         <header className="App-header">
           <h1>Το καλάθι μου</h1>
