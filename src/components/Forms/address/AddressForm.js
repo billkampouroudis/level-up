@@ -161,15 +161,20 @@ const AddressForm = (props) => {
 
   return (
     <Form id={formId}>
+      <Row>{renderInputs()}</Row>
       <Row>
-        {renderInputs()}
-        <Col xs={12} className="text-right">
-          <Button className="custom secondary mr-0 mr-sm-1" onClick={onCancel}>
-            {props.cancelText || 'Άκυρο'}
-          </Button>
-          <Button className="custom primary" onClick={onSubmit}>
-            {props.submitText || 'Δημιουργία'}
-          </Button>
+        <Col>
+          <div className="d-sm-flex flex-sm-row-reverse">
+            <Button className="custom primary" onClick={onSubmit}>
+              {props.submitText || 'Δημιουργία'}
+            </Button>
+            <Button
+              className="custom secondary mr-0 mr-sm-1"
+              onClick={onCancel}
+            >
+              {props.cancelText || 'Άκυρο'}
+            </Button>
+          </div>
         </Col>
       </Row>
     </Form>
