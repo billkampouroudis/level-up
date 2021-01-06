@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import urls from '../../../pages/router/urls';
 
+// Utils
+import get from '../../../utils/misc/get';
+
 // Components
 import { Rating } from 'semantic-ui-react';
 import ProductPrices from './ProductPrices';
@@ -25,8 +28,14 @@ const ProductCard = (props) => {
 
       <div className="content">
         <div className="rating mb-1">
-          <Rating defaultRating={product.stars} maxRating={5} disabled />
-          <span className="pl-1 text-sm">({product.ratings || 0})</span>
+          <Rating
+            defaultRating={get.safe(() => product.ratings.stars, 0)}
+            maxRating={5}
+            disabled
+          />
+          <span className="pl-1 text-sm">
+            ({get.safe(() => product.ratings.count, 0)})
+          </span>
         </div>
         <Link to={productUrl}>
           <div className="name">

@@ -6,7 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/urls';
 import is from '../utils/misc/is';
 import get from '../utils/misc/get';
-import { Rating, Button, Loader } from 'semantic-ui-react';
+import { Button, Loader } from 'semantic-ui-react';
 
 // Components
 import ProductOptions from '../components/misc/products/ProductOptions';
@@ -88,16 +88,6 @@ const ProductPage = (props) => {
                 <Col md={6} lg={4} className="mb-4">
                   <h3>{get.safe(() => product.store.brandName)}</h3>
 
-                  {get.safe(() => product.store.stars) && (
-                    <div className="mb-1">
-                      <Rating
-                        defaultRating={product.store.stars}
-                        maxRating={5}
-                        disabled
-                      />
-                      <span className="pl-1 text-sm">{product.ratings}</span>
-                    </div>
-                  )}
                   {get.safe(() => product.store.totalOrders) && (
                     <div className="mb-3">
                       {product.store.totalOrders} Συνολικές παραγγελίες

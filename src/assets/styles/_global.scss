@@ -151,9 +151,13 @@ form {
 }
 
 // Ratings
-.ui.rating .active.icon {
-  color: $accent !important;
-  border: none;
+.ui.rating {
+  opacity: 1 !important;
+
+  .active.icon {
+    color: $accent !important;
+    border: none;
+  }
 }
 
 //

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
+import PublicRoute from './router/PublicRoute';
 import Urls from './router/urls';
 import PropTypes from 'prop-types';
 
@@ -26,29 +27,31 @@ import { getUser } from '../redux/user/user.actions';
 
 const Root = (props) => {
   useEffect(() => {
-    props.getUser();
+    if (props.authReducer.token) {
+      props.getUser();
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <Router>
       <Switch>
-        <PrivateRoute
+        <PublicRoute
           path={Urls.HOME}
           component={HomePage}
           layout={MainLayout}
           exact
         />
-        <PrivateRoute
+        <PublicRoute
           path={Urls.LOGIN}
           component={LoginPage}
           layout={EmptyLayout}
         />
-        <PrivateRoute
+        <PublicRoute
           path={Urls.REGISTER}
           component={RegisterPage}
           layout={EmptyLayout}
         />
-        <PrivateRoute
+        <PublicRoute
           path={`${Urls.PRODUCTS}/:id?`}
           component={ProductPage}
           layout={MainLayout}
@@ -73,24 +76,24 @@ const Root = (props) => {
           component={MyAccountPage}
           layout={MainLayout}
         />
-        <PrivateRoute
+        <PublicRoute
           path={`${Urls.STORES}/:id?`}
           component={StorePage}
           layout={MainLayout}
         />
-        <PrivateRoute
+        <PublicRoute
           path={Urls.NOT_FOUND}
           component={Error404}
           layout={MainLayout}
         />
-        <PrivateRoute path="*" component={Error404} layout={MainLayout} />
+        <PublicRoute path="*" component={Error404} layout={MainLayout} />
       </Switch>
     </Router>
   );
 };
 
 const mapStateToProps = (state) => {
-  return {};
+  return { authReducer: state.authReducer };
 };
 
 const mapDispatchToProps = (dispatch) => {
@@ -100,7 +103,8 @@ const mapDispatchToProps = (dispatch) => {
 };
 
 Root.propTypes = {
-  getUser: PropTypes.func
+  getUser: PropTypes.func,
+  authReducer: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
