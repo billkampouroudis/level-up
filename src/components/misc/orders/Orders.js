@@ -29,14 +29,14 @@ import EmptyCartIllustration from '../../../assets/images/undraw_empty_cart_co35
 import {
   listOrders,
   updateOrders,
-  ordersCleanup
+  ordersCleanup,
+  setOrders
 } from '../../../redux/orders/orders.actions';
 
 const Orders = React.memo((props) => {
-  // const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const { ordersReducer, setOrders } = props;
+  const { ordersReducer, setOrders, listOrders, ordersCleanup } = props;
   const { orders } = ordersReducer;
 
   /**
@@ -247,10 +247,10 @@ const Orders = React.memo((props) => {
     if (props.status.length) {
       options.filters = [`status=${props.status.join()}`];
     }
-    props.listOrders(options);
+    listOrders(options);
 
     return () => {
-      props.ordersCleanup();
+      ordersCleanup();
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -274,7 +274,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     listOrders: (options) => dispatch(listOrders.call(options)),
     updateOrders: (data, options) => dispatch(updateOrders.call(data, options)),
-    ordersCleanup: (orders) => dispatch(ordersCleanup(orders))
+    ordersCleanup: (orders) => dispatch(ordersCleanup(orders)),
+    setOrders: (orders) => dispatch(setOrders(orders))
   };
 };
 
@@ -285,6 +286,7 @@ Orders.propTypes = {
   getOrders: PropTypes.func,
   status: PropTypes.array,
   ordersCleanup: PropTypes.func,
+  setOrders: PropTypes.func,
   emptyText: PropTypes.string
 };
 

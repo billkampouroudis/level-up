@@ -37,6 +37,7 @@ export const calculateCosts = (orders = []) => {
   const userLevel = calculateUserLevel(
     get.safe(() => store.getState().userReducer.user.xp)
   );
+
   let originalCost = 0;
   let reducedCost = 0;
   let totalDiscount = 0;
@@ -48,16 +49,22 @@ export const calculateCosts = (orders = []) => {
 
   for (let order of orders) {
     for (let orderItem of order.orderItems || []) {
-      const original =
-        parseFloat(get.safe(() => orderItem.product.originalPrice)) *
-        orderItem.quantity;
+      const originalProductPrice = get.safe(
+        () => orderItem.product.originalPrice
+      );
+      const orderItemQuantity = parseInt(orderItem.quantity);
+      const discountLevel = parseInt(orderItem.product.discountLevel);
+      const orderItemPrice = parseFloat(orderItem.price);
+
+      const original = originalProductPrice * orderItemQuantity;
+
       const reduced =
-        orderItem.product.discountLevel &&
-        userLevel >= orderItem.product.discountLevel
+        userLevel >= discountLevel
           ? parseFloat(getReducedPrice(orderItem.product, orderItem.quantity))
-          : 0;
-      originalCost += is.number(original) ? original : 0;
-      reducedCost += is.number(reduced) ? reduced : 0;
+          : orderItemPrice;
+
+      originalCost += original;
+      reducedCost += reduced;
     }
   }
 
