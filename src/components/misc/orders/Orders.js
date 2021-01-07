@@ -33,6 +33,14 @@ import {
   setOrders
 } from '../../../redux/orders/orders.actions';
 
+// Constants
+import {
+  ORDER_IN_CART,
+  ORDER_REGISTERED,
+  ORDER_SENT,
+  ORDER_CLOSED
+} from '../../../constants';
+
 const Orders = React.memo((props) => {
   const [loading, setLoading] = useState(false);
 
@@ -91,13 +99,13 @@ const Orders = React.memo((props) => {
 
   const renderStatus = (order) => {
     switch (order.status) {
-      case 'in_cart':
+      case ORDER_IN_CART:
         return 'Στο καλάθι';
-      case 'registered':
+      case ORDER_REGISTERED:
         return 'Καταχωρήθηκε';
-      case 'sent':
+      case ORDER_SENT:
         return 'Απεστάλλει';
-      case 'done':
+      case ORDER_CLOSED:
         return 'Ολοκληρώθηκε';
       default:
         return '';
@@ -115,7 +123,7 @@ const Orders = React.memo((props) => {
                 <p className="mb-0">
                   Κόστος:{' '}
                   <span className="text-bold">
-                    {props.status.includes('in_cart')
+                    {props.status.includes(ORDER_IN_CART)
                       ? calculateCosts(order).reducedCost
                       : calculateRegisteredCost(order)}
                     €
@@ -137,7 +145,7 @@ const Orders = React.memo((props) => {
                 ) : null}
               </div>
             </div>
-            {renderOrderItems(order.orderItems)}
+            {renderOrderItems(order.orderItems, order.status)}
           </div>
         ) : null
       )
@@ -155,7 +163,15 @@ const Orders = React.memo((props) => {
     );
   };
 
-  const renderOrderItems = (orderItems) => {
+  const renderRatingButton = (product) => {
+    return (
+      <Button className="custom secondary sm mt-3">
+        Αξιολογίστε το προϊόν
+      </Button>
+    );
+  };
+
+  const renderOrderItems = (orderItems, orderStatus) => {
     return (
       <Item.Group>
         {orderItems.map((orderItem, index) => (
@@ -174,7 +190,7 @@ const Orders = React.memo((props) => {
                   >
                     {orderItem.product.name}
                   </Link>
-                  {props.status.includes('in_cart') ? (
+                  {props.status.includes(ORDER_IN_CART) ? (
                     <span>
                       <Popup
                         wide
@@ -204,7 +220,7 @@ const Orders = React.memo((props) => {
                     <p>
                       Μέγεθος: <strong>{orderItem.size}</strong>
                     </p>
-                    {!props.status.includes('in_cart') ? (
+                    {!props.status.includes(ORDER_IN_CART) ? (
                       <span className="text-semi-bold text-lg">
                         {orderItem.price}€
                       </span>
@@ -214,8 +230,13 @@ const Orders = React.memo((props) => {
                         quantity={orderItem.quantity}
                       />
                     )}
+                    <div className="text-center">
+                      {orderStatus === ORDER_CLOSED
+                        ? renderRatingButton()
+                        : null}
+                    </div>
                   </div>
-                  {props.status.includes('in_cart') ? (
+                  {props.status.includes(ORDER_IN_CART) ? (
                     <div className="mt-2 mt-md-0 text-center text-md-left">
                       <Counter
                         initialCount={orderItem.quantity}
