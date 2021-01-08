@@ -13,7 +13,8 @@
 }
 
 .ui.input input,
-.ui.selection.dropdown {
+.ui.selection.dropdown,
+.ui.form textarea {
   width: 100% !important;
   border-radius: 10px !important;
   padding: 16px 24px !important;

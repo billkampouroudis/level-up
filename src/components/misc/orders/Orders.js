@@ -18,6 +18,7 @@ import { Item, Popup, Button, Loader } from 'semantic-ui-react';
 import { TrashCan24 } from '@carbon/icons-react';
 import Counter from '../counter/Counter';
 import ProductPrices from '../products/ProductPrices';
+import ProductRatingModal from '../../modals/ratings/ProductRatingModal';
 
 // API
 import orderItemsApi from '../../../api/orderItems';
@@ -43,8 +44,10 @@ import {
 
 const Orders = React.memo((props) => {
   const [loading, setLoading] = useState(false);
+  const [productRatingModalOpen, setProductRatingModalOpen] = useState(false);
+  const [productToRate, setProductToRate] = useState({});
 
-  const { ordersReducer, setOrders, listOrders, ordersCleanup } = props;
+  const { ordersReducer, setOrders, ordersCleanup } = props;
   const { orders } = ordersReducer;
 
   /**
@@ -95,6 +98,20 @@ const Orders = React.memo((props) => {
         order.orderItems[orderItemIndex] &&
         order.orderItems[orderItemIndex].id === orderItemId
     );
+  };
+
+  const listOrders = async () => {
+    let options = {};
+    if (props.status.length) {
+      options.filters = [`status=${props.status.join()}`];
+    }
+
+    try {
+      const response = await props.listOrders(options);
+      return Promise.resolve(response);
+    } catch (error) {
+      return Promise.reject(error);
+    }
   };
 
   const renderStatus = (order) => {
@@ -165,9 +182,33 @@ const Orders = React.memo((props) => {
 
   const renderRatingButton = (product) => {
     return (
-      <Button className="custom secondary sm mt-3">
+      <Button
+        className="custom secondary sm mt-3"
+        onClick={() => {
+          setProductToRate(product);
+          setProductRatingModalOpen(true);
+        }}
+      >
         Αξιολογίστε το προϊόν
       </Button>
+    );
+  };
+
+  const renderProductRatingModal = () => {
+    return (
+      <ProductRatingModal
+        onClose={() => {
+          setProductRatingModalOpen(false);
+        }}
+        onSuccess={() => {
+          listOrders();
+          setProductToRate({});
+        }}
+        open={productRatingModalOpen}
+        stayAfterAction
+        title="Προσθήκηαξιολόγισης"
+        product={productToRate}
+      />
     );
   };
 
@@ -231,8 +272,8 @@ const Orders = React.memo((props) => {
                       />
                     )}
                     <div className="text-center">
-                      {orderStatus === ORDER_CLOSED
-                        ? renderRatingButton()
+                      {orderStatus === ORDER_CLOSED && orderItem.product.canRate
+                        ? renderRatingButton(orderItem.product)
                         : null}
                     </div>
                   </div>
@@ -277,7 +318,14 @@ const Orders = React.memo((props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return !loading ? renderOrders() : <Loader active inline="centered" />;
+  return !loading ? (
+    <>
+      {renderOrders()}
+      {renderProductRatingModal()}
+    </>
+  ) : (
+    <Loader active inline="centered" />
+  );
 });
 
 Orders.defaultProps = {
