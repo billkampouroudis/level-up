@@ -29,7 +29,7 @@ const ProductCard = (props) => {
       <div className="content">
         <div className="rating mb-1">
           <Rating
-            defaultRating={get.safe(() => product.ratings.stars, 0)}
+            rating={get.safe(() => product.ratings.stars, 0)}
             maxRating={5}
             disabled
           />

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/urls';
-import { Rating, Message, Loader } from 'semantic-ui-react';
+import { Message, Loader } from 'semantic-ui-react';
 
 // Utils
 import get from '../utils/misc/get';
@@ -60,18 +60,6 @@ const StorePage = (props) => {
             <Container>
               <Row>
                 <Col>
-                  <div className="d-flex align-content-center mb-3">
-                    <Rating
-                      defaultRating={props.storesReducer.store.stars}
-                      maxRating={5}
-                      disabled
-                      size="huge"
-                    />
-                    <span className="pl-1 text-sm">
-                      ({props.storesReducer.store.ratings || 0})
-                    </span>
-                  </div>
-
                   <h1 className="d-inline-block">
                     {props.storesReducer.store.brandName}
                   </h1>
