@@ -43,14 +43,14 @@ const makeRequest = async ({
     };
   }
 
-  const { filters, cancelToken } = options;
-  if (filters && filters.length > 0) {
+  const { params, cancelToken } = options;
+  if (params && params.length > 0) {
     url += '?';
 
-    for (let i = 0; i < filters.length; i++) {
-      url += filters[i];
+    for (let i = 0; i < params.length; i++) {
+      url += params[i];
 
-      if (i !== filters.length - 1) {
+      if (i !== params.length - 1) {
         url += '&';
       }
     }

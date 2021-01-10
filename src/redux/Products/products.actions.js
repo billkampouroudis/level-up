@@ -40,17 +40,17 @@ export const getProduct = {
   },
 
   call: (id) => {
-    return (dispatch) => {
+    return async (dispatch) => {
       dispatch(getProduct.request());
 
-      productsApi
-        .getProduct(id)
-        .then((res) => {
-          dispatch(getProduct.success(res.data));
-        })
-        .catch((err) => {
-          dispatch(getProduct.error(err.message));
-        });
+      try {
+        const res = await productsApi.getProduct(id);
+        dispatch(getProduct.success(res.data));
+        return res;
+      } catch (err) {
+        dispatch(getProduct.error(err.message));
+        return err;
+      }
     };
   }
 };

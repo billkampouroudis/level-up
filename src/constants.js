@@ -11,3 +11,6 @@ export const ORDER_IN_CART = 'in_cart';
 export const ORDER_REGISTERED = 'registered';
 export const ORDER_SENT = 'sent';
 export const ORDER_CLOSED = 'closed';
+
+// Pagination
+export const DEFAULT_PAGINATION_SIZE = 2;

@@ -12,8 +12,8 @@ const useDidMountEffect = (func, deps) => {
     } else {
       didMount.current = true;
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, deps);
-}
+};
 
 export default useDidMountEffect;

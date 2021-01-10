@@ -55,7 +55,7 @@ const ProductPrices = (props) => {
             </span>
           }
         >
-          {product.discountLevel === userLevel
+          {userLevel >= product.discountLevel
             ? 'Έχετε ξεκλειδώσει την συγκεκριμένη προσφορά.'
             : `Για να ξεκλειδώσετε την συγκεκριμένη προσφορά πρέπει να βρίσκεστε τουλάχιστον στο level ${product.discountLevel}.`}
         </Popup>

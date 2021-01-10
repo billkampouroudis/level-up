@@ -103,7 +103,7 @@ const Orders = React.memo((props) => {
   const listOrders = async () => {
     let options = {};
     if (props.status.length) {
-      options.filters = [`status=${props.status.join()}`];
+      options.params = [`status=${props.status.join()}`];
     }
 
     try {
@@ -155,7 +155,7 @@ const Orders = React.memo((props) => {
                     <p>
                       Ημερομηνία:{' '}
                       <span className="text-bold">
-                        {moment(order.registeredAt).format('YYYY-MM-DD HH:mm')}
+                        {moment(order.registeredAt).format('DD-MM-YYYY HH:mm')}
                       </span>
                     </p>
                   </>
@@ -307,7 +307,7 @@ const Orders = React.memo((props) => {
   useEffect(() => {
     let options = {};
     if (props.status.length) {
-      options.filters = [`status=${props.status.join()}`];
+      options.params = [`status=${props.status.join()}`];
     }
     listOrders(options);
 

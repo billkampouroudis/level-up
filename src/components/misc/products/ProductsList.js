@@ -60,7 +60,6 @@ const Products = (props) => {
 Products.propTypes = {
   data: PropTypes.array.isRequired,
   exclude: PropTypes.array,
-  filters: PropTypes.object,
   loading: PropTypes.bool
 };
 export default Products;
