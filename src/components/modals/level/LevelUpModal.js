@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 // Components
 import CustomModal from '../CustomModal';
 
+// Images
+import LevelUpIl from '../../../assets/illustrations/Level-up.svg';
+
 const LevelUpModal = (props) => {
   const { newLevel } = props;
 
@@ -15,7 +18,7 @@ const LevelUpModal = (props) => {
       </p>
 
       <div className="level-up-il-container my-4">
-        <img src="/illustrations/level-up.svg" alt="Level up" />
+        <img src={LevelUpIl} alt="Level up" />
         <span>Level {newLevel}</span>
       </div>
 

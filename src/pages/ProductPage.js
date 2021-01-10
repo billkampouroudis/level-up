@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/urls';
-import { DEFAULT_PAGINATION_SIZE } from '../constants';
 
 // Utils
 import is from '../utils/misc/is';
@@ -22,37 +21,9 @@ import { getProduct } from '../redux/products/products.actions';
 import { getStore } from '../redux/stores/stores.actions';
 import { listSuggestionsByStore } from '../redux/suggestions/suggestions.actions';
 
-// Hooks
-import useDidMountEffect from '../utils/hooks/useDidMountEffect';
-
-// API
-import productRatingsApi from '../api/productRatings';
-
 const ProductPage = (props) => {
   const [product, setProduct] = useState({});
-  const [productRatings, setProductRatings] = useState([]);
-  const [pagination, setPagination] = useState({
-    pageSize: DEFAULT_PAGINATION_SIZE,
-    page: 1
-  });
-
   const history = useHistory();
-
-  const listRatigns = () => {
-    if (product.id) {
-      const options = { params: [] };
-      options.params.push([`productId=${product.id}`]);
-      options.params.push([`pageSize=${pagination.pageSize}`]);
-      options.params.push([`page=${pagination.page}`]);
-
-      productRatingsApi
-        .listProductRatings(options)
-        .then((res) => {
-          setProductRatings(res.data);
-        })
-        .catch();
-    }
-  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -70,10 +41,6 @@ const ProductPage = (props) => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.match.params.id]);
-
-  useDidMountEffect(() => {
-    listRatigns();
-  }, [product]);
 
   return (
     <>
@@ -123,7 +90,14 @@ const ProductPage = (props) => {
             </Container>
           </section>
           <section className="bg-background-dark">
-            <ProductRatings ratings={productRatings} />
+            <Container>
+              <Row>
+                <Col>
+                  <h3>Αξιολογίσεις χρηστών</h3>
+                  <ProductRatings productId={product.id} />
+                </Col>
+              </Row>
+            </Container>
           </section>
           {!props.suggestionsReducer.isListingSuggestionsByStore &&
             props.suggestionsReducer.suggestions.length > 1 && (

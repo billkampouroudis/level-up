@@ -7,7 +7,7 @@ import { Loader } from 'semantic-ui-react';
 import ProductCard from './ProductCard';
 
 // Images
-import NoDataIllustration from '../../../assets/images/undraw_No_data_re_kwbl.svg';
+import NoDataIllustration from '../../../assets/illustrations/undraw_No_data_re_kwbl.svg';
 
 const Products = (props) => {
   const [products, setProducts] = useState([]);

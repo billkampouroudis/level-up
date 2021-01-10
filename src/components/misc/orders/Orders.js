@@ -23,8 +23,8 @@ import ProductRatingModal from '../../modals/ratings/ProductRatingModal';
 // API
 import orderItemsApi from '../../../api/orderItems';
 
-// Images
-import EmptyCartIllustration from '../../../assets/images/undraw_empty_cart_co35.svg';
+// Illustrations
+import EmptyCartIllustration from '../../../assets/illustrations/undraw_empty_cart_co35.svg';
 
 // Redux Action
 import {
