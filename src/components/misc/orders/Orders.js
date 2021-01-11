@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import urls from '../../../pages/router/urls';
+import urls from '../../../pages/router/Urls';
 import { connect } from 'react-redux';
 import moment from 'moment';
 

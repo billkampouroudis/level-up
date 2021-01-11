@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 // import Counter from '../components/Counter';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import urls from '../pages/router/urls';
+import urls from '../pages/router/Urls';
 
 // Components
 import { Button } from 'semantic-ui-react';

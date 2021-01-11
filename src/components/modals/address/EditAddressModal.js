@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 // Components
 import CustomModal from '../CustomModal';
-import AddressForm from '../../forms/address/AddressForm';
+// import AddressForm from '../../forms/address/AddressForm';
 
 const AddressModal = (props) => {
   const onSuccess = () => {
@@ -13,7 +13,7 @@ const AddressModal = (props) => {
 
   return (
     <CustomModal {...props}>
-      <AddressForm onCancel={props.onClose} onSuccess={onSuccess} />
+      {/* <AddressForm onCancel={props.onClose} onSuccess={onSuccess} /> */}
     </CustomModal>
   );
 };

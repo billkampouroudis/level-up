@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import urls from './router/urls';
+import urls from './router/Urls';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 

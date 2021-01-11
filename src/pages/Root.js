@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Switch, BrowserRouter as Router } from 'react-router-dom';
 import PrivateRoute from './router/PrivateRoute';
 import PublicRoute from './router/PublicRoute';
-import Urls from './router/urls';
+import urls from './router/Urls';
 import PropTypes from 'prop-types';
 
 // Components
@@ -37,58 +37,58 @@ const Root = (props) => {
     <Router>
       <Switch>
         <PublicRoute
-          path={Urls.HOME}
+          path={urls.HOME}
           component={HomePage}
           layout={MainLayout}
           exact
         />
         <PublicRoute
-          path={Urls.LOGIN}
+          path={urls.LOGIN}
           component={LoginPage}
           layout={EmptyLayout}
         />
         <PublicRoute
-          path={Urls.REGISTER}
+          path={urls.REGISTER}
           component={RegisterPage}
           layout={EmptyLayout}
         />
         <PublicRoute
-          path={`${Urls.PRODUCTS}/:id?`}
+          path={`${urls.PRODUCTS}/:id?`}
           component={ProductPage}
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.MY_CART}
+          path={urls.MY_CART}
           component={MyCartPage}
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.FAVORITES}
+          path={urls.FAVORITES}
           component={FavoritesPage}
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.MY_ORDERS}
+          path={urls.MY_ORDERS}
           component={MyOrdersPage}
           layout={MainLayout}
         />
         <PrivateRoute
-          path={Urls.MY_ACCOUNT}
+          path={urls.MY_ACCOUNT}
           component={MyAccountPage}
           layout={MainLayout}
         />
         <PublicRoute
-          path={`${Urls.STORES}/:id?`}
+          path={`${urls.STORES}/:id?`}
           component={StorePage}
           layout={MainLayout}
         />
         <PublicRoute
-          path={Urls.ABOUT}
+          path={urls.ABOUT}
           component={AboutPage}
           layout={MainLayout}
         />
         <PublicRoute
-          path={Urls.NOT_FOUND}
+          path={urls.NOT_FOUND}
           component={Error404}
           layout={MainLayout}
         />

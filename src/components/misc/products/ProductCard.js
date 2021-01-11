@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import urls from '../../../pages/router/urls';
+import urls from '../../../pages/router/Urls';
 
 // Utils
 import get from '../../../utils/misc/get';

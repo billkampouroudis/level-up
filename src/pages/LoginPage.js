@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import urls from './router/urls';
+import urls from './router/Urls';
 import PropTypes from 'prop-types';
 
 // Components

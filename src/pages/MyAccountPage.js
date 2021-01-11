@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import get from '../utils/misc/get';
 import { levels, calculateUserLevel } from '../utils/levels/levels';
 import { Link } from 'react-router-dom';
-import urls from './router/urls';
+import urls from './router/Urls';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';

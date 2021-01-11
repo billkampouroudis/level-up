@@ -4,7 +4,7 @@ import CustomTextInput from '../../formElements/textInput/CustomTextInput';
 import { Button, Message } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import urls from '../../../pages/router/urls';
+import urls from '../../../pages/router/Urls';
 import PropTypes from 'prop-types';
 
 // Redux Actions

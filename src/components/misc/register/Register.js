@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import urls from '../../../pages/router/urls';
+import urls from '../../../pages/router/Urls';
 
 // Components
 import RegisterForm from '../../forms/register/RegisterForm';

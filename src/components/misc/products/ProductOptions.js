@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
-import urls from '../../../pages/router/urls';
+import urls from '../../../pages/router/Urls';
 import { useHistory } from 'react-router-dom';
 
 // Utils
