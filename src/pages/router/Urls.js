@@ -10,6 +10,7 @@ const urls = {
   MY_ORDERS: '/my-orders',
   MY_LEVEL: '/my-level',
   MY_ACCOUNT: '/my-account',
+  ABOUT: '/about',
   NOT_FOUND: '/not-found'
 };
 

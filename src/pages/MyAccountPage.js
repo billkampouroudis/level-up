@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import get from '../utils/misc/get';
 import { levels, calculateUserLevel } from '../utils/levels/levels';
+import { Link } from 'react-router-dom';
+import urls from './router/urls';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -46,8 +48,19 @@ const MyAccountPage = (props) => {
           </Row>
           <Row>
             <Col>
-              <p className="text-lg">{`Βρίσκεστε στο level ${level}. Έχετε πρόσβαση σε όλες τις προσφορές που ανήκουν στο ίδιο level με εσάς.`}</p>
-              <p className="text-lg mb-4">{`Για να ανεβείτε level θα πρέπει να μαζέψετε ${nextLevelAt} πόντους.`}</p>
+              <p className="text-lg">
+                <strong>Βρίσκεστε στο level {level}</strong>. Έχετε πρόσβαση σε
+                όλες τις προσφορές που ανήκουν στο ίδιο level με εσάς.
+              </p>
+              <p className="text-lg mb-4">
+                Για να προχωρήσετε στο <strong>επόμενο level</strong> θα πρέπει
+                να μαζέψετε <strong>{nextLevelAt} πόντους</strong> .
+              </p>
+              <p className="text-lg mb-4">
+                Μπορείτε να δείτε αναλυτικά τον πίνακα των level και την έκπτωση
+                που κερδίζεται σε καθένα από αυτά πατώντας{' '}
+                <Link to={`${urls.ABOUT}`}>εδώ</Link>
+              </p>
             </Col>
           </Row>
           <Row>

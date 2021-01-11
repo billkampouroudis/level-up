@@ -21,6 +21,7 @@ import MyOrdersPage from './MyOrdersPage';
 import FavoritesPage from './FavoritesPage';
 import MyAccountPage from './MyAccountPage';
 import StorePage from './StorePage';
+import AboutPage from './AboutPage';
 
 // Redux Actions
 import { getUser } from '../redux/user/user.actions';
@@ -79,6 +80,11 @@ const Root = (props) => {
         <PublicRoute
           path={`${Urls.STORES}/:id?`}
           component={StorePage}
+          layout={MainLayout}
+        />
+        <PublicRoute
+          path={Urls.ABOUT}
+          component={AboutPage}
           layout={MainLayout}
         />
         <PublicRoute
