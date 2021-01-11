@@ -28,7 +28,7 @@ Illustration.defaultProps = {
 
 Illustration.propTypes = {
   className: PropTypes.string,
-  img: PropTypes.object.isRequired,
+  img: PropTypes.string.isRequired,
   description: PropTypes.string,
   width: PropTypes.string,
   style: PropTypes.object

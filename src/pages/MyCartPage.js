@@ -14,6 +14,7 @@ import SEO from '../components/misc/seo/SEO';
 import Orders from '../components/misc/orders/Orders';
 import SelectAddress from '../components/misc/selectAddress/SelectAddress';
 import LevelUpModal from '../components/modals/level/LevelUpModal';
+import SelectPaymentMethod from '../components/misc/payments/SelectPaymentMethod';
 
 // API
 import ordersApi from '../api/orders';
@@ -91,6 +92,10 @@ const MyCartPage = (props) => {
                 <SelectAddress
                   onValueChange={(address) => setSelectedAddress(address)}
                 />
+              </section>
+              <section className="pt-0 pb-4">
+                <h2>Τρόπος πληρωμής</h2>
+                <SelectPaymentMethod />
               </section>
               <section className="py-0">
                 <h2>Σύνοψη</h2>

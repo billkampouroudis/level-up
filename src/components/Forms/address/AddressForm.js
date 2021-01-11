@@ -17,9 +17,26 @@ import addressesApi from '../../../api/addresses';
 
 const AddressForm = (props) => {
   let initialInputs = {
+    firstName: {
+      label: 'Όνομα',
+      value: '',
+      rules: {
+        notEmpty: true,
+        maxLength: 45
+      },
+      errorMessage: ''
+    },
+    lastName: {
+      label: 'Επώνυμο',
+      value: '',
+      rules: {
+        notEmpty: true,
+        maxLength: 45
+      },
+      errorMessage: ''
+    },
     street: {
       label: 'Οδός',
-      placeholder: 'Ιερού Λόχου',
       value: '',
       rules: {
         notEmpty: true,
@@ -29,7 +46,6 @@ const AddressForm = (props) => {
     },
     number: {
       label: 'Αριθμός',
-      placeholder: '2',
       value: '',
       rules: {
         notEmpty: true,
@@ -39,7 +55,6 @@ const AddressForm = (props) => {
     },
     zipCode: {
       label: 'Ταχ. κώδικας',
-      placeholder: '68132',
       value: '',
       rules: {
         notEmpty: true,
@@ -49,7 +64,6 @@ const AddressForm = (props) => {
     },
     city: {
       label: 'Πόλη',
-      placeholder: 'Αλεχανδρούπολη',
       value: '',
       rules: {
         notEmpty: true,
@@ -59,7 +73,6 @@ const AddressForm = (props) => {
     },
     country: {
       label: 'Χώρα',
-      placeholder: 'Ελλάδα',
       value: 'Ελλάδα',
       rules: {
         notEmpty: true,
@@ -69,7 +82,6 @@ const AddressForm = (props) => {
     },
     floor: {
       label: 'Όροφος',
-      placeholder: '1',
       value: '',
       rules: {
         notEmpty: true,

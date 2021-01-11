@@ -14,3 +14,6 @@ export const ORDER_CLOSED = 'closed';
 
 // Pagination
 export const DEFAULT_PAGINATION_SIZE = 15;
+
+// Payment methods
+export const PAYMENT_COD = 'Αντικαταβολή';

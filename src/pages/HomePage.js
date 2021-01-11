@@ -3,9 +3,11 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 // import Counter from '../components/Counter';
 import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
+import urls from '../pages/router/urls';
 
 // Components
+import { Button } from 'semantic-ui-react';
 import SEO from '../components/misc/seo/SEO';
 import ProductsList from '../components/misc/products/ProductsList';
 import MainHeader from '../components/misc/header/MainHeader';
@@ -67,7 +69,9 @@ const HomePage = (props) => {
                 <p className="text-xl mb-4">
                   Ξεκλειδώστε νέες προσφορές με κάθε νέο level που κατακτάτε.
                 </p>
-                <Button className="custom primary">Μάθετε περισσότερα</Button>
+                <Link to={urls.ABOUT}>
+                  <Button className="custom primary">Μάθετε περισσότερα</Button>
+                </Link>
               </Col>
             </Row>
           </Container>

@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Container, Row, Col } from 'react-bootstrap';
 import urls from '../../../pages/router/urls';
-import { Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
-import { validateOne } from '../../../utils/validation/index';
 import { useHistory } from 'react-router-dom';
 
+// Utils
+import { validateOne } from '../../../utils/validation/index';
+
 // Component
+import { Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
 import Counter from '../counter/Counter';
 import { Message, Button } from 'semantic-ui-react';
 import CustomSelect from '../../formElements/select/CustomSelect';
@@ -55,6 +57,11 @@ const ProductOptions = (props) => {
   };
 
   const handleFavorites = () => {
+    if (!props.authReducer.token) {
+      history.push(urls.LOGIN);
+      return;
+    }
+
     if (product.isFavorite) {
       favoritesApi
         .removeFromFavorites(product.id)
