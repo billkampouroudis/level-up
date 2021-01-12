@@ -13,7 +13,6 @@ import { Button, Message } from 'semantic-ui-react';
 import SEO from '../components/misc/seo/SEO';
 import Orders from '../components/misc/orders/Orders';
 import SelectAddress from '../components/misc/selectAddress/SelectAddress';
-import LevelUpModal from '../components/modals/level/LevelUpModal';
 import SelectPaymentMethod from '../components/misc/payments/SelectPaymentMethod';
 
 // API
@@ -22,18 +21,15 @@ import ordersApi from '../api/orders';
 // Redux Action
 import { setUser } from '../redux/user/user.actions';
 import { updateOrders } from '../redux/orders/orders.actions';
-import { calculateUserLevel } from '../utils/levels/levels';
 
 const MyCartPage = (props) => {
+  let history = useHistory();
+
   const [selectedAddress, setSelectedAddress] = useState(null);
   const [costs, setCosts] = useState(0);
   const [submitError, setSubmitError] = useState(false);
-  const [levelUpModalOpen, setLevelUpModalOpen] = useState(false);
 
   const { orders } = props.ordersReducer;
-  const { user } = props.userReducer;
-
-  let history = useHistory();
 
   const submitOrders = () => {
     const { orders } = props.ordersReducer;
@@ -53,13 +49,8 @@ const MyCartPage = (props) => {
       .then((res) => {
         const newUser = res.data;
 
-        if (calculateUserLevel(newUser.xp) > calculateUserLevel(user.xp)) {
-          props.setUser(newUser);
-          setLevelUpModalOpen(true);
-        } else {
-          props.setUser(newUser);
-          history.push(urls.HOME);
-        }
+        props.setUser(newUser);
+        history.push(urls.HOME);
       })
       .catch(() => setSubmitError(true));
   };
@@ -152,19 +143,6 @@ const MyCartPage = (props) => {
           onDismiss={() => setSubmitError(false)}
         />
       )}
-      <LevelUpModal
-        title="Ανεβήκατε level!"
-        onOpen={() => setLevelUpModalOpen(true)}
-        onClose={() => {
-          setLevelUpModalOpen(false);
-        }}
-        onConfirm={() => {
-          history.push(urls.HOME);
-        }}
-        open={levelUpModalOpen}
-        confirmMessage="Επιστροφή στην αρχική"
-        newLevel={calculateUserLevel(user.xp)}
-      />
     </>
   );
 };

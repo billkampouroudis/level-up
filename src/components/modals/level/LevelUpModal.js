@@ -37,7 +37,6 @@ const LevelUpModal = (props) => {
 
 LevelUpModal.propTypes = {
   onClose: PropTypes.func,
-  onSuccess: PropTypes.func,
   newLevel: PropTypes.number.isRequired
 };
 

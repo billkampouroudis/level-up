@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Form, Button } from 'semantic-ui-react';
-import { Row, Col } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 // Utils
 import get from '../../../utils/misc/get';
@@ -13,8 +12,12 @@ import {
 } from '../../../utils/validation';
 
 // Components
-import { Rating, Message } from 'semantic-ui-react';
+import { Row, Col } from 'react-bootstrap';
+import { Rating, Message, Form, Button } from 'semantic-ui-react';
 import CustomTextArea from '../../formElements/textArea/CustomTextArea';
+
+// Redux Actions
+import { getUser } from '../../../redux/user/user.actions';
 
 // API
 import productRatingsApi from '../../../api/productRatings';
@@ -59,6 +62,7 @@ const ProductRatingForm = (props) => {
       productRatingsApi
         .createProductRating(data)
         .then((res) => {
+          props.getUser();
           clearInputs();
           props.onSuccess && props.onSuccess();
         })
@@ -165,6 +169,16 @@ const ProductRatingForm = (props) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {};
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: () => dispatch(getUser.call())
+  };
+};
+
 ProductRatingForm.propTypes = {
   onSuccess: PropTypes.func,
   onCancel: PropTypes.func,
@@ -173,7 +187,8 @@ ProductRatingForm.propTypes = {
   address: PropTypes.object,
   index: PropTypes.number,
   rerender: PropTypes.any,
-  product: PropTypes.object.isRequired
+  product: PropTypes.object.isRequired,
+  getUser: PropTypes.func
 };
 
-export default ProductRatingForm;
+export default connect(mapStateToProps, mapDispatchToProps)(ProductRatingForm);

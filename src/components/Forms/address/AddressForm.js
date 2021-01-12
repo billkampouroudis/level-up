@@ -101,6 +101,8 @@ const AddressForm = (props) => {
 
     if (!haveErrors(validatedInputs)) {
       const data = {
+        firstName: inputs.firstName.value,
+        lastName: inputs.lastName.value,
         street: inputs.street.value,
         number: inputs.number.value,
         zipCode: inputs.zipCode.value,
