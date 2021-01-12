@@ -8,6 +8,7 @@ import LoginForm from '../../forms/login/LoginForm';
 
 // Images
 import logo from '../../../assets/images/Logo-Large.svg';
+import urls from '../../../pages/router/Urls';
 
 const LoginRegister = () => {
   return (
@@ -16,23 +17,25 @@ const LoginRegister = () => {
         <Col lg={5} className="login-image" />
         <Col className="d-flex align-items-center">
           <Container className="pt-5 px-sm-5 px-xl-10">
-            <figure className="text-center mb-5">
-              <img src={logo} alt="Logo" />
-            </figure>
+            <Link to={urls.HOME}>
+              <figure className="text-center mb-5">
+                <img src={logo} alt="Logo" />
+              </figure>
+            </Link>
             <h1 className="h2 text-center">Σύνδεση</h1>
             <p className="text-lg mb-4 text-center">
-              Ανέβασε <strong>level</strong> στις αγορές σου!
+              Ανεβάστε <strong>level</strong> στις αγορές σας!
             </p>
             <LoginForm />
             <div className="mb-3 text-center">
               <Link to={Urls.REGISTER}>Δημιουργία λογαριασμού</Link>
             </div>
 
-            <div className="text-center">
+            {/* <div className="text-center">
               <Link to={Urls.RESET_PASSWORD} className="text-grey-light">
                 Ξέχασα τον κωδικό μου
               </Link>
-            </div>
+            </div> */}
           </Container>
         </Col>
       </Row>

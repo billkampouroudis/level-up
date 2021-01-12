@@ -16,6 +16,20 @@ const authApi = {
     }
   },
 
+  register: async (data, options) => {
+    try {
+      const response = await makeRequest({
+        method: requestMethods.POST,
+        url: `${API_URL}/api/auth/register`,
+        data,
+        options
+      });
+      return Promise.resolve(response.data);
+    } catch (error) {
+      return Promise.reject(error);
+    }
+  },
+
   removeFromFavorites: async (id, options) => {
     try {
       const response = await makeRequest({
