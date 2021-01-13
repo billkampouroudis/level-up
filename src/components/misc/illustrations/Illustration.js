@@ -11,9 +11,9 @@ const Illustration = (props) => {
     <figure className={props.className}>
       <img
         style={customStyle}
-        className="mb-1"
+        className={`mb-1 ${props.imageClassName ? props.imageClassName : ''}`}
         src={props.img}
-        alt="Δεν υπάρχουν κριτικές για το προϊόν"
+        alt={props.alt || ''}
       />
       {props.description ? (
         <div className=" text-muted">{props.description}</div>
@@ -31,7 +31,9 @@ Illustration.propTypes = {
   img: PropTypes.string.isRequired,
   description: PropTypes.string,
   width: PropTypes.string,
-  style: PropTypes.object
+  style: PropTypes.object,
+  alt: PropTypes.string,
+  imageClassName: PropTypes.string
 };
 
 export default Illustration;

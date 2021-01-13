@@ -384,3 +384,9 @@ form {
     transform: translateX(-50%);
   }
 }
+
+// Table
+.ui.table {
+  border: 1px solid $grey-lighter !important;
+  border-collapse: collapse;
+}

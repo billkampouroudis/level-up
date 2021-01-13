@@ -15,6 +15,10 @@ export const levels = (level) => {
     { key: 10, minXp: 12000, discount: 0.6 }
   ];
 
+  if (!level) {
+    return _levels;
+  }
+
   if (level < 0) {
     return _levels[1];
   }
