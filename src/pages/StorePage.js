@@ -2,14 +2,15 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { Container, Row, Col } from 'react-bootstrap';
 import urls from './router/Urls';
-import { Message, Loader } from 'semantic-ui-react';
 
 // Utils
 import get from '../utils/misc/get';
 
 // Components
+import { Phone16, At16 } from '@carbon/icons-react';
+import { Container, Row, Col } from 'react-bootstrap';
+import { Message, Loader } from 'semantic-ui-react';
 import MainHeader from '../components/misc/header/MainHeader';
 import ProductsList from '../components/misc/products/ProductsList';
 import SEO from '../components/misc/seo/SEO';
@@ -23,6 +24,9 @@ import { listStoreProducts } from '../redux/products/products.actions';
 
 const StorePage = (props) => {
   const history = useHistory();
+
+  const { storesReducer } = props;
+  const { store, isGettingStore, isListingProductsByStore } = storesReducer;
 
   function checkForError() {
     if (props.storesReducer.getStoreError) {
@@ -48,9 +52,8 @@ const StorePage = (props) => {
 
   return (
     <>
-      <SEO title={get.safe(() => props.storesReducer.store.brandName, null)} />
-
-      {!props.storesReducer.isGettingStore && props.storesReducer.store ? (
+      <SEO title={get.safe(() => store.brandName)} />
+      {!isGettingStore && store ? (
         <>
           <MainHeader
             style={{ backgroundImage: `url(${HeroImage})` }}
@@ -60,31 +63,40 @@ const StorePage = (props) => {
             <Container>
               <Row>
                 <Col>
-                  <h1 className="d-inline-block">
-                    {props.storesReducer.store.brandName}
-                  </h1>
+                  <h1 className="d-inline-block">{store.brandName}</h1>
 
-                  {props.storesReducer.store.ratings && (
-                    <p>{props.storesReducer.store.description}</p>
-                  )}
+                  <div>
+                    {get.safe(() => store.contactEmail) && (
+                      <span className="mr-3">
+                        <At16 className="text-accent" />
+                        <span className="mb-1 ml-1">{store.contactEmail}</span>
+                      </span>
+                    )}
+
+                    {get.safe(() => store.contactPhone) && (
+                      <span>
+                        <Phone16 className="text-accent" />
+                        <span className="mb-1 ml-1">{store.contactPhone}</span>
+                      </span>
+                    )}
+                  </div>
                 </Col>
               </Row>
             </Container>
           </section>
 
-          {!props.productsReducer.isListingProductsByStore &&
-            props.productsReducer.products.length && (
-              <section className="pt-0">
-                <Container>
-                  <Row>
-                    <Col>
-                      <h3 className="mb-3">Προϊόντα</h3>
-                      <ProductsList data={props.productsReducer.products} />
-                    </Col>
-                  </Row>
-                </Container>
-              </section>
-            )}
+          {!isListingProductsByStore && props.productsReducer.products.length && (
+            <section className="pt-0">
+              <Container>
+                <Row>
+                  <Col>
+                    <h3 className="mb-3">Προϊόντα</h3>
+                    <ProductsList data={props.productsReducer.products} />
+                  </Col>
+                </Row>
+              </Container>
+            </section>
+          )}
         </>
       ) : (
         <Loader active inline="centered" />

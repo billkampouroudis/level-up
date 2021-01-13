@@ -10,6 +10,7 @@ import is from '../utils/misc/is';
 import get from '../utils/misc/get';
 
 // Components
+import { Phone16, At16 } from '@carbon/icons-react';
 import { Button, Loader } from 'semantic-ui-react';
 import ProductOptions from '../components/misc/products/ProductOptions';
 import ProductsList from '../components/misc/products/ProductsList';
@@ -68,12 +69,26 @@ const ProductPage = (props) => {
               <Row>
                 <Col md={6} lg={4} className="mb-4">
                   <h3>{get.safe(() => product.store.brandName)}</h3>
+                  <div className="mb-3">
+                    {get.safe(() => product.store.contactEmail) && (
+                      <div>
+                        <At16 className="text-accent" />
+                        <span className="mb-1 ml-2">
+                          {product.store.contactEmail}
+                        </span>
+                      </div>
+                    )}
 
-                  {get.safe(() => product.store.totalOrders) && (
-                    <div className="mb-3">
-                      {product.store.totalOrders} Συνολικές παραγγελίες
-                    </div>
-                  )}
+                    {get.safe(() => product.store.contactPhone) && (
+                      <div>
+                        <Phone16 className="text-accent" />
+                        <span className="mb-1 ml-2">
+                          {product.store.contactPhone}
+                        </span>
+                      </div>
+                    )}
+                  </div>
+
                   <div>
                     <Link to={`${urls.STORES}/${product.store.id}`}>
                       <Button className="custom secondary mr-3">
