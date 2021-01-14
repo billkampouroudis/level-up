@@ -206,7 +206,7 @@ const Orders = React.memo((props) => {
         }}
         open={productRatingModalOpen}
         stayAfterAction
-        title="Προσθήκηαξιολόγισης"
+        title="Προσθήκη αξιολόγησης"
         product={productToRate}
       />
     );

@@ -13,6 +13,11 @@ const ProductRatingModal = (props) => {
 
   return (
     <CustomModal {...props}>
+      <p className="text-lg text-semi-bold mb-4">
+        Με κάθε αξιολόγηση κερδίζετε{' '}
+        <span className="text-success">200 XP</span>!
+      </p>
+
       <ProductRatingForm
         onCancel={props.onClose}
         onSuccess={onSuccess}
