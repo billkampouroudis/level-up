@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 // Utils
 import { calculateCosts } from '../utils/prices/prices';
+import { giveXpFromOrder } from '../utils/points/points';
 
 // Components
 import { Container, Row, Col } from 'react-bootstrap';
@@ -110,16 +111,26 @@ const MyCartPage = (props) => {
                         </span>
                       </td>
                     </tr>
-                    {costs.totalDiscount ? (
-                      <tr>
-                        <td>Κερδίζετε:</td>
-                        <td className="text-right">
-                          <span className="text-lg text-bold">
-                            {costs.totalDiscount}€
-                          </span>
-                        </td>
-                      </tr>
+                    {costs.totalDiscount > 0 ? (
+                      <>
+                        <tr>
+                          <td>Κερδίζετε:</td>
+                          <td className="text-right">
+                            <span className="text-lg text-bold">
+                              {costs.totalDiscount}€
+                            </span>
+                          </td>
+                        </tr>
+                      </>
                     ) : null}
+                    <tr>
+                      <td>XP:</td>
+                      <td className="text-right">
+                        <span className="text-lg text-bold text-success">
+                          +{giveXpFromOrder(costs.reducedCost)}
+                        </span>
+                      </td>
+                    </tr>
                   </tbody>
                 </table>
                 <div className="text-right">

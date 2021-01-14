@@ -8,6 +8,9 @@ import { useHistory } from 'react-router-dom';
 
 // Utils
 import { validateOne } from '../../../utils/validation/index';
+import { giveXpFromOrder } from '../../../utils/points/points';
+import { calculateUserLevel } from '../../../utils/levels/levels';
+import { getReducedPrice } from '../../../utils/prices/prices';
 
 // Component
 import { Favorite32, FavoriteFilled32 } from '@carbon/icons-react';
@@ -109,6 +112,20 @@ const ProductOptions = (props) => {
       });
   };
 
+  const renderXpToGain = () => {
+    const { product } = props.productsReducer;
+    const { user } = props.userReducer;
+
+    if (
+      product.discountLevel &&
+      calculateUserLevel(user.xp) >= product.discountLevel
+    ) {
+      return giveXpFromOrder(getReducedPrice(product));
+    }
+
+    return giveXpFromOrder(product.originalPrice);
+  };
+
   useEffect(() => {
     if (product) {
       if (product.sizes) {
@@ -165,6 +182,12 @@ const ProductOptions = (props) => {
               <ProductPrices product={product} textSize="xl" />
             </Col>
           </Row>
+          <Row className="mb-3 text-muted">
+            <Col>
+              Με την αγορά του συγκεκριμένου προϊόντος κερδίζετε{' '}
+              <span className="text-success">{renderXpToGain()} XP</span>.
+            </Col>
+          </Row>
           <Row className="d-flex align-items-center">
             <Col>
               <Button className="custom primary mr-3" onClick={addToCart}>
@@ -213,7 +236,8 @@ const ProductOptions = (props) => {
 const mapStateToProps = (state) => {
   return {
     productsReducer: state.productsReducer,
-    authReducer: state.authReducer
+    authReducer: state.authReducer,
+    userReducer: state.userReducer
   };
 };
 
@@ -228,7 +252,8 @@ ProductOptions.propTypes = {
   productsReducer: PropTypes.object,
   addToFavorites: PropTypes.func,
   removeFromFavorites: PropTypes.func,
-  authReducer: PropTypes.object
+  authReducer: PropTypes.object,
+  userReducer: PropTypes.object
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ProductOptions);

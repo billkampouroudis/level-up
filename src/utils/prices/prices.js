@@ -27,6 +27,7 @@ export const getReducedPrice = (product, count = 1) => {
 
 /**
  * Calculates the cost before and after discount of a give order or collection of orders.
+ * Accepts both an array of orders and a single order
  *
  * @returns {object} costs: Object with strings values of the original cost, the reduced cost and the total discount.
  * @returns {string} costs.originalCost

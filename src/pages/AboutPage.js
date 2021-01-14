@@ -120,22 +120,14 @@ const AboutPage = () => {
                 Παρακάτω μπορείτε να βρείτε αναλυτικά το ποσοστό έκπτωσης και τα
                 XP που χρειάζονται για κάθε level κερδίζετε σε κάθε level
               </p>
-              <Table celled basic>
-                <Table.Header>
-                  <Table.Row>
-                    <Table.HeaderCell>Level</Table.HeaderCell>
-                    <Table.HeaderCell>XP</Table.HeaderCell>
-                    <Table.HeaderCell>Έκπτωση</Table.HeaderCell>
-                  </Table.Row>
-                </Table.Header>
-
+              <Table celled basic className="bg-white">
                 <Table.Body>
                   {levels().map((level) =>
                     level.key ? (
                       <Table.Row key={level.key}>
-                        <Table.Cell>{level.key}</Table.Cell>
-                        <Table.Cell>{level.minXp}</Table.Cell>
-                        <Table.Cell>{level.discount * 100}%</Table.Cell>
+                        <Table.Cell>Level {level.key}</Table.Cell>
+                        <Table.Cell>{level.minXp} XP</Table.Cell>
+                        <Table.Cell>-{level.discount * 100}%</Table.Cell>
                       </Table.Row>
                     ) : null
                   )}
