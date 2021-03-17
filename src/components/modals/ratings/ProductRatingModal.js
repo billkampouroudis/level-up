@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import CustomModal from '../CustomModal';
 import ProductRatingForm from '../../forms/ratings/ProductRatingForm';
 
+// Utils
+import { giveXpFromRating } from '../../../utils/points/points';
+
 const ProductRatingModal = (props) => {
   const onSuccess = () => {
     props.onSuccess && props.onSuccess();
@@ -15,7 +18,7 @@ const ProductRatingModal = (props) => {
     <CustomModal {...props}>
       <p className="text-lg text-semi-bold mb-4">
         Με κάθε αξιολόγηση κερδίζετε{' '}
-        <span className="text-success">200 XP</span>!
+        <span className="text-success">{giveXpFromRating()} XP</span>!
       </p>
 
       <ProductRatingForm

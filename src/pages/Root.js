@@ -28,7 +28,7 @@ import StorePage from './StorePage';
 import AboutPage from './AboutPage';
 
 // Redux Actions
-import { getUser } from '../redux/user/user.actions';
+import { getUser, userCleanup } from '../redux/user/user.actions';
 
 const Root = (props) => {
   const [levelUpModalOpen, setLevelUpModalOpen] = useState(false);
@@ -55,9 +55,13 @@ const Root = (props) => {
   useEffect(() => {
     if (authReducer.token) {
       props.getUser();
+    } else {
+      props.userCleanup();
     }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [authReducer.token]);
+
   return (
     <>
       <Router>
@@ -144,14 +148,16 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (id) => dispatch(getUser.call(id))
+    getUser: (id) => dispatch(getUser.call(id)),
+    userCleanup: () => dispatch(userCleanup())
   };
 };
 
 Root.propTypes = {
   getUser: PropTypes.func,
   authReducer: PropTypes.object,
-  userReducer: PropTypes.object
+  userReducer: PropTypes.object,
+  userCleanup: PropTypes.func
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
