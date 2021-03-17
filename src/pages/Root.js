@@ -31,10 +31,10 @@ import AboutPage from './AboutPage';
 import { getUser, userCleanup } from '../redux/user/user.actions';
 
 const Root = (props) => {
-  const [levelUpModalOpen, setLevelUpModalOpen] = useState(false);
-  const [userXP, setUserXP] = useState(0);
-
   const { authReducer, userReducer } = props;
+
+  const [levelUpModalOpen, setLevelUpModalOpen] = useState(false);
+  const [userXP, setUserXP] = useState(userReducer.user.xp || 0);
 
   useEffect(() => {
     if (!authReducer.token) {
