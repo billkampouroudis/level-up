@@ -1,3 +1,17 @@
+# Gamification in E-commerce
+
+This project focuses on developing the front-end component of an e-commerce platform that integrates gamification elements to enhance the online shopping experience. The platform enables users to purchase clothing and footwear products from a variety of stores.
+
+## For Customers
+
+- **Product Search:** Users can search for products across all stores or within a specific store, facilitating a tailored shopping experience.
+
+- **Points and Levels:** With each purchase, customers collect points. Upon reaching a predetermined number of points, they level up, unlocking new offers set by sellers for that specific customer level.
+
+## Implementation Details
+
+- **Scope:** The current implementation is focused solely on the customer-facing front-end. The seller-side functionalities have not been developed yet.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
